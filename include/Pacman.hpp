@@ -1,0 +1,35 @@
+#ifndef DEF_PACMAN
+#define DEF_PACMAN
+
+#include <SDL2/SDL.h>
+#include <Character.hpp>
+#include <iostream>
+
+
+using namespace std;
+
+class Pacman : public Character{
+
+	private:
+		bool open_;
+		SDL_Texture* characterTextureOpenTop_;
+		SDL_Surface* characterSurfaceOpenTop_;
+
+		SDL_Texture* characterTextureOpenRight_;
+		SDL_Surface* characterSurfaceOpenRight_;
+
+		SDL_Texture* characterTextureOpenBot_;
+		SDL_Surface* characterSurfaceOpenBot_;
+
+		SDL_Texture* characterTextureOpenLeft_;
+		SDL_Surface* characterSurfaceOpenLeft_;
+
+	public:	
+		Pacman(char*,int, int, int, SDL_Renderer*);
+		SDL_Texture* getCharacterTexture() override;
+		
+
+};
+
+
+#endif
