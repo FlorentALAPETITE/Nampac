@@ -11,7 +11,7 @@ Character::Character(char* sl, int s, int posX, int posY,SDL_Renderer* renderer)
 	textureRect_ = { posX,posY, 25, 25};
 
 
-	if(!characterSurface_ and !characterTexture_)
+	if(!characterSurface_ or !characterTexture_)
 		throw string("Impossible de charger le personnage");
 
 }
