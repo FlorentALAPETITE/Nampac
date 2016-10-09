@@ -1,4 +1,6 @@
 #include <GameEngine.hpp>
+#include <MapReader.hpp>
+#include <vector>
 
 using namespace std;
 
@@ -13,9 +15,9 @@ int main(int argc, char **argv)
         
         SDL_Window* window = gameEngine.getWindow();
 
-        gameEngine.setBackgroundBlack();
-        
-       
+        vector<vector<int>> laby = MapReader::BuildMap("map/laby1.laby");
+
+        gameEngine.createMap(laby); 
         
         // While window isn't close
         while(!quit){   
@@ -42,10 +44,11 @@ int main(int argc, char **argv)
 
                   }           
               }
-        
-
+            gameEngine.clearRenderer();
+            gameEngine.renderMap(); 
             gameEngine.renderCharacter(gameEngine.getPacman());
             gameEngine.moveCharacter(gameEngine.getPacman());
+            gameEngine.renderPresent();
 
            
 

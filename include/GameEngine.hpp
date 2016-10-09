@@ -5,6 +5,8 @@
 #include <iostream>
 #include <Character.hpp>
 #include <Pacman.hpp>
+#include <vector>
+#include <MapElement.hpp>
 
 class GameEngine{
 
@@ -18,6 +20,10 @@ class GameEngine{
 		void moveCharacter(Character*);
 		Pacman* getPacman();
 		void changePacmanDirection(int);
+		void createMap(std::vector<std::vector<int>> const& laby);
+		void renderMap();
+		void clearRenderer();
+		void renderPresent();
 
 
 
@@ -25,7 +31,11 @@ class GameEngine{
 
 		SDL_Window* window_;
 		SDL_Renderer* renderer_;
+		SDL_Renderer* mapRenderer_;
 		Pacman* pacman_;
+					
+		
+		vector<vector<MapElement*>> mapElements_;		
 		
 
 
