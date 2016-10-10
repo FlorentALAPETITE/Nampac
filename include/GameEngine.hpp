@@ -13,8 +13,7 @@ class GameEngine{
 	public:
 
 		GameEngine();
-		SDL_Window* getWindow();	
-		void setBackgroundBlack();
+		SDL_Window* getWindow();		
 		void renderCharacter(Character*);
 		void destroyRenderer();
 		void moveCharacter(Character*);
@@ -23,7 +22,7 @@ class GameEngine{
 		void createMap(std::vector<std::vector<int>> const& laby);
 		void renderMap();
 		void clearRenderer();
-		void renderPresent();
+		void renderPresent();		
 
 
 

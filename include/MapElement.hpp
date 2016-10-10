@@ -15,6 +15,7 @@ class MapElement{
 		MapElement(char*,int,int,SDL_Renderer*);
 		SDL_Rect* getTextureRect();	
 		SDL_Texture* getMapElementTexture();
+		virtual bool canBeCrossed()=0;
 
 };
 

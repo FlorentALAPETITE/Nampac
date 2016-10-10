@@ -1,5 +1,8 @@
 #include <GameEngine.hpp>
 
+#include <Wall.hpp>
+#include <Lane.hpp>
+
 using namespace std;
 
 
@@ -15,7 +18,7 @@ GameEngine::GameEngine(){
         
    
     //Window initialization
-    window_ = SDL_CreateWindow("Test SDL 2.0", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 800, SDL_WINDOW_SHOWN);
+    window_ = SDL_CreateWindow("Nampac", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 700, 775, SDL_WINDOW_SHOWN);
 
     if(window_ == 0)
     {
@@ -24,23 +27,9 @@ GameEngine::GameEngine(){
 
     renderer_ = SDL_CreateRenderer(window_, -1, SDL_RENDERER_ACCELERATED); 
 
-    pacman_ = new Pacman("sprites/pacmanClose.bmp",3,0,0,renderer_);   
+    pacman_ = new Pacman("sprites/pacmanClose.bmp",3,15*25,17*25,renderer_);   
 
- //    // REFACTO DANS CLASSES MURS/COULOIRS
- //    mapRenderer_ = SDL_CreateRenderer(window_, -1, SDL_RENDERER_ACCELERATED); 
-
- //    pSMurs = SDL_LoadBMP(cheminMurs);
-	// pSSol = SDL_LoadBMP(cheminSol);
-	// if(!pSSol || !pSMurs)
-	// 	throw std::string("Erreur creéation Sprite");
-
-	// pTMurs = SDL_CreateTextureFromSurface(mapRenderer_, pSMurs);
-	// pTSol = SDL_CreateTextureFromSurface(mapRenderer_, pSSol);
-	// if(!pTSol || !pTMurs)
-	// 	throw std::string("Erreur creéation texture");
-	// // REFACTO HERE
-
-    
+     
 }
 
 
@@ -49,18 +38,11 @@ SDL_Window* GameEngine::getWindow(){
 }
 
 
-void GameEngine::setBackgroundBlack(){
-	SDL_SetRenderDrawColor(renderer_, 0, 0, 0, 255);
-	//SDL_RenderClear(renderer_);
-	SDL_RenderPresent(renderer_);
-}
 
 void GameEngine::renderCharacter(Character* c){
 		    
- 	SDL_RenderCopy(renderer_,c->getCharacterTexture(),NULL,c->getTextureRect()); // Copie du sprite grâce au SDL_Renderer
-	           
-	SDL_RenderPresent(renderer_); // Affichage		
-	
+ 	SDL_RenderCopy(renderer_,c->getCharacterTexture(),NULL,c->getTextureRect()); // Copie du sprite grâce au SDL_Renderer	        
+	SDL_RenderPresent(renderer_); // Affichage			
 
 }
 
@@ -119,11 +101,11 @@ void GameEngine::createMap(std::vector<std::vector<int>> const& laby){
 		for (unsigned int c = 0; c < laby[0].size(); ++c)
 		{
 			if (laby[l][c] == 0){
-				mapElements_[l].push_back(new MapElement("sprites/lane.bmp",c*25,l*25,renderer_));			
+				mapElements_[l].push_back(new Lane("sprites/lane.bmp",c*25,l*25,renderer_));			
 				
 			}
 			else{
-				mapElements_[l].push_back(new MapElement("sprites/wall.bmp",c*25,l*25,renderer_));				
+				mapElements_[l].push_back(new Wall("sprites/wall.bmp",c*25,l*25,renderer_));				
 			}
 		}
 	}

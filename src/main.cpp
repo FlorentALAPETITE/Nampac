@@ -28,7 +28,7 @@ int main(int argc, char **argv)
                      quit = true;
 
                 // arrow key events
-                switch( events.key.keysym.sym ){                                   
+                switch( events.key.keysym.sym ){ 
                     case SDLK_UP: 
                         gameEngine.changePacmanDirection(2);
                         break;
