@@ -2,6 +2,9 @@
 
 #include <Wall.hpp>
 #include <Lane.hpp>
+#include <memory>
+#include <MapReader.hpp>
+
 
 using namespace std;
 
@@ -27,15 +30,11 @@ GameEngine::GameEngine(){
 
     renderer_ = SDL_CreateRenderer(window_, -1, SDL_RENDERER_ACCELERATED); 
 
-    pacman_ = new Pacman("sprites/pacmanClose.bmp",5,15*25,17*25,renderer_);   
+    pacman_ = unique_ptr<Pacman>(new Pacman("sprites/pacmanClose.bmp",5,15*25,17*25,renderer_));   
 
      
 }
 
-
-SDL_Window* GameEngine::getWindow(){
-	return window_;
-}
 
 
 
@@ -80,9 +79,7 @@ void GameEngine::moveCharacter(Character * c){
 }
 
 
-Pacman* GameEngine::getPacman(){
-	return pacman_;
-}
+
 
 void GameEngine::changePacmanDirection(int direction){
 	pacman_->setDirection(direction);
@@ -98,15 +95,15 @@ void GameEngine::createMap(std::vector<std::vector<int>> const& laby){
 	
 	for (unsigned int l = 0; l < laby.size(); ++l)
 	{
-		mapElements_.push_back(vector<MapElement*>());
+		mapElements_.push_back(vector<shared_ptr<MapElement>>());
 		for (unsigned int c = 0; c < laby[0].size(); ++c)
 		{
 			if (laby[l][c] == 0){
-				mapElements_[l].push_back(new Lane(c*25,l*25,renderer_));			
+				mapElements_[l].push_back(shared_ptr<Lane> (new Lane(c*25,l*25,renderer_)));			
 				
 			}
 			else{
-				mapElements_[l].push_back(new Wall(c*25,l*25,renderer_));				
+				mapElements_[l].push_back(shared_ptr<Wall> (new Wall(c*25,l*25,renderer_)));				
 			}
 		}
 	}
@@ -137,7 +134,7 @@ void GameEngine::renderPresent(){
 
 
 
-MapElement* GameEngine::getMapElement(int x, int y){	
+shared_ptr<MapElement> GameEngine::getMapElement(int x, int y){	
 	return mapElements_[y/25][x/25];
 }
 
@@ -158,4 +155,61 @@ void GameEngine::destroySDL(){
 	SDL_DestroyRenderer(renderer_); 
 	pacman_->destroySDLElements();
     SDL_DestroyWindow(window_);
+}
+
+
+
+
+void GameEngine::launchNampac(const char* mapLocation){
+	 
+        SDL_Event events;
+        bool quit(false);
+        
+        vector<vector<int>> laby = MapReader::BuildMap(mapLocation);
+
+        createMap(laby); 
+        
+        // While window isn't close
+        while(!quit){   
+
+            while (SDL_PollEvent(&events)) {
+
+                if(events.window.event == SDL_WINDOWEVENT_CLOSE)
+                    quit = true;
+
+                // arrow key events
+                switch( events.key.keysym.sym ){ 
+                    case SDLK_UP: 
+                        changePacmanDirection(2);
+                        break;
+                    case SDLK_DOWN:
+                        changePacmanDirection(3);
+                        break;
+                    case SDLK_RIGHT:
+                        changePacmanDirection(0);
+                        break;
+                    case SDLK_LEFT:
+                        changePacmanDirection(1);
+                        break;
+
+                  }           
+              }
+            clearRenderer();
+            renderMap(); 
+            renderCharacter(pacman_.get());
+            moveCharacter(pacman_.get());
+            renderPresent();
+
+
+
+            //Thread test
+            //std::this_thread::sleep_for (std::chrono::milliseconds(25));   
+
+            SDL_Delay(25);       
+
+
+
+        }   
+
+        destroySDL();
 }

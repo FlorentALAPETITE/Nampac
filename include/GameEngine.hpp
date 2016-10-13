@@ -7,38 +7,40 @@
 #include <Pacman.hpp>
 #include <vector>
 #include <MapElement.hpp>
+#include <memory>
+
 
 class GameEngine{
 
 	public:
 
-		GameEngine();
-		SDL_Window* getWindow();		
+		GameEngine();		
 		void renderCharacter(Character*);
 		void destroyRenderer();
 		void moveCharacter(Character*);
-		Pacman* getPacman();
+		
 		void changePacmanDirection(int);
 		void createMap(std::vector<std::vector<int>> const& laby);
 		void renderMap();
 		void clearRenderer();
 		void renderPresent();
 		
-		MapElement* getMapElement(int x, int y);
+		shared_ptr<MapElement>  getMapElement(int x, int y);
 		bool checkColision(int x, int y);		
 
 		void destroySDL();
+
+		void launchNampac(const char*);
 
 
 	private:
 
 		SDL_Window* window_;
-		SDL_Renderer* renderer_;
-		SDL_Renderer* mapRenderer_;
-		Pacman* pacman_;
+		SDL_Renderer* renderer_;		
+		std::unique_ptr<Pacman> pacman_;
 					
 		
-		vector<vector<MapElement*>> mapElements_;		
+		vector<vector<std::shared_ptr<MapElement>>> mapElements_;		
 		
 
 
