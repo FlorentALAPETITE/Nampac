@@ -25,7 +25,9 @@ class GameEngine{
 		void renderPresent();
 		
 		MapElement* getMapElement(int x, int y);
-		bool checkColision(int x, int y);		
+		bool checkColision(int x, int y);	
+		bool checkColisionCaracters(SDL_Rect* c1, SDL_Rect* c2);
+		int getSizeSprite();
 
 		void destroySDL();
 
@@ -36,8 +38,7 @@ class GameEngine{
 		SDL_Renderer* renderer_;
 		SDL_Renderer* mapRenderer_;
 		Pacman* pacman_;
-					
-		
+		int sizeSprite = 25;
 		vector<vector<MapElement*>> mapElements_;		
 		
 

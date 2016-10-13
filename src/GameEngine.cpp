@@ -27,7 +27,7 @@ GameEngine::GameEngine(){
 
     renderer_ = SDL_CreateRenderer(window_, -1, SDL_RENDERER_ACCELERATED); 
 
-    pacman_ = new Pacman("sprites/pacmanClose.bmp",5,15*25,17*25,renderer_);   
+    pacman_ = new Pacman("sprites/pacmanClose.bmp",2,15*sizeSprite,17*sizeSprite,renderer_);   
 
      
 }
@@ -72,7 +72,7 @@ void GameEngine::moveCharacter(Character * c){
 	}
 
 
-	if( !checkColision(newPosX,newPosY)){		
+	if( ! checkColision(newPosX,newPosY)){		
 		c->changePosition(newPosX, newPosY);	
 	}
 	
@@ -88,42 +88,30 @@ void GameEngine::changePacmanDirection(int direction){
 	pacman_->setDirection(direction);
 }
 
-
-
-
-
 void GameEngine::createMap(std::vector<std::vector<int>> const& laby){
-
-	
-	
 	for (unsigned int l = 0; l < laby.size(); ++l)
 	{
 		mapElements_.push_back(vector<MapElement*>());
 		for (unsigned int c = 0; c < laby[0].size(); ++c)
 		{
 			if (laby[l][c] == 0){
-				mapElements_[l].push_back(new Lane(c*25,l*25,renderer_));			
+				mapElements_[l].push_back(new Lane(c*sizeSprite,l*sizeSprite,renderer_));			
 				
 			}
 			else{
-				mapElements_[l].push_back(new Wall(c*25,l*25,renderer_));				
+				mapElements_[l].push_back(new Wall(c*sizeSprite,l*sizeSprite,renderer_));				
 			}
 		}
 	}
-
-	
 }
 
 
 void GameEngine::renderMap(){
-
 	for (unsigned int l = 0; l < mapElements_.size(); ++l){
 		for (unsigned int c = 0; c < mapElements_[0].size(); ++c){
 			SDL_RenderCopy(renderer_, mapElements_.at(l).at(c)->getMapElementTexture(), NULL, mapElements_.at(l).at(c)->getTextureRect());
 		}
 	}
-
-	
 }
 
 void GameEngine::clearRenderer(){
@@ -135,16 +123,42 @@ void GameEngine::renderPresent(){
 	SDL_RenderPresent(renderer_);
 }
 
+int GameEngine::getSizeSprite(){ return sizeSprite; }
 
 
-MapElement* GameEngine::getMapElement(int x, int y){	
-	return mapElements_[y/25][x/25];
+MapElement* GameEngine::getMapElement(int x, int y){
+	int xRes = x/sizeSprite;
+	int yRes = y/sizeSprite;
+	// ex: 25/25 == case 1 != case 0
+	if(x % 25 == 0){
+		xRes = xRes - 1;
+
+	}
+	if(y % 25 == 0){
+		yRes = yRes - 1;
+
+	}
+	return mapElements_[yRes][xRes];
 }
 
 bool GameEngine::checkColision(int x, int y){	
-	return ! getMapElement(x, y)->canBeCrossed();
+	cout << "x: "<< x << " y: " << y << endl;
+	return !getMapElement(x, y)->canBeCrossed();
+	
 }
 
+bool GameEngine::checkColisionCaracters(SDL_Rect* c1, SDL_Rect* c2){
+	if(
+		(c2->x >= c1->x + c1->w) || // too right
+		(c2->x + c2->w <= c1->x) || // too left
+		(c2->y >= c1->y + c1->h) || // too down
+		(c2->y + c2->h <= c1->y) // too top
+		){
+		return false;
+	}
+	return true;
+
+}
 
 void GameEngine::destroySDL(){
 
