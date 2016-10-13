@@ -19,6 +19,7 @@ class Character{
 		SDL_Rect* getTextureRect();
 		int getDirection();
 		void setDirection(int);
+		virtual void destroySDLElements();
 
 
 

@@ -11,7 +11,7 @@ using namespace std;
 class Pacman : public Character{
 
 	private:
-		bool open_;
+		unsigned int open_;
 		SDL_Texture* characterTextureOpenTop_;
 		SDL_Surface* characterSurfaceOpenTop_;
 
@@ -27,6 +27,7 @@ class Pacman : public Character{
 	public:	
 		Pacman(char*,int, int, int, SDL_Renderer*);
 		SDL_Texture* getCharacterTexture() override;
+		void destroySDLElements() override;
 		
 
 };

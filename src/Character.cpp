@@ -51,3 +51,8 @@ int Character::getDirection(){
 void Character::setDirection(int d){
 	direction_=d;
 }
+
+void Character::destroySDLElements(){
+	SDL_DestroyTexture(characterTexture_);
+	SDL_FreeSurface(characterSurface_);
+}

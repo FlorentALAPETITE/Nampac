@@ -27,3 +27,8 @@ SDL_Texture* MapElement::getMapElementTexture(){
 SDL_Rect* MapElement::getTextureRect(){
 	return &textureRect_;
 }
+
+void MapElement::destroySDLElements(){
+	SDL_DestroyTexture(mapElementTexture_);
+	SDL_FreeSurface(mapElementSurface_);
+}

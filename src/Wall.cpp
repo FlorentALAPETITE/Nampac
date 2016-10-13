@@ -6,4 +6,4 @@ bool Wall::canBeCrossed(){
 	return false;
 }
 
-Wall::Wall(char* sl, int posX, int posY,SDL_Renderer* renderer):MapElement(sl,posX,posY,renderer){}
+Wall::Wall(int posX, int posY,SDL_Renderer* renderer):MapElement("sprites/wall.bmp",posX,posY,renderer){}
