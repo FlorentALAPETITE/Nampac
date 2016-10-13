@@ -6,7 +6,7 @@
 class Lane : public MapElement{	
 
 	public:		
-		Lane(char*, int , int ,SDL_Renderer*);	
+		Lane(int , int ,SDL_Renderer*);	
 	    bool canBeCrossed() override;
 
 };

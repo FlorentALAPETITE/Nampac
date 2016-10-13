@@ -22,8 +22,12 @@ class GameEngine{
 		void createMap(std::vector<std::vector<int>> const& laby);
 		void renderMap();
 		void clearRenderer();
-		void renderPresent();		
+		void renderPresent();
+		
+		MapElement* getMapElement(int x, int y);
+		bool checkColision(int x, int y);		
 
+		void destroySDL();
 
 
 	private:

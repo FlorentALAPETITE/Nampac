@@ -7,7 +7,7 @@
 class Wall : public MapElement{	
 
 	public:		
-		Wall(char*, int , int ,SDL_Renderer*);	
+		Wall(int, int ,SDL_Renderer*);	
 	    bool canBeCrossed() override;
 
 };

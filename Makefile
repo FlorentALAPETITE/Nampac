@@ -1,14 +1,14 @@
 
-all:LaunchMain
+all:LaunchNampac
 
-TestSDLCompile: 
-	g++ -Wall -g -std=c++11 src/*.cpp -L./lib -I./include -o "main" -lSDL2 -lSDL2main -lpthread -ldl 
+Nampac-Compile: 
+	g++ -Wall -g -std=c++11 src/*.cpp -L./lib -I./include -o "Nampac" -lSDL2 -lSDL2main -lpthread -ldl 
 
-LaunchMain: TestSDLCompile
-	./main
+LaunchNampac: Nampac-Compile
+	./Nampac
 
 clean:
-	rm main
+	rm Nampac
 
 
 

@@ -2,6 +2,10 @@
 #include <MapReader.hpp>
 #include <vector>
 
+
+#include <thread>        
+#include <chrono> 
+
 using namespace std;
 
 
@@ -50,15 +54,18 @@ int main(int argc, char **argv)
             gameEngine.moveCharacter(gameEngine.getPacman());
             gameEngine.renderPresent();
 
-           
+
+
+            //Thread test
+            //std::this_thread::sleep_for (std::chrono::milliseconds(25));   
+
+            SDL_Delay(25);       
 
 
 
-        }
-        
-        gameEngine.destroyRenderer();
+        }   
 
-        SDL_DestroyWindow(window);
+        gameEngine.destroySDL();
         SDL_Quit();
     }
         
