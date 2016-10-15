@@ -8,6 +8,7 @@
 #include <vector>
 #include <MapElement.hpp>
 #include <memory>
+#include <Ghost.hpp>
 
 
 class GameEngine{
@@ -32,12 +33,16 @@ class GameEngine{
 
 		void launchNampac(const char*);
 
+		void renderCharacters();
+
 
 	private:
 
 		SDL_Window* window_;
 		SDL_Renderer* renderer_;		
 		std::unique_ptr<Pacman> pacman_;
+
+		vector<std::unique_ptr<Ghost>> ghosts_;	
 					
 		
 		vector<vector<std::shared_ptr<MapElement>>> mapElements_;		
