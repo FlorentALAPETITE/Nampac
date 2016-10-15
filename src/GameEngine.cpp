@@ -4,6 +4,8 @@
 #include <Lane.hpp>
 #include <memory>
 #include <MapReader.hpp>
+#include <RedGhost.hpp>
+
 
 
 using namespace std;
@@ -30,7 +32,11 @@ GameEngine::GameEngine(){
 
     renderer_ = SDL_CreateRenderer(window_, -1, SDL_RENDERER_ACCELERATED); 
 
-    pacman_ = unique_ptr<Pacman>(new Pacman("sprites/pacmanClose.bmp",5,15*25,17*25,renderer_));   
+    pacman_ = unique_ptr<Pacman>(new Pacman("sprites/pacmanClose.bmp",5,15*25,17*25,renderer_)); 
+
+    ghosts_ = vector<unique_ptr<Ghost>>();
+
+    ghosts_.push_back(unique_ptr<RedGhost>(new RedGhost(1*25,1*25,renderer_)));
 
      
 }
@@ -43,6 +49,16 @@ void GameEngine::renderCharacter(Character* c){
  	SDL_RenderCopy(renderer_,c->getCharacterTexture(),NULL,c->getTextureRect()); // Copie du sprite grâce au SDL_Renderer	        
 	SDL_RenderPresent(renderer_); // Affichage			
 
+}
+
+
+
+void GameEngine::renderCharacters(){
+	renderCharacter(pacman_.get());
+
+	for(unsigned int i=0;i<ghosts_.size();++i){
+		renderCharacter(ghosts_.at(i).get());
+	}
 }
 
 
@@ -89,9 +105,9 @@ void GameEngine::changePacmanDirection(int direction){
 
 
 
-void GameEngine::createMap(std::vector<std::vector<int>> const& laby){
+void GameEngine::createMap(vector<vector<int>> const& laby){
 
-	
+	mapElements_ = vector<vector<shared_ptr<MapElement>>> ();
 	
 	for (unsigned int l = 0; l < laby.size(); ++l)
 	{
@@ -196,7 +212,7 @@ void GameEngine::launchNampac(const char* mapLocation){
               }
             clearRenderer();
             renderMap(); 
-            renderCharacter(pacman_.get());
+            renderCharacters();
             moveCharacter(pacman_.get());
             renderPresent();
 
@@ -205,7 +221,7 @@ void GameEngine::launchNampac(const char* mapLocation){
             //Thread test
             //std::this_thread::sleep_for (std::chrono::milliseconds(25));   
 
-            SDL_Delay(25);       
+            //SDL_Delay(25);       
 
 
 
