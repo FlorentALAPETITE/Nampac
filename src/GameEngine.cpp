@@ -68,9 +68,7 @@ void GameEngine::renderCharacters(){
 void GameEngine::moveCharacter(Character * c){
 	int newPosX, newPosY;
 
-	cout<<"Pacman en : "<<c->getPosX()/25<<","<<c->getPosY()/25<<endl;
-
-	switch (c->getDirection()){
+		switch (c->getDirection()){
 		case 0 : // right
 			newPosX = c->getPosX()+c->getSpeed();
 			newPosY = c->getPosY();
@@ -113,6 +111,18 @@ void GameEngine::moveCharacter(Character * c){
 	
 	
 	renderCharacter(c);
+}
+
+
+
+void GameEngine::moveCharacters(){
+	moveCharacter(pacman_.get());
+
+	for(unsigned int i=0;i<ghosts_.size();++i){
+		ghosts_.at(i)->calculateNextDirection();
+		moveCharacter(ghosts_.at(i).get());
+	}
+	
 }
 
 
@@ -200,7 +210,6 @@ shared_ptr<MapElement> GameEngine::getMapElement(int x, int y){
 }
 
 bool GameEngine::checkColision(int x, int y){	
-	cout<<"Test collision en : "<<x/25<<","<<y/25<<endl;
 	return ! getMapElement(x, y)->canBeCrossed();
 }
 
@@ -279,7 +288,7 @@ void GameEngine::launchNampac(const char* mapLocation){
             clearRenderer();
             renderMap(); 
             renderCharacters();
-            moveCharacter(pacman_.get());
+            moveCharacters();            
             renderPresent();
 
 

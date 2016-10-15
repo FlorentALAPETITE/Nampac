@@ -22,7 +22,9 @@ class GameEngine{
 		void renderCharacter(Character*);
 		void destroyRenderer();
 		void moveCharacter(Character*);
-		
+		void moveCharacters();
+
+
 		void changePacmanDirection(int);
 		void createMap(std::vector<std::vector<int>> const& laby);
 		void renderMap();
