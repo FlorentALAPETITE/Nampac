@@ -47,8 +47,8 @@ GameEngine::GameEngine(){
 
 void GameEngine::renderCharacter(Character* c){
 		    
- 	SDL_RenderCopy(renderer_,c->getCharacterTexture(),NULL,c->getTextureRect()); // Copie du sprite grâce au SDL_Renderer	        
-	SDL_RenderPresent(renderer_); // Affichage			
+ 	SDL_RenderCopy(renderer_,c->getCharacterTexture(),NULL,c->getTextureRect()); // Copie du sprite grâce au SDL_Renderer	 
+			
 
 }
 
@@ -66,51 +66,54 @@ void GameEngine::renderCharacters(){
 
 
 void GameEngine::moveCharacter(Character * c){
-	int newPosX, newPosY;
+	int newPosX, newPosY, checkX, checkY;
+
 
 		switch (c->getDirection()){
+
 		case 0 : // right
 			newPosX = c->getPosX()+c->getSpeed();
 			newPosY = c->getPosY();
 
-			if( !checkColision(newPosX+24,newPosY)){		
-				c->changePosition(newPosX, newPosY);	
-			}
-
+			checkX = newPosX+sizeSprite-1;
+			checkY = newPosY;
 
 			break; 
+
 		case 1 :  // left
 			newPosX = c->getPosX()-c->getSpeed();
 			newPosY = c->getPosY();
 
-			if( !checkColision(newPosX,newPosY)){		
-				c->changePosition(newPosX, newPosY);	
-			}
+			checkX = newPosX;
+			checkY = newPosY;
 
 
 			break;
+
 		case 2 :  //up
 			newPosX = c->getPosX();
 			newPosY = c->getPosY()-c->getSpeed();
 
-			if( !checkColision(newPosX,newPosY)){		
-				c->changePosition(newPosX, newPosY);	
-			}
+			checkX = newPosX;
+			checkY = newPosY;
 
 			break;
+
 		case 3 : //down
 			newPosX = c->getPosX();
 			newPosY = c->getPosY()+c->getSpeed();
-			if( !checkColision(newPosX,newPosY+24)){		
-				c->changePosition(newPosX, newPosY);	
-			}
+
+			checkX = newPosX;
+			checkY = newPosY+sizeSprite-1;
+			
 			break;
 	}
 
 
+	if( !checkColision(checkX,checkY)){		
+		c->changePosition(newPosX, newPosY);	
+	}		
 	
-	
-	renderCharacter(c);
 }
 
 
@@ -206,7 +209,7 @@ void GameEngine::renderPresent(){
 
 
 shared_ptr<MapElement> GameEngine::getMapElement(int x, int y){		
-	return mapElements_[ceil(y/25)][ceil(x/25)];
+	return mapElements_[ceil(y/sizeSprite)][ceil(x/sizeSprite)];
 }
 
 bool GameEngine::checkColision(int x, int y){	
@@ -297,7 +300,7 @@ void GameEngine::launchNampac(const char* mapLocation){
             //Thread test
             //std::this_thread::sleep_for (std::chrono::milliseconds(25));   
 
-            //SDL_Delay(700);       
+            SDL_Delay(25);       
 
 
 

@@ -25,13 +25,13 @@ Pacman::Pacman(char* sp,int s, int posX, int posY, SDL_Renderer* renderer):Chara
 
 SDL_Texture* Pacman::getCharacterTexture(){
 
-	if(open_<=3){
+	if(open_<=4){
 		open_+=1;
 		return characterTexture_;
 	}
 
 	else{
-		if (open_=6)
+		if (open_=8)
 			open_=0;
 		else
 			open_+=1;
