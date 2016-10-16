@@ -5,7 +5,11 @@
 #include <memory>
 #include <MapReader.hpp>
 #include <RedGhost.hpp>
+#include <BlueGhost.hpp>
+#include <OrangeGhost.hpp>
+#include <PinkGhost.hpp>
 #include <math.h>
+#include <stdlib.h>    
 
 
 
@@ -37,8 +41,12 @@ GameEngine::GameEngine(){
 
     ghosts_ = vector<unique_ptr<Ghost>>();
 
-    ghosts_.push_back(unique_ptr<RedGhost>(new RedGhost(1*25,1*25,renderer_)));
+    ghosts_.push_back(unique_ptr<RedGhost>(new RedGhost(1*sizeSprite,1*sizeSprite,renderer_)));
+    ghosts_.push_back(unique_ptr<OrangeGhost>(new OrangeGhost(1*sizeSprite,29*sizeSprite,renderer_)));
+    ghosts_.push_back(unique_ptr<BlueGhost>(new BlueGhost(26*sizeSprite,1*sizeSprite,renderer_)));
+    ghosts_.push_back(unique_ptr<PinkGhost>(new PinkGhost(26*sizeSprite,29*sizeSprite,renderer_)));
 
+    randNumber_=0;
      
 }
 
@@ -122,6 +130,8 @@ void GameEngine::moveCharacters(){
 	moveCharacter(pacman_.get());
 
 	for(unsigned int i=0;i<ghosts_.size();++i){
+		srand(randNumber_);
+		randNumber_+=100;
 		ghosts_.at(i)->calculateNextDirection();
 		moveCharacter(ghosts_.at(i).get());
 	}
@@ -300,7 +310,7 @@ void GameEngine::launchNampac(const char* mapLocation){
             //Thread test
             //std::this_thread::sleep_for (std::chrono::milliseconds(25));   
 
-            SDL_Delay(25);       
+            //SDL_Delay(25);       
 
 
 

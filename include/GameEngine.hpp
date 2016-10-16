@@ -50,7 +50,9 @@ class GameEngine{
 
 		vector<std::unique_ptr<Ghost>> ghosts_;						
 		
-		vector<vector<std::shared_ptr<MapElement>>> mapElements_;		
+		vector<vector<std::shared_ptr<MapElement>>> mapElements_;
+
+		int randNumber_;		
 		
 
 
