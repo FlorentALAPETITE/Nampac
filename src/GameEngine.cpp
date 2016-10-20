@@ -37,14 +37,16 @@ GameEngine::GameEngine(){
 
     renderer_ = SDL_CreateRenderer(window_, -1, SDL_RENDERER_ACCELERATED); 
 
+
     pacman_ = unique_ptr<Pacman>(new Pacman("sprites/pacmanClose.bmp",5,15*sizeSprite,17*sizeSprite,renderer_)); 
+
 
     ghosts_ = vector<unique_ptr<Ghost>>();
 
-    //ghosts_.push_back(unique_ptr<RedGhost>(new RedGhost(1*sizeSprite,1*sizeSprite,renderer_)));
-    //ghosts_.push_back(unique_ptr<OrangeGhost>(new OrangeGhost(1*sizeSprite,29*sizeSprite,renderer_)));
-    //ghosts_.push_back(unique_ptr<BlueGhost>(new BlueGhost(26*sizeSprite,1*sizeSprite,renderer_)));
-    //ghosts_.push_back(unique_ptr<PinkGhost>(new PinkGhost(26*sizeSprite,29*sizeSprite,renderer_)));
+    ghosts_.push_back(unique_ptr<RedGhost>(new RedGhost(1*sizeSprite,1*sizeSprite,renderer_)));
+    ghosts_.push_back(unique_ptr<OrangeGhost>(new OrangeGhost(1*sizeSprite,29*sizeSprite,renderer_)));
+    ghosts_.push_back(unique_ptr<BlueGhost>(new BlueGhost(26*sizeSprite,1*sizeSprite,renderer_)));
+    ghosts_.push_back(unique_ptr<PinkGhost>(new PinkGhost(26*sizeSprite,29*sizeSprite,renderer_)));
 
     randNumber_ = 0;
      
@@ -117,6 +119,7 @@ void GameEngine::moveCharacter(Character * c){
 	}
 
 	if( !checkColision(checkX,checkY)){		
+
 		c->changePosition(newPosX, newPosY);	
 	}		
 	//14 27
@@ -158,7 +161,7 @@ void GameEngine::changePacmanDirection(int direction){
 void GameEngine::createMap(vector<vector<int>> const& laby){
 
 	mapElements_ = vector<vector<shared_ptr<MapElement>>> ();
-	
+
 	for (unsigned int l = 0; l < laby.size(); ++l)
 	{
 		mapElements_.push_back(vector<shared_ptr<MapElement>>());
@@ -173,20 +176,15 @@ void GameEngine::createMap(vector<vector<int>> const& laby){
 			}
 		}
 	}
-
-	
 }
 
 
 void GameEngine::renderMap(){
-
 	for (unsigned int l = 0; l < mapElements_.size(); ++l){
 		for (unsigned int c = 0; c < mapElements_[0].size(); ++c){
 			SDL_RenderCopy(renderer_, mapElements_.at(l).at(c)->getMapElementTexture(), NULL, mapElements_.at(l).at(c)->getTextureRect());
 		}
 	}
-
-	
 }
 
 void GameEngine::clearRenderer(){
@@ -197,6 +195,8 @@ void GameEngine::clearRenderer(){
 void GameEngine::renderPresent(){
 	SDL_RenderPresent(renderer_);
 }
+
+int GameEngine::getSizeSprite(){ return sizeSprite; }
 
 
 
@@ -232,6 +232,18 @@ bool GameEngine::checkColision(int x, int y){
 	return ! getMapElement(x, y)->canBeCrossed();
 }
 
+bool GameEngine::checkColisionCaracters(SDL_Rect* c1, SDL_Rect* c2){
+	if(
+		(c2->x >= c1->x + c1->w) || // too right
+		(c2->x + c2->w <= c1->x) || // too left
+		(c2->y >= c1->y + c1->h) || // too down
+		(c2->y + c2->h <= c1->y) // too top
+		){
+		return false;
+	}
+	return true;
+
+}
 
 
 
@@ -248,24 +260,6 @@ void GameEngine::destroySDL(){
 	pacman_->destroySDLElements();
     SDL_DestroyWindow(window_);
 }
-
-
-
-
-bool GameEngine::checkColisionCaracters(SDL_Rect* c1, SDL_Rect* c2){
-	if(
-		(c2->x >= c1->x + c1->w) || // too right
-		(c2->x + c2->w <= c1->x) || // too left
-		(c2->y >= c1->y + c1->h) || // too down
-		(c2->y + c2->h <= c1->y) // too top
-		){
-		return false;
-	}
-	return true;
-
-}
-
-
 
 
 
