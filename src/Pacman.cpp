@@ -31,7 +31,7 @@ SDL_Texture* Pacman::getCharacterTexture(){
 	}
 
 	else{
-		if (open_=8)
+		if (open_ == 8)
 			open_=0;
 		else
 			open_+=1;
@@ -47,9 +47,9 @@ SDL_Texture* Pacman::getCharacterTexture(){
 				return characterTextureOpenTop_;
 				break;
 			case 3 : //down
-				return characterTextureOpenBot_;
 				break;
 		}
+		return characterTextureOpenBot_;
 
 
 	}

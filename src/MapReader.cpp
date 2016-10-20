@@ -12,7 +12,7 @@ vector<vector<int>> MapReader::BuildMap(const char* file){
 			string line;
 			while(getline(flux, line)){
 				res.push_back(vector<int>());
-				for (int i = 0; i < line.size(); ++i)
+				for (unsigned int i = 0; i < line.size(); ++i)
 				{
 					int nb = line[i] - '0';
 					res[l].push_back(nb);
@@ -24,4 +24,5 @@ vector<vector<int>> MapReader::BuildMap(const char* file){
 		}
 	}
 	catch(std::string const& err){ std::cerr << err << "\n"; }
+	return vector<vector<int>>();
 }

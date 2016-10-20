@@ -38,7 +38,7 @@ GameEngine::GameEngine(){
     renderer_ = SDL_CreateRenderer(window_, -1, SDL_RENDERER_ACCELERATED); 
 
 
-    pacman_ = unique_ptr<Pacman>(new Pacman("sprites/pacmanClose.bmp",5,15*sizeSprite,17*sizeSprite,renderer_)); 
+    pacman_ = unique_ptr<Pacman>(new Pacman((char*)"sprites/pacmanClose.bmp",5,15*sizeSprite,17*sizeSprite,renderer_)); 
 
 
     ghosts_ = vector<unique_ptr<Ghost>>();
