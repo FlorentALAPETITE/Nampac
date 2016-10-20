@@ -42,7 +42,7 @@ class GameEngine{
 		void launchNampac(const char*);
 		void renderCharacters();
 
-
+		bool CheckAllCharactersColision();
 
 	private:
 

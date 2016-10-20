@@ -130,10 +130,23 @@ void GameEngine::moveCharacter(Character * c){
 	if((ceil(c->getPosY()/sizeSprite)== 14 && ceil(c->getPosX()/sizeSprite) <=0) && c->getDirection() == 1){
 		c->changePosition(27*sizeSprite, 14*sizeSprite);
 	}
+
+	if (CheckAllCharactersColision())
+	{
+		cout << "Game Over" << endl;
+	}
 	
 }
 
-
+bool GameEngine::CheckAllCharactersColision(){
+	bool res = false;
+	for(unsigned int i=0;i<ghosts_.size();++i){
+		if (checkColisionCaracters(ghosts_.at(i)->getTextureRect(), pacman_->getTextureRect())){
+			res = true;
+		}
+	}
+	return res;
+}
 
 void GameEngine::moveCharacters(){
 	moveCharacter(pacman_.get());
@@ -153,10 +166,6 @@ void GameEngine::moveCharacters(){
 void GameEngine::changePacmanDirection(int direction){
 	pacman_->setDirection(direction);
 }
-
-
-
-
 
 void GameEngine::createMap(vector<vector<int>> const& laby){
 
