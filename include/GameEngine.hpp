@@ -30,17 +30,19 @@ class GameEngine{
 		void renderMap();
 		void clearRenderer();
 		void renderPresent();
-		
+
 		shared_ptr<MapElement>  getMapElement(int x, int y);		
 
 		bool checkColision(int x, int y);	
 		bool checkColisionCaracters(SDL_Rect* c1, SDL_Rect* c2);
 		int getSizeSprite();	
 
+
 		void destroySDL();
 		void launchNampac(const char*);
 		void renderCharacters();
 
+		bool CheckAllCharactersColision();
 
 	private:
 
@@ -53,6 +55,7 @@ class GameEngine{
 		vector<vector<std::shared_ptr<MapElement>>> mapElements_;
 
 		int randNumber_;		
+
 		
 
 
