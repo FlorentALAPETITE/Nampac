@@ -54,7 +54,7 @@ class GameEngine{
 		
 		vector<vector<std::shared_ptr<MapElement>>> mapElements_;
 
-		int randNumber_;		
+		int randNumber_;	
 
 		
 

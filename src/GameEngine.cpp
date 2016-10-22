@@ -38,13 +38,13 @@ GameEngine::GameEngine(){
     renderer_ = SDL_CreateRenderer(window_, -1, SDL_RENDERER_ACCELERATED); 
 
 
-    pacman_ = unique_ptr<Pacman>(new Pacman((char*)"sprites/pacmanClose.bmp",5,15*sizeSprite,17*sizeSprite,renderer_)); 
+    pacman_ = unique_ptr<Pacman>(new Pacman((char*)"sprites/pacmanClose.bmp",5,1*sizeSprite,1*sizeSprite,renderer_)); 
 
 
     ghosts_ = vector<unique_ptr<Ghost>>();
 
     ghosts_.push_back(unique_ptr<RedGhost>(new RedGhost(1*sizeSprite,1*sizeSprite,renderer_)));
-    ghosts_.push_back(unique_ptr<OrangeGhost>(new OrangeGhost(1*sizeSprite,29*sizeSprite,renderer_)));
+   	ghosts_.push_back(unique_ptr<OrangeGhost>(new OrangeGhost(1*sizeSprite,29*sizeSprite,renderer_)));
     ghosts_.push_back(unique_ptr<BlueGhost>(new BlueGhost(26*sizeSprite,1*sizeSprite,renderer_)));
     ghosts_.push_back(unique_ptr<PinkGhost>(new PinkGhost(26*sizeSprite,29*sizeSprite,renderer_)));
 
@@ -75,7 +75,7 @@ void GameEngine::renderCharacters(){
 
 
 void GameEngine::moveCharacter(Character * c){
-	int newPosX, newPosY, checkX, checkY;
+	int newPosX, newPosY;
 
 
 		switch (c->getDirection()){
@@ -83,45 +83,29 @@ void GameEngine::moveCharacter(Character * c){
 		case 0 : // right
 			newPosX = c->getPosX()+c->getSpeed();
 			newPosY = c->getPosY();
-
-			checkX = newPosX+sizeSprite-1;
-			checkY = newPosY;
-
 			break; 
 
 		case 1 :  // left
 			newPosX = c->getPosX()-c->getSpeed();
 			newPosY = c->getPosY();
-
-			checkX = newPosX;
-			checkY = newPosY;
-
-
 			break;
 
 		case 2 :  //up
 			newPosX = c->getPosX();
 			newPosY = c->getPosY()-c->getSpeed();
-
-			checkX = newPosX;
-			checkY = newPosY;
-
 			break;
 
 		case 3 : //down
 			newPosX = c->getPosX();
 			newPosY = c->getPosY()+c->getSpeed();
-
-			checkX = newPosX;
-			checkY = newPosY+sizeSprite-1;
-			
 			break;
 	}
 
-	if( !checkColision(checkX,checkY)){		
+	if( !checkColision(newPosX,newPosY)){		
 
 		c->changePosition(newPosX, newPosY);	
 	}		
+	
 	//14 27
 	
 	if((ceil(c->getPosY()/sizeSprite)== 14 && ceil(c->getPosX()/sizeSprite) >= 27) && c->getDirection() == 0){
@@ -160,9 +144,6 @@ void GameEngine::moveCharacters(){
 	
 }
 
-
-
-
 void GameEngine::changePacmanDirection(int direction){
 	pacman_->setDirection(direction);
 }
@@ -187,7 +168,6 @@ void GameEngine::createMap(vector<vector<int>> const& laby){
 	}
 }
 
-
 void GameEngine::renderMap(){
 	for (unsigned int l = 0; l < mapElements_.size(); ++l){
 		for (unsigned int c = 0; c < mapElements_[0].size(); ++c){
@@ -200,45 +180,30 @@ void GameEngine::clearRenderer(){
 	SDL_RenderClear(renderer_);
 }
 
-
 void GameEngine::renderPresent(){
 	SDL_RenderPresent(renderer_);
 }
 
 int GameEngine::getSizeSprite(){ return sizeSprite; }
 
-
-
-// shared_ptr<MapElement> GameEngine::getMapElement(int x, int y){
-// 	int xRes = x/sizeSprite;
-// 	int yRes = y/sizeSprite;
-// 	// ex: 25/25 == case 1 != case 0
-// 	if(x % 25 == 0)
-// 		xRes = xRes - 1;
-	
-// 	if(y % 25 == 0)
-// 		yRes = yRes - 1;
-
-// 	return mapElements_[yRes][xRes];
-// }
-
-
-
-
-// bool GameEngine::checkColision(int x, int y){	
-// 	cout << "x: "<< x << " y: " << y << "  " << !getMapElement(x, y)->canBeCrossed()<< endl;
-// 	return !getMapElement(x, y)->canBeCrossed();
-// }
-
-
-
-
 shared_ptr<MapElement> GameEngine::getMapElement(int x, int y){		
-	return mapElements_[ceil(y/sizeSprite)][ceil(x/sizeSprite)];
+	return mapElements_[y][x];
 }
 
 bool GameEngine::checkColision(int x, int y){
-	return ! getMapElement(x, y)->canBeCrossed();
+	int x1 = x/sizeSprite;
+   	int y1 = y/sizeSprite;
+   	int x2 = (x + sizeSprite -1 ) /sizeSprite;  
+   	int y2 = (y + sizeSprite -1 ) /sizeSprite;
+   	for(int i = x1; i <=x2; ++i)
+   	{
+    	for(int j = y1; j<=y2; ++j)
+    	{
+        	if (!getMapElement(i,j)->canBeCrossed())
+            	return true;
+    	}
+  	}
+	return false;
 }
 
 bool GameEngine::checkColisionCaracters(SDL_Rect* c1, SDL_Rect* c2){
@@ -253,8 +218,6 @@ bool GameEngine::checkColisionCaracters(SDL_Rect* c1, SDL_Rect* c2){
 	return true;
 
 }
-
-
 
 void GameEngine::destroySDL(){
 
