@@ -2,6 +2,7 @@
 #define DEF_MAPELEMENT
 
 #include <SDL2/SDL.h>
+#include <Bonus.hpp>
 
 
 class MapElement{
@@ -17,6 +18,7 @@ class MapElement{
 		SDL_Texture* getMapElementTexture();
 		virtual bool canBeCrossed()=0;
 		void destroySDLElements();
+		virtual Bonus* getBonus() =0;
 
 };
 

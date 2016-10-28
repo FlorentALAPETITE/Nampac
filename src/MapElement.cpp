@@ -32,3 +32,4 @@ void MapElement::destroySDLElements(){
 	SDL_DestroyTexture(mapElementTexture_);
 	SDL_FreeSurface(mapElementSurface_);
 }
+

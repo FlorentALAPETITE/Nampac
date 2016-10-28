@@ -21,8 +21,6 @@ Pacman::Pacman(char* sp,int s, int posX, int posY, SDL_Renderer* renderer):Chara
 	
 }
 
-
-
 SDL_Texture* Pacman::getCharacterTexture(){
 
 	if(open_<=4){

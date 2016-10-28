@@ -9,6 +9,7 @@
 #include <MapElement.hpp>
 #include <memory>
 #include <Ghost.hpp>
+#include <Bonus.hpp>
 
 
 const int sizeSprite = 25;
