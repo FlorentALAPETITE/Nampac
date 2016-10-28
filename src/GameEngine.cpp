@@ -38,7 +38,7 @@ GameEngine::GameEngine(){
     renderer_ = SDL_CreateRenderer(window_, -1, SDL_RENDERER_ACCELERATED); 
 
 
-    pacman_ = unique_ptr<Pacman>(new Pacman((char*)"sprites/pacmanClose.bmp",5,1*sizeSprite,1*sizeSprite,renderer_)); 
+    pacman_ = unique_ptr<Pacman>(new Pacman((char*)"sprites/pacmanClose.bmp",5,14*sizeSprite,17*sizeSprite,renderer_)); 
 
 
     ghosts_ = vector<unique_ptr<Ghost>>();
@@ -104,7 +104,7 @@ void GameEngine::moveCharacter(Character * c){
 	if( !checkColision(newPosX,newPosY)){		
 
 		c->changePosition(newPosX, newPosY);	
-	}		
+	}	
 	
 	//14 27
 	
@@ -145,7 +145,31 @@ void GameEngine::moveCharacters(){
 }
 
 void GameEngine::changePacmanDirection(int direction){
-	pacman_->setDirection(direction);
+	int newPosX, newPosY;
+
+	switch(direction){
+		case 0 : // right
+			newPosX = pacman_->getPosX()+pacman_->getSpeed();
+			newPosY = pacman_->getPosY();
+			break; 
+		case 1 :  // left
+			newPosX = pacman_->getPosX()-pacman_->getSpeed();
+			newPosY = pacman_->getPosY();
+			break;
+
+		case 2 :  //up
+			newPosX = pacman_->getPosX();
+			newPosY = pacman_->getPosY()-pacman_->getSpeed();
+			break;
+
+		case 3 : //down
+			newPosX = pacman_->getPosX();
+			newPosY = pacman_->getPosY()+pacman_->getSpeed();
+			break;
+	}
+	if(!checkColision(newPosX,newPosY)){
+		pacman_->setDirection(direction);
+	}
 }
 
 void GameEngine::createMap(vector<vector<int>> const& laby){
@@ -172,6 +196,11 @@ void GameEngine::renderMap(){
 	for (unsigned int l = 0; l < mapElements_.size(); ++l){
 		for (unsigned int c = 0; c < mapElements_[0].size(); ++c){
 			SDL_RenderCopy(renderer_, mapElements_.at(l).at(c)->getMapElementTexture(), NULL, mapElements_.at(l).at(c)->getTextureRect());
+			if(mapElements_.at(l).at(c)->getBonus()){
+				cout << "<--";
+				cout << mapElements_.at(l).at(c)->getBonus()->getTexture()<< endl;
+				//SDL_RenderCopy(renderer_, mapElements_.at(l).at(c)->getBonus()->getTexture(), NULL, mapElements_.at(l).at(c)->getBonus()->getTextureRect());
+			}
 		}
 	}
 }
