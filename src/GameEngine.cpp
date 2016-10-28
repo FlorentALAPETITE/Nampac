@@ -102,23 +102,20 @@ void GameEngine::moveCharacter(Character * c){
 			break;
 	}
 
-	if( !checkColision(newPosX,newPosY)){		
 
-		c->changePosition(newPosX, newPosY);	
+	if(newPosX>=680){
+		c->changePosition(0, newPosY);	
+	}
+
+	else if (newPosX<=0){
+		c->changePosition(680, newPosY);
+	}
+
+	else {
+		if( !checkColision(newPosX,newPosY))
+			c->changePosition(newPosX, newPosY);	
 	}	
 	
-	//14 27
-	
-		
-
-
-	// if((ceil(c->getPosY()/sizeSprite)== 14 && ceil(c->getPosX()/sizeSprite) >= 27) && c->getDirection() == 0){
-	// 	c->changePosition(0*sizeSprite, 14*sizeSprite);
-	// }
-	// if((ceil(c->getPosY()/sizeSprite)== 14 && ceil(c->getPosX()/sizeSprite) <=0) && c->getDirection() == 1){
-	// 	c->changePosition(27*sizeSprite, 14*sizeSprite);
-	// }
-
 		
 }
 
