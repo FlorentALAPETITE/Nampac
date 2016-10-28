@@ -193,13 +193,13 @@ void GameEngine::createMap(vector<vector<int>> const& laby){
 }
 
 void GameEngine::renderMap(){
+	Bonus* bonus;
 	for (unsigned int l = 0; l < mapElements_.size(); ++l){
 		for (unsigned int c = 0; c < mapElements_[0].size(); ++c){
 			SDL_RenderCopy(renderer_, mapElements_.at(l).at(c)->getMapElementTexture(), NULL, mapElements_.at(l).at(c)->getTextureRect());
-			if(mapElements_.at(l).at(c)->getBonus()){
-				cout << "<--";
-				cout << mapElements_.at(l).at(c)->getBonus()->getTexture()<< endl;
-				//SDL_RenderCopy(renderer_, mapElements_.at(l).at(c)->getBonus()->getTexture(), NULL, mapElements_.at(l).at(c)->getBonus()->getTextureRect());
+			bonus = mapElements_.at(l).at(c)->getBonus();
+			if(bonus!=nullptr){				
+				SDL_RenderCopy(renderer_, bonus->getTexture(), NULL, bonus->getTextureRect());
 			}
 		}
 	}
@@ -311,7 +311,7 @@ void GameEngine::launchNampac(const char* mapLocation){
             //Thread test
             //std::this_thread::sleep_for (std::chrono::milliseconds(25));   
 
-            SDL_Delay(25);       
+            //SDL_Delay(25);       
 
 
 
