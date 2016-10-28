@@ -2,7 +2,6 @@
 #define DEF_LANE
 
 #include <Bonus.hpp>
-#include <Gomme.hpp>
 #include <MapElement.hpp>
 
 class Lane : public MapElement{	

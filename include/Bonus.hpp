@@ -6,8 +6,7 @@
 class Bonus{
 	public:
 		virtual SDL_Rect* getTextureRect() = 0;	
-		virtual SDL_Texture* getTexture() = 0;
-		virtual void setBonusTextureRect(int x, int y) = 0;
+		virtual SDL_Texture* getTexture() = 0;	
 };
 
 #endif

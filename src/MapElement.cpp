@@ -19,7 +19,6 @@ MapElement::MapElement(char* sl, int posX, int posY,SDL_Renderer* renderer):rend
 
 
 
-
 SDL_Texture* MapElement::getMapElementTexture(){
 	return mapElementTexture_;
 }

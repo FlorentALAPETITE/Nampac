@@ -49,6 +49,8 @@ GameEngine::GameEngine(){
     ghosts_.push_back(unique_ptr<PinkGhost>(new PinkGhost(26*sizeSprite,29*sizeSprite,renderer_)));
 
     randNumber_ = 0;
+
+    gameOver_=false;
      
 }
 
@@ -77,8 +79,7 @@ void GameEngine::renderCharacters(){
 void GameEngine::moveCharacter(Character * c){
 	int newPosX, newPosY;
 
-
-		switch (c->getDirection()){
+	switch (c->getDirection()){
 
 		case 0 : // right
 			newPosX = c->getPosX()+c->getSpeed();
@@ -101,35 +102,29 @@ void GameEngine::moveCharacter(Character * c){
 			break;
 	}
 
-	if( !checkColision(newPosX,newPosY)){		
 
-		c->changePosition(newPosX, newPosY);	
+	if(newPosX>=680){
+		c->changePosition(0, newPosY);	
+	}
+
+	else if (newPosX<=0){
+		c->changePosition(680, newPosY);
+	}
+
+	else {
+		if( !checkColision(newPosX,newPosY))
+			c->changePosition(newPosX, newPosY);	
 	}	
 	
-	//14 27
-	
-	if((ceil(c->getPosY()/sizeSprite)== 14 && ceil(c->getPosX()/sizeSprite) >= 27) && c->getDirection() == 0){
-		c->changePosition(0*sizeSprite, 14*sizeSprite);
-	}
-	if((ceil(c->getPosY()/sizeSprite)== 14 && ceil(c->getPosX()/sizeSprite) <=0) && c->getDirection() == 1){
-		c->changePosition(27*sizeSprite, 14*sizeSprite);
-	}
-
-	if (CheckAllCharactersColision())
-	{
-		cout << "Game Over" << endl;
-	}
-	
+		
 }
 
-bool GameEngine::CheckAllCharactersColision(){
-	bool res = false;
+void GameEngine::checkAllCharactersColision(){	
 	for(unsigned int i=0;i<ghosts_.size();++i){
-		if (checkColisionCaracters(ghosts_.at(i)->getTextureRect(), pacman_->getTextureRect())){
-			res = true;
+		if (checkColisionCharacters(ghosts_.at(i)->getTextureRect(), pacman_->getTextureRect())){
+			gameOver_ = true;
 		}
 	}
-	return res;
 }
 
 void GameEngine::moveCharacters(){
@@ -193,13 +188,13 @@ void GameEngine::createMap(vector<vector<int>> const& laby){
 }
 
 void GameEngine::renderMap(){
+	Bonus* bonus;
 	for (unsigned int l = 0; l < mapElements_.size(); ++l){
 		for (unsigned int c = 0; c < mapElements_[0].size(); ++c){
 			SDL_RenderCopy(renderer_, mapElements_.at(l).at(c)->getMapElementTexture(), NULL, mapElements_.at(l).at(c)->getTextureRect());
-			if(mapElements_.at(l).at(c)->getBonus()){
-				cout << "<--";
-				cout << mapElements_.at(l).at(c)->getBonus()->getTexture()<< endl;
-				//SDL_RenderCopy(renderer_, mapElements_.at(l).at(c)->getBonus()->getTexture(), NULL, mapElements_.at(l).at(c)->getBonus()->getTextureRect());
+			bonus = mapElements_.at(l).at(c)->getBonus();
+			if(bonus!=nullptr){				
+				SDL_RenderCopy(renderer_, bonus->getTexture(), NULL, bonus->getTextureRect());
 			}
 		}
 	}
@@ -235,7 +230,7 @@ bool GameEngine::checkColision(int x, int y){
 	return false;
 }
 
-bool GameEngine::checkColisionCaracters(SDL_Rect* c1, SDL_Rect* c2){
+bool GameEngine::checkColisionCharacters(SDL_Rect* c1, SDL_Rect* c2){
 	if(
 		(c2->x >= c1->x + c1->w) || // too right
 		(c2->x + c2->w <= c1->x) || // too left
@@ -259,8 +254,39 @@ void GameEngine::destroySDL(){
 
 	SDL_DestroyRenderer(renderer_); 
 	pacman_->destroySDLElements();
+
+	for(unsigned int i=0;i<ghosts_.size();++i){
+		ghosts_.at(i).get()->destroySDLElements();
+	}
+
+	SDL_DestroyTexture(gameOverTexture_);
+	SDL_FreeSurface(gameOverSurface_);
+
     SDL_DestroyWindow(window_);
+
+
+
 }
+
+
+
+void GameEngine::printGameOverMessage(){
+	TTF_Init();
+
+	TTF_Font* xolo = TTF_OpenFont("./font/Xolonium-Regular.ttf", 250); 
+
+	SDL_Color White = {255, 0, 0};  
+
+	gameOverSurface_ = TTF_RenderText_Solid(xolo, "GAME OVER", White); 
+
+	gameOverTexture_ = SDL_CreateTextureFromSurface(renderer_, gameOverSurface_); 
+
+	gameOverRect_ = {150,250,400,200};
+	
+	SDL_RenderCopy(renderer_, gameOverTexture_, NULL, &gameOverRect_); 
+}
+
+
 
 
 
@@ -273,9 +299,12 @@ void GameEngine::launchNampac(const char* mapLocation){
 
         createMap(laby); 
 
-       
+        renderMap(); 
+        renderCharacters();
+        renderPresent();
+
         // While window isn't close
-        while(!quit){   
+        while(!quit && !gameOver_){   
 
             while (SDL_PollEvent(&events)) {
 
@@ -299,11 +328,21 @@ void GameEngine::launchNampac(const char* mapLocation){
 
                   }           
               }
+            moveCharacters(); 
             clearRenderer();
             renderMap(); 
             renderCharacters();
-            moveCharacters();            
             renderPresent();
+            checkAllCharactersColision();
+                       
+            
+
+
+            if(gameOver_){
+            	printGameOverMessage();
+            	renderPresent();
+            	SDL_Delay(5000);
+            }
 
 
 
@@ -311,7 +350,7 @@ void GameEngine::launchNampac(const char* mapLocation){
             //Thread test
             //std::this_thread::sleep_for (std::chrono::milliseconds(25));   
 
-            SDL_Delay(25);       
+            //SDL_Delay(25);       
 
 
 

@@ -2,6 +2,7 @@
 #define DEF_GAMEENGINE
 
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_ttf.h>
 #include <iostream>
 #include <Character.hpp>
 #include <Pacman.hpp>
@@ -35,7 +36,7 @@ class GameEngine{
 		shared_ptr<MapElement>  getMapElement(int x, int y);		
 
 		bool checkColision(int x, int y);	
-		bool checkColisionCaracters(SDL_Rect* c1, SDL_Rect* c2);
+		bool checkColisionCharacters(SDL_Rect* c1, SDL_Rect* c2);
 		int getSizeSprite();	
 
 
@@ -43,13 +44,20 @@ class GameEngine{
 		void launchNampac(const char*);
 		void renderCharacters();
 
-		bool CheckAllCharactersColision();
+		void printGameOverMessage();
+
+		void checkAllCharactersColision();
 
 	private:
 
 		SDL_Window* window_;
 		SDL_Renderer* renderer_;		
 		std::unique_ptr<Pacman> pacman_;
+
+		SDL_Texture* gameOverTexture_;
+		SDL_Surface* gameOverSurface_;
+		SDL_Rect gameOverRect_;
+		bool gameOver_;
 
 		vector<std::unique_ptr<Ghost>> ghosts_;						
 		

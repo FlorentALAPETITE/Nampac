@@ -1,5 +1,6 @@
 
 #include <Lane.hpp>
+#include <Gum.hpp>
 #include <iostream>
 
 
@@ -8,11 +9,9 @@ bool Lane::canBeCrossed(){
 }
 
 Lane::Lane(int posX, int posY,SDL_Renderer* renderer):MapElement((char*)"sprites/lane.bmp",posX,posY,renderer){
-	Gomme bonus_(renderer);
-	bonus_.setBonusTextureRect(posX, posY);
+	bonus_ = new Gum(renderer, posX+9, posY+9);	
 }
 
-Bonus* Lane::getBonus(){ 
-	std::cout << "lane";
+Bonus* Lane::getBonus(){ 	
 	return bonus_; 
 }
