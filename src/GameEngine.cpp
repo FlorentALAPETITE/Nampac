@@ -30,10 +30,7 @@ GameEngine::GameEngine():gameOver_(false),randNumber_(0),playerScore_(0){
         throw string(SDL_GetError());        
     }
 
-    renderer_ = SDL_CreateRenderer(window_, -1, SDL_RENDERER_ACCELERATED); 
-
-
-    pacman_ = unique_ptr<Pacman>(new Pacman((char*)"sprites/pacmanClose.bmp",5,14*sizeSprite,17*sizeSprite,renderer_)); 
+    renderer_ = SDL_CreateRenderer(window_, -1, SDL_RENDERER_ACCELERATED);     
 
 
     ghosts_ = vector<unique_ptr<Ghost>>();
@@ -181,11 +178,15 @@ void GameEngine::createMap(vector<vector<char>> const& laby){
 		{
 			charMapElement = laby[l][c];
 
-			if(isalpha(charMapElement)){
-				ghosts_.push_back(ghostFactory_->createGhost(charMapElement,c,l,sizeSprite,renderer_));
+			if(charMapElement == 'p'){
+				pacman_ = unique_ptr<Pacman>(new Pacman((char*)"sprites/pacmanClose.bmp",5,c*sizeSprite,l*sizeSprite,renderer_)); 
 				charMapElement = '0';
 			}
 
+			else if(isalpha(charMapElement)){
+				ghosts_.push_back(ghostFactory_->createGhost(charMapElement,c,l,sizeSprite,renderer_));
+				charMapElement = '0';
+			}
 
 			mapElements_[l].push_back(mapElementFactory_->createMapElement(charMapElement,c,l,sizeSprite,renderer_));			
 		}
