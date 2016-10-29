@@ -20,6 +20,7 @@ class MapElement{
 		virtual bool canBeCrossed()=0;
 		void destroySDLElements();
 		Bonus* getBonus();
+		void eatBonus();
 
 };
 

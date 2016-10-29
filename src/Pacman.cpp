@@ -71,3 +71,4 @@ void Pacman::destroySDLElements(){
 	SDL_FreeSurface(characterSurfaceOpenTop_);
 }
 
+

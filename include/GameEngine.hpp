@@ -38,7 +38,7 @@ class GameEngine{
 		shared_ptr<MapElement>  getMapElement(int x, int y);		
 
 		bool checkColision(int x, int y);	
-		bool checkColisionCharacters(SDL_Rect* c1, SDL_Rect* c2);
+		bool checkColisionSDLRect(SDL_Rect* c1, SDL_Rect* c2);
 		int getSizeSprite();	
 
 
@@ -50,6 +50,8 @@ class GameEngine{
 		void renderPlayerScore();
 
 		void checkAllCharactersColision();
+
+		void checkBonusEating();
 
 	private:
 

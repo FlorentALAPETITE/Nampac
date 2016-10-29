@@ -27,7 +27,7 @@ class Pacman : public Character{
 	public:	
 		Pacman(char*,int, int, int, SDL_Renderer*);
 		SDL_Texture* getCharacterTexture() override;
-		void destroySDLElements() override;
+		void destroySDLElements() override;		
 
 
 };
