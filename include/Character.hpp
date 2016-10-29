@@ -4,8 +4,9 @@
 #include <SDL2/SDL.h>
 #include <iostream>
 
-
 using namespace std;
+
+class GameEngine;
 
 class Character{
 
@@ -20,6 +21,7 @@ class Character{
 		int getDirection();
 		void setDirection(int);
 		virtual void destroySDLElements();
+		virtual void moveCharacter(GameEngine*);
 
 
 

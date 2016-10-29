@@ -7,9 +7,17 @@ Ghost::Ghost(char* sp,int posX, int posY, SDL_Renderer* renderer):Character(sp,5
 	movementAmbushState_ = shared_ptr<GhostMovementAmbush>(new GhostMovementAmbush(this));
 	movementStupidState_ = shared_ptr<GhostMovementStupid>(new GhostMovementStupid(this));
 	movementUnpredictableState_ = shared_ptr<GhostMovementUnpredictable>(new GhostMovementUnpredictable(this));
+	movementDeadState_ = shared_ptr<GhostMovementDead>(new GhostMovementDead(this));
 }
 
 
 void Ghost::calculateNextDirection(){
 	currentMovementState_->calculateDirection();
+}
+
+
+
+
+void Ghost::moveCharacter(GameEngine* g){
+	currentMovementState_->moveCharacter(g);		
 }

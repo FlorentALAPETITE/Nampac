@@ -37,3 +37,6 @@ Bonus* MapElement::getBonus(){
 	return bonus_;
 }
 
+void MapElement::eatBonus(){
+	bonus_=nullptr;
+}

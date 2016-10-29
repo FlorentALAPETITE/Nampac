@@ -1,8 +1,6 @@
 #include <GhostMovementChase.hpp>
+#include <stdlib.h>  
 #include <Ghost.hpp>
-#include <stdlib.h>    
-
-
 
 void GhostMovementChase::calculateDirection(){
 	ghost_->setDirection(rand() % 4);

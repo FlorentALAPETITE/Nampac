@@ -73,51 +73,14 @@ void GameEngine::renderCharacters(){
 
 
 void GameEngine::moveCharacter(Character * c){
-	int newPosX, newPosY;
-
-	switch (c->getDirection()){
-
-		case 0 : // right
-			newPosX = c->getPosX()+c->getSpeed();
-			newPosY = c->getPosY();
-			break; 
-
-		case 1 :  // left
-			newPosX = c->getPosX()-c->getSpeed();
-			newPosY = c->getPosY();
-			break;
-
-		case 2 :  //up
-			newPosX = c->getPosX();
-			newPosY = c->getPosY()-c->getSpeed();
-			break;
-
-		case 3 : //down
-			newPosX = c->getPosX();
-			newPosY = c->getPosY()+c->getSpeed();
-			break;
-	}
-
-
-	if(newPosX>=680){
-		c->changePosition(0, newPosY);	
-	}
-
-	else if (newPosX<=0){
-		c->changePosition(680, newPosY);
-	}
-
-	else {
-		if( !checkColision(newPosX,newPosY))
-			c->changePosition(newPosX, newPosY);	
-	}	
+	c->moveCharacter(this);
 	
 		
 }
 
 void GameEngine::checkAllCharactersColision(){	
 	for(unsigned int i=0;i<ghosts_.size();++i){
-		if (checkColisionCharacters(ghosts_.at(i)->getTextureRect(), pacman_->getTextureRect())){
+		if (checkColisionSDLRect(ghosts_.at(i)->getTextureRect(), pacman_->getTextureRect())){
 			gameOver_ = true;
 		}
 	}
@@ -125,6 +88,7 @@ void GameEngine::checkAllCharactersColision(){
 
 void GameEngine::moveCharacters(){
 	moveCharacter(pacman_.get());
+	checkBonusEating();
 
 	for(unsigned int i=0;i<ghosts_.size();++i){
 		srand(randNumber_);
@@ -236,12 +200,12 @@ bool GameEngine::checkColision(int x, int y){
 	return false;
 }
 
-bool GameEngine::checkColisionCharacters(SDL_Rect* c1, SDL_Rect* c2){
+bool GameEngine::checkColisionSDLRect(SDL_Rect* r1, SDL_Rect* r2){
 	if(
-		(c2->x >= c1->x + c1->w) || // too right
-		(c2->x + c2->w <= c1->x) || // too left
-		(c2->y >= c1->y + c1->h) || // too down
-		(c2->y + c2->h <= c1->y) // too top
+		(r2->x >= r1->x + r1->w) || // too right
+		(r2->x + r2->w <= r1->x) || // too left
+		(r2->y >= r1->y + r1->h) || // too down
+		(r2->y + r2->h <= r1->y) // too top
 		){
 		return false;
 	}
@@ -306,6 +270,16 @@ void GameEngine::renderPlayerScore(){
 	
 }
 
+
+void GameEngine::checkBonusEating(){
+	Bonus* actualBonus = getMapElement(pacman_->getPosX()/sizeSprite, pacman_->getPosY()/sizeSprite)->getBonus();
+	if(actualBonus != nullptr){
+		if(checkColisionSDLRect(pacman_->getTextureRect(), actualBonus->getTextureRect())){
+			playerScore_+=actualBonus->getPoint();
+			getMapElement(pacman_->getPosX()/sizeSprite, pacman_->getPosY()/sizeSprite)->eatBonus();
+		}
+	}
+}
 
 
 
