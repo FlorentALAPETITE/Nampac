@@ -10,15 +10,16 @@ class MapElement{
 		SDL_Texture* mapElementTexture_;
 		SDL_Surface* mapElementSurface_;
 		SDL_Rect textureRect_;
-		SDL_Renderer* renderer_;
+		SDL_Renderer* renderer_;			
+		Bonus* bonus_;
 
 	public:
-		MapElement(char*,int,int,SDL_Renderer*);
+		MapElement(char*,int,int,SDL_Renderer*,Bonus* b);
 		SDL_Rect* getTextureRect();	
 		SDL_Texture* getMapElementTexture();
 		virtual bool canBeCrossed()=0;
 		void destroySDLElements();
-		virtual Bonus* getBonus() =0;
+		Bonus* getBonus();
 
 };
 

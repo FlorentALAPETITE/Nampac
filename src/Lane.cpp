@@ -8,10 +8,6 @@ bool Lane::canBeCrossed(){
 	return true;
 }
 
-Lane::Lane(int posX, int posY,SDL_Renderer* renderer):MapElement((char*)"sprites/lane.bmp",posX,posY,renderer){
-	bonus_ = new Gum(renderer, posX+9, posY+9);	
+Lane::Lane(int posX, int posY,SDL_Renderer* renderer, Bonus* b):MapElement((char*)"sprites/lane.bmp",posX,posY,renderer,b){		
 }
 
-Bonus* Lane::getBonus(){ 	
-	return bonus_; 
-}

@@ -1,20 +1,20 @@
 #include <MapReader.hpp>
 
 
-vector<vector<int>> MapReader::BuildMap(const char* file){
+vector<vector<char>> MapReader::BuildMap(const char* file){
 	try{
 		ifstream flux(file, ios::binary);
 		if (!flux){ throw std::string("Erreur lecture fichier");}
 		else{
-			vector<vector<int>> res;
+			vector<vector<char>> res;
 
 			int l = 0;
 			string line;
 			while(getline(flux, line)){
-				res.push_back(vector<int>());
+				res.push_back(vector<char>());
 				for (unsigned int i = 0; i < line.size(); ++i)
 				{
-					int nb = line[i] - '0';
+					char nb = line[i];
 					res[l].push_back(nb);
 				}
 				++l;
@@ -24,5 +24,5 @@ vector<vector<int>> MapReader::BuildMap(const char* file){
 		}
 	}
 	catch(std::string const& err){ std::cerr << err << "\n"; }
-	return vector<vector<int>>();
+		return vector<vector<char>>();
 }
