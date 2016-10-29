@@ -5,8 +5,16 @@
 
 class Bonus{
 	public:
-		virtual SDL_Rect* getTextureRect() = 0;	
-		virtual SDL_Texture* getTexture() = 0;	
+		Bonus(SDL_Renderer*, int, int, const char *);
+		virtual SDL_Rect* getTextureRect();
+		virtual SDL_Texture* getTexture();
+		virtual int getPoint()=0;
+
+	protected:
+		SDL_Texture* bonusTexture_;
+		SDL_Surface* bonusSurface_;
+		SDL_Rect bonusTextureRect_;
+		SDL_Renderer* renderer_;
 };
 
 #endif

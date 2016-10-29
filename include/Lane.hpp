@@ -1,18 +1,15 @@
 #ifndef DEF_LANE
 #define DEF_LANE
 
-#include <Bonus.hpp>
 #include <MapElement.hpp>
 
 class Lane : public MapElement{	
 
 	public:		
-		Lane(int , int ,SDL_Renderer*);	
+		Lane(int , int ,SDL_Renderer*, Bonus*);	
 	    bool canBeCrossed() override;
-	    Bonus* getBonus() override;
+	    Bonus* getBonus();
 
-	private:
-		Bonus* bonus_;
 };
 
 

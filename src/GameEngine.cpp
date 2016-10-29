@@ -1,22 +1,17 @@
 #include <GameEngine.hpp>
-
-#include <Wall.hpp>
-#include <Lane.hpp>
+#include <string.h>
 #include <memory>
 #include <MapReader.hpp>
-#include <RedGhost.hpp>
-#include <BlueGhost.hpp>
-#include <OrangeGhost.hpp>
-#include <PinkGhost.hpp>
 #include <math.h>
 #include <stdlib.h>    
-
+#include <MapElementFactory.hpp>
+#include <ctype.h>
 
 
 using namespace std;
 
 
-GameEngine::GameEngine(){
+GameEngine::GameEngine():gameOver_(false),randNumber_(0),playerScore_(0){
 	    
            
        
@@ -42,16 +37,20 @@ GameEngine::GameEngine(){
 
 
     ghosts_ = vector<unique_ptr<Ghost>>();
+    
 
-    ghosts_.push_back(unique_ptr<RedGhost>(new RedGhost(1*sizeSprite,1*sizeSprite,renderer_)));
-   	ghosts_.push_back(unique_ptr<OrangeGhost>(new OrangeGhost(1*sizeSprite,29*sizeSprite,renderer_)));
-    ghosts_.push_back(unique_ptr<BlueGhost>(new BlueGhost(26*sizeSprite,1*sizeSprite,renderer_)));
-    ghosts_.push_back(unique_ptr<PinkGhost>(new PinkGhost(26*sizeSprite,29*sizeSprite,renderer_)));
+    TTF_Init();
 
-    randNumber_ = 0;
+    fontScoring_ = TTF_OpenFont("./font/Xolonium-Regular.ttf", 30);
+    fontGameOver_ = TTF_OpenFont("./font/Xolonium-Regular.ttf", 250);
+    red_ = {255, 0, 0};  
+	white_ = {255, 255, 255};  
 
-    gameOver_=false;
-     
+	playerScoreRect_ = {540,685,80,40};
+
+	mapElementFactory_ = unique_ptr<MapElementFactory>(new MapElementFactory());
+	ghostFactory_ = unique_ptr<GhostFactory>(new GhostFactory());
+        
 }
 
 
@@ -167,22 +166,28 @@ void GameEngine::changePacmanDirection(int direction){
 	}
 }
 
-void GameEngine::createMap(vector<vector<int>> const& laby){
+void GameEngine::createMap(vector<vector<char>> const& laby){
+	
+	
 
 	mapElements_ = vector<vector<shared_ptr<MapElement>>> ();
+
+	char charMapElement;
 
 	for (unsigned int l = 0; l < laby.size(); ++l)
 	{
 		mapElements_.push_back(vector<shared_ptr<MapElement>>());
 		for (unsigned int c = 0; c < laby[0].size(); ++c)
 		{
-			if (laby[l][c] == 0){
-				mapElements_[l].push_back(shared_ptr<Lane> (new Lane(c*sizeSprite,l*sizeSprite,renderer_)));			
-				
+			charMapElement = laby[l][c];
+
+			if(isalpha(charMapElement)){
+				ghosts_.push_back(ghostFactory_->createGhost(charMapElement,c,l,sizeSprite,renderer_));
+				charMapElement = '0';
 			}
-			else{
-				mapElements_[l].push_back(shared_ptr<Wall> (new Wall(c*sizeSprite,l*sizeSprite,renderer_)));				
-			}
+
+
+			mapElements_[l].push_back(mapElementFactory_->createMapElement(charMapElement,c,l,sizeSprite,renderer_));			
 		}
 	}
 }
@@ -262,6 +267,9 @@ void GameEngine::destroySDL(){
 	SDL_DestroyTexture(gameOverTexture_);
 	SDL_FreeSurface(gameOverSurface_);
 
+	SDL_DestroyTexture(playerScoreTexture_);
+	SDL_FreeSurface(playerScoreSurface_);
+
     SDL_DestroyWindow(window_);
 
 
@@ -270,21 +278,33 @@ void GameEngine::destroySDL(){
 
 
 
-void GameEngine::printGameOverMessage(){
-	TTF_Init();
-
-	TTF_Font* xolo = TTF_OpenFont("./font/Xolonium-Regular.ttf", 250); 
-
-	SDL_Color White = {255, 0, 0};  
-
-	gameOverSurface_ = TTF_RenderText_Solid(xolo, "GAME OVER", White); 
+void GameEngine::renderGameOverMessage(){
+	
+	gameOverSurface_ = TTF_RenderText_Solid(fontGameOver_, "GAME OVER", red_); 
 
 	gameOverTexture_ = SDL_CreateTextureFromSurface(renderer_, gameOverSurface_); 
 
 	gameOverRect_ = {150,250,400,200};
-	
+
 	SDL_RenderCopy(renderer_, gameOverTexture_, NULL, &gameOverRect_); 
 }
+
+
+
+
+
+void GameEngine::renderPlayerScore(){	
+
+	const char* score = (string("Score : ")+to_string(playerScore_)).c_str();
+
+	playerScoreSurface_ = TTF_RenderText_Solid(fontScoring_, score, white_); 
+
+	playerScoreTexture_ = SDL_CreateTextureFromSurface(renderer_, playerScoreSurface_); 	
+	
+	SDL_RenderCopy(renderer_, playerScoreTexture_, NULL, &playerScoreRect_); 
+	
+}
+
 
 
 
@@ -295,12 +315,13 @@ void GameEngine::launchNampac(const char* mapLocation){
         SDL_Event events;
         bool quit(false);
         
-        vector<vector<int>> laby = MapReader::BuildMap(mapLocation);
+        vector<vector<char>> laby = MapReader::BuildMap(mapLocation);
 
         createMap(laby); 
 
         renderMap(); 
         renderCharacters();
+        renderPlayerScore();
         renderPresent();
 
         // While window isn't close
@@ -332,6 +353,7 @@ void GameEngine::launchNampac(const char* mapLocation){
             clearRenderer();
             renderMap(); 
             renderCharacters();
+            renderPlayerScore();
             renderPresent();
             checkAllCharactersColision();
                        
@@ -339,7 +361,7 @@ void GameEngine::launchNampac(const char* mapLocation){
 
 
             if(gameOver_){
-            	printGameOverMessage();
+            	renderGameOverMessage();
             	renderPresent();
             	SDL_Delay(5000);
             }

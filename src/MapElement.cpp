@@ -5,7 +5,7 @@
 using namespace std;
 
 
-MapElement::MapElement(char* sl, int posX, int posY,SDL_Renderer* renderer):renderer_(renderer){	
+MapElement::MapElement(char* sl, int posX, int posY,SDL_Renderer* renderer, Bonus* b):renderer_(renderer), bonus_(b){	
 	mapElementSurface_ = SDL_LoadBMP(sl);
 	mapElementTexture_ = SDL_CreateTextureFromSurface(renderer_,mapElementSurface_);
 
@@ -30,5 +30,10 @@ SDL_Rect* MapElement::getTextureRect(){
 void MapElement::destroySDLElements(){
 	SDL_DestroyTexture(mapElementTexture_);
 	SDL_FreeSurface(mapElementSurface_);
+}
+
+
+Bonus* MapElement::getBonus(){
+	return bonus_;
 }
 

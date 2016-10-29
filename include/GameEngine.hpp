@@ -11,6 +11,8 @@
 #include <memory>
 #include <Ghost.hpp>
 #include <Bonus.hpp>
+#include <GhostFactory.hpp>
+#include <MapElementFactory.hpp>
 
 
 const int sizeSprite = 25;
@@ -28,7 +30,7 @@ class GameEngine{
 
 
 		void changePacmanDirection(int);
-		void createMap(std::vector<std::vector<int>> const& laby);
+		void createMap(std::vector<std::vector<char>> const& laby);
 		void renderMap();
 		void clearRenderer();
 		void renderPresent();
@@ -44,26 +46,41 @@ class GameEngine{
 		void launchNampac(const char*);
 		void renderCharacters();
 
-		void printGameOverMessage();
+		void renderGameOverMessage();
+		void renderPlayerScore();
 
 		void checkAllCharactersColision();
 
 	private:
 
+		unique_ptr<MapElementFactory> mapElementFactory_;
+		unique_ptr<GhostFactory> ghostFactory_;
+
 		SDL_Window* window_;
 		SDL_Renderer* renderer_;		
 		std::unique_ptr<Pacman> pacman_;
+
+		TTF_Font* fontScoring_;
+		TTF_Font* fontGameOver_;
+		SDL_Color white_;
+		SDL_Color red_;
 
 		SDL_Texture* gameOverTexture_;
 		SDL_Surface* gameOverSurface_;
 		SDL_Rect gameOverRect_;
 		bool gameOver_;
 
+		
 		vector<std::unique_ptr<Ghost>> ghosts_;						
 		
 		vector<vector<std::shared_ptr<MapElement>>> mapElements_;
 
 		int randNumber_;	
+
+		int playerScore_;
+		SDL_Texture* playerScoreTexture_;
+		SDL_Surface* playerScoreSurface_;
+		SDL_Rect playerScoreRect_;
 
 		
 
