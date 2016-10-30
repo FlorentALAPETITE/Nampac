@@ -11,17 +11,19 @@ class GameEngine;
 class Character{
 
 	public:
-		Character(char*,int,int,int,SDL_Renderer*);			
-		int getSpeed();
-		void changePosition(int,int);
-		int getPosX();
-		int getPosY();
+		Character(char*,int,int,int,SDL_Renderer*);	
+		Character();		
+		virtual int getSpeed();
+		virtual void changePosition(int,int);
+		virtual int getPosX();
+		virtual int getPosY();
 		virtual SDL_Texture* getCharacterTexture();
-		SDL_Rect* getTextureRect();
-		int getDirection();
-		void setDirection(int);
+		virtual SDL_Rect* getTextureRect();
+		virtual int getDirection();
+		virtual void setDirection(int);
 		virtual void destroySDLElements();
-		virtual void moveCharacter(GameEngine*);
+		virtual void moveCharacter(GameEngine*,int)=0;
+		virtual void calculateNextDirection()=0;
 
 
 

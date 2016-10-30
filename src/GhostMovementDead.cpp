@@ -7,4 +7,4 @@ void GhostMovementDead::calculateDirection(){}
 
 GhostMovementDead::GhostMovementDead(Ghost *g):GhostMovementState(g){}
 
-void GhostMovementDead::moveCharacter(GameEngine*){}
+void GhostMovementDead::moveCharacter(GameEngine*, int speed){}

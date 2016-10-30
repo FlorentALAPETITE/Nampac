@@ -10,7 +10,7 @@ class GhostMovementDead : public GhostMovementState {
 	public:
 		GhostMovementDead(Ghost *);
 		void calculateDirection() override;
-		void moveCharacter(GameEngine*) override;
+		void moveCharacter(GameEngine*, int speed) override;
 		
 };
 

@@ -1,4 +1,5 @@
 #include <Pacman.hpp>
+#include <GameEngine.hpp>
 #include <iostream>
 
 using namespace std;
@@ -72,3 +73,46 @@ void Pacman::destroySDLElements(){
 }
 
 
+
+void Pacman::moveCharacter(GameEngine* g, int speed){
+	int newPosX, newPosY;
+
+	switch (getDirection()){
+
+		case 0 : // right
+			newPosX = getPosX()+speed;
+			newPosY = getPosY();
+			break; 
+
+		case 1 :  // left
+			newPosX = getPosX()-speed;
+			newPosY = getPosY();
+			break;
+
+		case 2 :  //up
+			newPosX = getPosX();
+			newPosY = getPosY()-speed;
+			break;
+
+		case 3 : //down
+			newPosX = getPosX();
+			newPosY = getPosY()+speed;
+			break;
+	}
+
+	if(newPosX>=680){
+		changePosition(0, newPosY);	
+	}
+
+	else if (newPosX<=0){
+		changePosition(680, newPosY);
+	}
+
+	else {
+		if( !g->checkColision(newPosX,newPosY))
+			changePosition(newPosX, newPosY);	
+	}		
+		
+}
+
+void Pacman::calculateNextDirection(){}

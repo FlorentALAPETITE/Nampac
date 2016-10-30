@@ -1,7 +1,6 @@
 #ifndef DEF_GHOST
 #define DEF_GHOST
 
-
 #include <Character.hpp>
 #include <GhostMovementState.hpp>
 #include <GhostMovementChase.hpp>
@@ -19,8 +18,8 @@ class Ghost : public Character{
 
 	public:
 		Ghost(char*, int, int, SDL_Renderer*);
-		void calculateNextDirection();
-		void moveCharacter(GameEngine*) override;
+		void calculateNextDirection() override;
+		void moveCharacter(GameEngine*,int) override;
 
 	protected:
 		shared_ptr<GhostMovementState> currentMovementState_;
