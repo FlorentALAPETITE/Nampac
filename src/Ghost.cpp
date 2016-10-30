@@ -18,6 +18,6 @@ void Ghost::calculateNextDirection(){
 
 
 
-void Ghost::moveCharacter(GameEngine* g){
-	currentMovementState_->moveCharacter(g);		
+void Ghost::moveCharacter(GameEngine* g,int speed){
+	currentMovementState_->moveCharacter(g, speed);		
 }

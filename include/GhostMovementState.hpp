@@ -14,7 +14,7 @@ class GhostMovementState {
 	public:
 		GhostMovementState(Ghost*);
 		virtual void calculateDirection() = 0;
-		virtual void moveCharacter(GameEngine*);
+		virtual void moveCharacter(GameEngine*, int);
 
 	protected:
 		Ghost* ghost_;

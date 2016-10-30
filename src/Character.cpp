@@ -17,6 +17,8 @@ Character::Character(char* sl, int s, int posX, int posY,SDL_Renderer* renderer)
 
 }
 
+Character::Character(){}
+
 
 int Character::getSpeed(){
 	return speed_;
@@ -58,44 +60,3 @@ void Character::destroySDLElements(){
 	SDL_FreeSurface(characterSurface_);
 }
 
-
-void Character::moveCharacter(GameEngine* g){
-	int newPosX, newPosY;
-
-	switch (getDirection()){
-
-		case 0 : // right
-			newPosX = getPosX()+getSpeed();
-			newPosY = getPosY();
-			break; 
-
-		case 1 :  // left
-			newPosX = getPosX()-getSpeed();
-			newPosY = getPosY();
-			break;
-
-		case 2 :  //up
-			newPosX = getPosX();
-			newPosY = getPosY()-getSpeed();
-			break;
-
-		case 3 : //down
-			newPosX = getPosX();
-			newPosY = getPosY()+getSpeed();
-			break;
-	}
-
-	if(newPosX>=680){
-		changePosition(0, newPosY);	
-	}
-
-	else if (newPosX<=0){
-		changePosition(680, newPosY);
-	}
-
-	else {
-		if( !g->checkColision(newPosX,newPosY))
-			changePosition(newPosX, newPosY);	
-	}		
-		
-}

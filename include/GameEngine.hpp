@@ -5,11 +5,9 @@
 #include <SDL2/SDL_ttf.h>
 #include <iostream>
 #include <Character.hpp>
-#include <Pacman.hpp>
 #include <vector>
 #include <MapElement.hpp>
 #include <memory>
-#include <Ghost.hpp>
 #include <Bonus.hpp>
 #include <GhostFactory.hpp>
 #include <MapElementFactory.hpp>
@@ -60,7 +58,7 @@ class GameEngine{
 
 		SDL_Window* window_;
 		SDL_Renderer* renderer_;		
-		std::unique_ptr<Pacman> pacman_;
+		shared_ptr<Character> pacman_;
 
 		TTF_Font* fontScoring_;
 		TTF_Font* fontGameOver_;
@@ -73,7 +71,7 @@ class GameEngine{
 		bool gameOver_;
 
 		
-		vector<std::unique_ptr<Ghost>> ghosts_;						
+		vector<shared_ptr<Character>> ghosts_;						
 		
 		vector<vector<std::shared_ptr<MapElement>>> mapElements_;
 

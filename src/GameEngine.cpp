@@ -6,6 +6,8 @@
 #include <stdlib.h>    
 #include <MapElementFactory.hpp>
 #include <ctype.h>
+#include <SpeededCharacter.hpp>
+#include <Pacman.hpp>
 
 
 using namespace std;
@@ -33,7 +35,7 @@ GameEngine::GameEngine():gameOver_(false),randNumber_(0),playerScore_(0){
     renderer_ = SDL_CreateRenderer(window_, -1, SDL_RENDERER_ACCELERATED);     
 
 
-    ghosts_ = vector<unique_ptr<Ghost>>();
+    ghosts_ = vector<shared_ptr<Character>>();
     
 
     TTF_Init();
@@ -73,7 +75,7 @@ void GameEngine::renderCharacters(){
 
 
 void GameEngine::moveCharacter(Character * c){
-	c->moveCharacter(this);
+	c->moveCharacter(this, c->getSpeed());
 	
 		
 }
@@ -100,7 +102,7 @@ void GameEngine::moveCharacters(){
 }
 
 void GameEngine::changePacmanDirection(int direction){
-	int newPosX, newPosY;
+	int newPosX, newPosY;	
 
 	switch(direction){
 		case 0 : // right
@@ -127,8 +129,7 @@ void GameEngine::changePacmanDirection(int direction){
 	}
 }
 
-void GameEngine::createMap(vector<vector<char>> const& laby){
-	
+void GameEngine::createMap(vector<vector<char>> const& laby){	
 	
 
 	mapElements_ = vector<vector<shared_ptr<MapElement>>> ();
@@ -143,7 +144,8 @@ void GameEngine::createMap(vector<vector<char>> const& laby){
 			charMapElement = laby[l][c];
 
 			if(charMapElement == 'p'){
-				pacman_ = unique_ptr<Pacman>(new Pacman((char*)"sprites/pacmanClose.bmp",5,c*sizeSprite,l*sizeSprite,renderer_)); 
+				pacman_ = shared_ptr<Character>(new Pacman((char*)"sprites/pacmanClose.bmp",5,c*sizeSprite,l*sizeSprite,renderer_)); 
+				pacman_ = shared_ptr<Character>(new SpeededCharacter(pacman_));				
 				charMapElement = '0';
 			}
 
@@ -226,7 +228,7 @@ void GameEngine::destroySDL(){
 	pacman_->destroySDLElements();
 
 	for(unsigned int i=0;i<ghosts_.size();++i){
-		ghosts_.at(i).get()->destroySDLElements();
+		ghosts_.at(i)->destroySDLElements();
 	}
 
 	SDL_DestroyTexture(gameOverTexture_);
