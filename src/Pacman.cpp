@@ -19,6 +19,8 @@ Pacman::Pacman(char* sp,int s, int posX, int posY, SDL_Renderer* renderer):Chara
 	characterSurfaceOpenRight_ = SDL_LoadBMP("sprites/pacmanOpenRight.bmp");
 	characterTextureOpenRight_ = SDL_CreateTextureFromSurface(renderer_,characterSurfaceOpenRight_);
 
+	requestedDirection_=9;
+
 	
 }
 
@@ -78,49 +80,108 @@ void Pacman::moveCharacter(GameEngine* g, int speed){
 
 	int modifiedSpeed = speed;
 	bool modified=false;
-	while(modified==false && modifiedSpeed!=0){
 
-		int newPosX, newPosY;		
-		switch (getDirection()){
 
-			case 0 : // right
-				newPosX = getPosX()+modifiedSpeed;
-				newPosY = getPosY();
-				break; 
+	if(requestedDirection_!=direction_){
 
-			case 1 :  // left
-				newPosX = getPosX()-modifiedSpeed;
-				newPosY = getPosY();
-				break;
 
-			case 2 :  //up
-				newPosX = getPosX();
-				newPosY = getPosY()-modifiedSpeed;
-				break;
+		while(modified==false && modifiedSpeed!=0){
 
-			case 3 : //down
-				newPosX = getPosX();
-				newPosY = getPosY()+modifiedSpeed;
-				break;
-		}
+				int newPosX, newPosY;		
+				switch (requestedDirection_){
 
-		if(newPosX>=680){
-			changePosition(0, newPosY);	
-			modified=true;
-		}
+					case 0 : // right
+						newPosX = getPosX()+modifiedSpeed;
+						newPosY = getPosY();
+						break; 
 
-		else if (newPosX<=0){
-			changePosition(680, newPosY);
-			modified=true;
-		}
+					case 1 :  // left
+						newPosX = getPosX()-modifiedSpeed;
+						newPosY = getPosY();
+						break;
 
-		else {
-			if( !g->checkColision(newPosX,newPosY)){
-				changePosition(newPosX, newPosY);
+					case 2 :  //up
+						newPosX = getPosX();
+						newPosY = getPosY()-modifiedSpeed;
+						break;
+
+					case 3 : //down
+						newPosX = getPosX();
+						newPosY = getPosY()+modifiedSpeed;
+						break;
+				}
+
+				if( !g->checkColision(newPosX,newPosY)){
+					changePosition(newPosX, newPosY);
+					modified=true;
+					direction_=requestedDirection_;					
+				}		
+				--modifiedSpeed;
+			}
+
+	}
+
+	if (!modified) {
+
+		modifiedSpeed=speed;
+
+		while(modified==false && modifiedSpeed!=0){
+
+			int newPosX, newPosY;		
+			switch (direction_){
+
+				case 0 : // right
+					newPosX = getPosX()+modifiedSpeed;
+					newPosY = getPosY();
+					break; 
+
+				case 1 :  // left
+					newPosX = getPosX()-modifiedSpeed;
+					newPosY = getPosY();
+					break;
+
+				case 2 :  //up
+					newPosX = getPosX();
+					newPosY = getPosY()-modifiedSpeed;
+					break;
+
+				case 3 : //down
+					newPosX = getPosX();
+					newPosY = getPosY()+modifiedSpeed;
+					break;
+			}
+
+			if(newPosX>=680){
+				changePosition(0, newPosY);	
 				modified=true;
-				}	
-		}		
-		--modifiedSpeed;
+			}
+
+			else if (newPosX<0){
+				changePosition(680, newPosY);
+				modified=true;
+			}
+
+			else if(newPosY>=755){
+				changePosition(newPosX, 0);
+				modified=true;
+			}
+
+			else if(newPosY<=0){
+				changePosition(newPosX, 755);
+				modified=true;
+			}
+
+
+			else{ 
+				if( !g->checkColision(newPosX,newPosY)){
+					changePosition(newPosX, newPosY);
+					modified=true;
+				}
+			}		
+			--modifiedSpeed;
+		}
+
+
 	}
 
 
@@ -128,3 +189,9 @@ void Pacman::moveCharacter(GameEngine* g, int speed){
 
 
 void Pacman::calculateNextDirection(){}
+
+
+
+void Pacman::setDirection(int direction){
+	requestedDirection_=direction;
+}

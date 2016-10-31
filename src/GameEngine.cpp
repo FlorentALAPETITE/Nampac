@@ -102,31 +102,65 @@ void GameEngine::moveCharacters(){
 }
 
 void GameEngine::changePacmanDirection(int direction){
-	int newPosX, newPosY;	
+	// int modifiedSpeed = pacman_->getSpeed();
+	// bool modified=false;
+	// while(modified==false && modifiedSpeed!=0){
 
-	switch(direction){
-		case 0 : // right
-			newPosX = pacman_->getPosX()+pacman_->getSpeed();
-			newPosY = pacman_->getPosY();
-			break; 
-		case 1 :  // left
-			newPosX = pacman_->getPosX()-pacman_->getSpeed();
-			newPosY = pacman_->getPosY();
-			break;
+	// 	int newPosX, newPosY;		
+	// 	switch (direction){
 
-		case 2 :  //up
-			newPosX = pacman_->getPosX();
-			newPosY = pacman_->getPosY()-pacman_->getSpeed();
-			break;
+	// 		case 0 : // right
+	// 			newPosX = pacman_->getPosX()+modifiedSpeed;
+	// 			newPosY = pacman_->getPosY();
+	// 			break; 
 
-		case 3 : //down
-			newPosX = pacman_->getPosX();
-			newPosY = pacman_->getPosY()+pacman_->getSpeed();
-			break;
-	}
-	if(!checkColision(newPosX,newPosY)){
-		pacman_->setDirection(direction);
-	}
+	// 		case 1 :  // left
+	// 			newPosX = pacman_->getPosX()-modifiedSpeed;
+	// 			newPosY = pacman_->getPosY();
+	// 			break;
+
+	// 		case 2 :  //up
+	// 			newPosX = pacman_->getPosX();
+	// 			newPosY = pacman_->getPosY()-modifiedSpeed;
+	// 			break;
+
+	// 		case 3 : //down
+	// 			newPosX = pacman_->getPosX();
+	// 			newPosY = pacman_->getPosY()+modifiedSpeed;
+	// 			break;
+	// 	}
+
+	// 	// if(newPosX>=680){
+	// 	// 	changePosition(0, newPosY);	
+	// 	// 	modified=true;
+	// 	// }
+
+	// 	// else if (newPosX<=0){
+	// 	// 	changePosition(680, newPosY);
+	// 	// 	modified=true;
+	// 	// }
+
+	// 	// if(newPosY>=750){
+	// 	// 	changePosition(newPosX, 0);
+	// 	// 	modified=true;
+	// 	// }
+
+	// 	// else if(newPosY<=0){
+	// 	// 	changePosition(newPosX, 750);
+	// 	// 	modified=true;
+	// 	// }
+
+		
+	// 	if( !checkColision(newPosX,newPosY)){
+	// 			pacman_->setDirection(direction);
+	// 			modified=true;
+	// 	}	
+				
+	// 	--modifiedSpeed;
+	// }
+
+	pacman_->setDirection(direction);
+
 }
 
 void GameEngine::createMap(vector<vector<char>> const& laby){	
@@ -145,7 +179,7 @@ void GameEngine::createMap(vector<vector<char>> const& laby){
 
 			if(charMapElement == 'p'){
 				pacman_ = shared_ptr<Character>(new Pacman((char*)"sprites/pacmanClose.bmp",5,c*sizeSprite,l*sizeSprite,renderer_)); 
-				pacman_ = shared_ptr<Character>(new SpeededCharacter(pacman_));				
+				//pacman_ = shared_ptr<Character>(new SpeededCharacter(pacman_));				
 				charMapElement = '0';
 			}
 
