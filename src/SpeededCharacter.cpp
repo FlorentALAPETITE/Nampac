@@ -5,6 +5,6 @@ SpeededCharacter::SpeededCharacter(shared_ptr<Character> c):CharacterDecorator(c
 }
 
 int SpeededCharacter::getSpeed(){	
-	return character_->getSpeed()+0;
+	return character_->getSpeed()+3;
 }
 
