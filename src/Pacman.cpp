@@ -19,6 +19,8 @@ Pacman::Pacman(char* sp,int s, int posX, int posY, SDL_Renderer* renderer):Chara
 	characterSurfaceOpenRight_ = SDL_LoadBMP("sprites/pacmanOpenRight.bmp");
 	characterTextureOpenRight_ = SDL_CreateTextureFromSurface(renderer_,characterSurfaceOpenRight_);
 
+	requestedDirection_=9;
+
 	
 }
 
@@ -75,44 +77,121 @@ void Pacman::destroySDLElements(){
 
 
 void Pacman::moveCharacter(GameEngine* g, int speed){
-	int newPosX, newPosY;
 
-	switch (getDirection()){
+	int modifiedSpeed = speed;
+	bool modified=false;
 
-		case 0 : // right
-			newPosX = getPosX()+speed;
-			newPosY = getPosY();
-			break; 
 
-		case 1 :  // left
-			newPosX = getPosX()-speed;
-			newPosY = getPosY();
-			break;
+	if(requestedDirection_!=direction_){
 
-		case 2 :  //up
-			newPosX = getPosX();
-			newPosY = getPosY()-speed;
-			break;
 
-		case 3 : //down
-			newPosX = getPosX();
-			newPosY = getPosY()+speed;
-			break;
+		while(modified==false && modifiedSpeed!=0){
+
+				int newPosX, newPosY;		
+				switch (requestedDirection_){
+
+					case 0 : // right
+						newPosX = getPosX()+modifiedSpeed;
+						newPosY = getPosY();
+						break; 
+
+					case 1 :  // left
+						newPosX = getPosX()-modifiedSpeed;
+						newPosY = getPosY();
+						break;
+
+					case 2 :  //up
+						newPosX = getPosX();
+						newPosY = getPosY()-modifiedSpeed;
+						break;
+
+					case 3 : //down
+						newPosX = getPosX();
+						newPosY = getPosY()+modifiedSpeed;
+						break;
+				}
+
+				if( !g->checkColision(newPosX,newPosY)){
+					changePosition(newPosX, newPosY);
+					modified=true;
+					direction_=requestedDirection_;					
+				}		
+				--modifiedSpeed;
+			}
+
 	}
 
-	if(newPosX>=680){
-		changePosition(0, newPosY);	
+	if (!modified) {
+
+		modifiedSpeed=speed;
+
+		while(modified==false && modifiedSpeed!=0){
+
+			int newPosX, newPosY;		
+			switch (direction_){
+
+				case 0 : // right
+					newPosX = getPosX()+modifiedSpeed;
+					newPosY = getPosY();
+					break; 
+
+				case 1 :  // left
+					newPosX = getPosX()-modifiedSpeed;
+					newPosY = getPosY();
+					break;
+
+				case 2 :  //up
+					newPosX = getPosX();
+					newPosY = getPosY()-modifiedSpeed;
+					break;
+
+				case 3 : //down
+					newPosX = getPosX();
+					newPosY = getPosY()+modifiedSpeed;
+					break;
+			}
+
+			if(newPosX>=680){
+				changePosition(0, newPosY);	
+				modified=true;
+			}
+
+			else if (newPosX<0){
+				changePosition(680, newPosY);
+				modified=true;
+			}
+
+			else if(newPosY>=755){
+				changePosition(newPosX, 0);
+				modified=true;
+			}
+
+			else if(newPosY<=0){
+				changePosition(newPosX, 755);
+				modified=true;
+			}
+
+
+			else{ 
+				if( !g->checkColision(newPosX,newPosY)){
+					changePosition(newPosX, newPosY);
+					modified=true;
+				}
+			}		
+			--modifiedSpeed;
+		}
+
+
 	}
 
-	else if (newPosX<=0){
-		changePosition(680, newPosY);
-	}
 
-	else {
-		if( !g->checkColision(newPosX,newPosY))
-			changePosition(newPosX, newPosY);	
-	}		
-		
 }
 
+
 void Pacman::calculateNextDirection(){}
+
+
+
+void Pacman::setDirection(int direction){
+	requestedDirection_=direction;
+}

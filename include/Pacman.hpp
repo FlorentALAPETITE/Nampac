@@ -24,12 +24,15 @@ class Pacman : public Character{
 		SDL_Texture* characterTextureOpenLeft_;
 		SDL_Surface* characterSurfaceOpenLeft_;
 
+		int requestedDirection_;
+
 	public:	
 		Pacman(char*,int, int, int, SDL_Renderer*);
 		SDL_Texture* getCharacterTexture() override;
 		void destroySDLElements() override;		
 		void moveCharacter(GameEngine*, int) override;
 		void calculateNextDirection() override;
+		void setDirection(int) override;
 
 
 };

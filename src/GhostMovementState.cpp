@@ -8,42 +8,52 @@ GhostMovementState::GhostMovementState(Ghost* g){
 
 
 void GhostMovementState::moveCharacter(GameEngine* g,int speed){
-	int newPosX, newPosY;
+	
+	int modifiedSpeed = speed;
+	bool modified=false;
+	while(modified==false && modifiedSpeed!=0){
 
-	switch (ghost_->getDirection()){
+		int newPosX, newPosY;		
+		switch (ghost_->getDirection()){
 
-		case 0 : // right
-			newPosX = ghost_->getPosX()+speed;
-			newPosY = ghost_->getPosY();
-			break; 
+			case 0 : // right
+				newPosX = ghost_->getPosX()+modifiedSpeed;
+				newPosY = ghost_->getPosY();
+				break; 
 
-		case 1 :  // left
-			newPosX = ghost_->getPosX()-speed;
-			newPosY = ghost_->getPosY();
-			break;
+			case 1 :  // left
+				newPosX = ghost_->getPosX()-modifiedSpeed;
+				newPosY = ghost_->getPosY();
+				break;
 
-		case 2 :  //up
-			newPosX = ghost_->getPosX();
-			newPosY = ghost_->getPosY()-speed;
-			break;
+			case 2 :  //up
+				newPosX = ghost_->getPosX();
+				newPosY = ghost_->getPosY()-modifiedSpeed;
+				break;
 
-		case 3 : //down
-			newPosX = ghost_->getPosX();
-			newPosY = ghost_->getPosY()+speed;
-			break;
+			case 3 : //down
+				newPosX = ghost_->getPosX();
+				newPosY = ghost_->getPosY()+modifiedSpeed;
+				break;
+		}
+
+		if(newPosX>=680){
+			ghost_->changePosition(0, newPosY);	
+			modified=true;
+		}
+
+		else if (newPosX<=0){
+			ghost_->changePosition(680, newPosY);
+			modified=true;
+		}
+
+		else {
+			if( !g->checkColision(newPosX,newPosY)){
+				ghost_->changePosition(newPosX, newPosY);
+				modified=true;
+				}	
+		}		
+		--modifiedSpeed;
 	}
-
-	if(newPosX>=680){
-		ghost_->changePosition(0, newPosY);	
-	}
-
-	else if (newPosX<=0){
-		ghost_->changePosition(680, newPosY);
-	}
-
-	else {
-		if( !g->checkColision(newPosX,newPosY))
-			ghost_->changePosition(newPosX, newPosY);	
-	}		
 		
 }
