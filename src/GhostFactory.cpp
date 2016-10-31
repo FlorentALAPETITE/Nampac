@@ -1,4 +1,4 @@
-#include <GhostFactory.hpp>
+#include <ConcreteGhostFactory.hpp>
 #include <RedGhost.hpp>
 #include <BlueGhost.hpp>
 #include <OrangeGhost.hpp>
@@ -7,7 +7,7 @@
 using namespace std;
 
 
-shared_ptr<Character> GhostFactory::createGhost(const char type, const unsigned int c, const unsigned int l, const int sizeSprite, SDL_Renderer* renderer){
+shared_ptr<Character> ConcreteGhostFactory::createGhost(const char type, const unsigned int c, const unsigned int l, const int sizeSprite, SDL_Renderer* renderer){
 	shared_ptr<Character> ghost;
 
 	switch(type){

@@ -10,7 +10,7 @@
 #include <memory>
 #include <Bonus.hpp>
 #include <GhostFactory.hpp>
-#include <MapElementFactory.hpp>
+#include <MapFactory.hpp>
 
 
 const int sizeSprite = 25;
@@ -51,9 +51,11 @@ class GameEngine{
 
 		void checkBonusEating();
 
+		void handleBonus(int);
+
 	private:
 
-		unique_ptr<MapElementFactory> mapElementFactory_;
+		unique_ptr<MapFactory> mapElementFactory_;
 		unique_ptr<GhostFactory> ghostFactory_;
 
 		SDL_Window* window_;
