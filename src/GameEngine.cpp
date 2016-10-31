@@ -5,8 +5,10 @@
 #include <math.h>
 #include <stdlib.h>    
 #include <MapElementFactory.hpp>
+#include <ConcreteGhostFactory.hpp>
 #include <ctype.h>
 #include <SpeededCharacter.hpp>
+#include <SlowedCharacter.hpp>
 #include <Pacman.hpp>
 
 
@@ -48,7 +50,7 @@ GameEngine::GameEngine():gameOver_(false),randNumber_(0),playerScore_(0){
 	playerScoreRect_ = {540,685,80,40};
 
 	mapElementFactory_ = unique_ptr<MapElementFactory>(new MapElementFactory());
-	ghostFactory_ = unique_ptr<GhostFactory>(new GhostFactory());
+	ghostFactory_ = unique_ptr<ConcreteGhostFactory>(new ConcreteGhostFactory());
         
 }
 
@@ -75,10 +77,10 @@ void GameEngine::renderCharacters(){
 
 
 void GameEngine::moveCharacter(Character * c){
-	c->moveCharacter(this, c->getSpeed());
-	
+	c->moveCharacter(this, c->getSpeed());	
 		
 }
+
 
 void GameEngine::checkAllCharactersColision(){	
 	for(unsigned int i=0;i<ghosts_.size();++i){
@@ -101,64 +103,25 @@ void GameEngine::moveCharacters(){
 	
 }
 
+
+void GameEngine::handleBonus(int type){
+
+	switch(type){
+
+		case 1:  //Bonus : slow ghost
+			for(unsigned int i=0;i<ghosts_.size();++i){
+				ghosts_[i]=shared_ptr<Character>(new SlowedCharacter(ghosts_[i]));
+			}
+			break;
+	}
+
+}
+
+
+
+
 void GameEngine::changePacmanDirection(int direction){
-	// int modifiedSpeed = pacman_->getSpeed();
-	// bool modified=false;
-	// while(modified==false && modifiedSpeed!=0){
-
-	// 	int newPosX, newPosY;		
-	// 	switch (direction){
-
-	// 		case 0 : // right
-	// 			newPosX = pacman_->getPosX()+modifiedSpeed;
-	// 			newPosY = pacman_->getPosY();
-	// 			break; 
-
-	// 		case 1 :  // left
-	// 			newPosX = pacman_->getPosX()-modifiedSpeed;
-	// 			newPosY = pacman_->getPosY();
-	// 			break;
-
-	// 		case 2 :  //up
-	// 			newPosX = pacman_->getPosX();
-	// 			newPosY = pacman_->getPosY()-modifiedSpeed;
-	// 			break;
-
-	// 		case 3 : //down
-	// 			newPosX = pacman_->getPosX();
-	// 			newPosY = pacman_->getPosY()+modifiedSpeed;
-	// 			break;
-	// 	}
-
-	// 	// if(newPosX>=680){
-	// 	// 	changePosition(0, newPosY);	
-	// 	// 	modified=true;
-	// 	// }
-
-	// 	// else if (newPosX<=0){
-	// 	// 	changePosition(680, newPosY);
-	// 	// 	modified=true;
-	// 	// }
-
-	// 	// if(newPosY>=750){
-	// 	// 	changePosition(newPosX, 0);
-	// 	// 	modified=true;
-	// 	// }
-
-	// 	// else if(newPosY<=0){
-	// 	// 	changePosition(newPosX, 750);
-	// 	// 	modified=true;
-	// 	// }
-
-		
-	// 	if( !checkColision(newPosX,newPosY)){
-	// 			pacman_->setDirection(direction);
-	// 			modified=true;
-	// 	}	
-				
-	// 	--modifiedSpeed;
-	// }
-
+	
 	pacman_->setDirection(direction);
 
 }
@@ -178,8 +141,7 @@ void GameEngine::createMap(vector<vector<char>> const& laby){
 			charMapElement = laby[l][c];
 
 			if(charMapElement == 'p'){
-				pacman_ = shared_ptr<Character>(new Pacman((char*)"sprites/pacmanClose.bmp",5,c*sizeSprite,l*sizeSprite,renderer_)); 
-				//pacman_ = shared_ptr<Character>(new SpeededCharacter(pacman_));				
+				pacman_ = shared_ptr<Character>(new Pacman((char*)"sprites/pacmanClose.bmp",5,c*sizeSprite,l*sizeSprite,renderer_)); 							
 				charMapElement = '0';
 			}
 
@@ -194,7 +156,7 @@ void GameEngine::createMap(vector<vector<char>> const& laby){
 }
 
 void GameEngine::renderMap(){
-	Bonus* bonus;
+	shared_ptr<Bonus> bonus;
 	for (unsigned int l = 0; l < mapElements_.size(); ++l){
 		for (unsigned int c = 0; c < mapElements_[0].size(); ++c){
 			SDL_RenderCopy(renderer_, mapElements_.at(l).at(c)->getMapElementTexture(), NULL, mapElements_.at(l).at(c)->getTextureRect());
@@ -308,10 +270,11 @@ void GameEngine::renderPlayerScore(){
 
 
 void GameEngine::checkBonusEating(){
-	Bonus* actualBonus = getMapElement(pacman_->getPosX()/sizeSprite, pacman_->getPosY()/sizeSprite)->getBonus();
+	shared_ptr<Bonus> actualBonus = getMapElement(pacman_->getPosX()/sizeSprite, pacman_->getPosY()/sizeSprite)->getBonus();
 	if(actualBonus != nullptr){
 		if(checkColisionSDLRect(pacman_->getTextureRect(), actualBonus->getTextureRect())){
 			playerScore_+=actualBonus->getPoint();
+			handleBonus(actualBonus->getBonusType());
 			getMapElement(pacman_->getPosX()/sizeSprite, pacman_->getPosY()/sizeSprite)->eatBonus();
 		}
 	}

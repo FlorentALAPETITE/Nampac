@@ -3,7 +3,9 @@
 
 #include <SDL2/SDL.h>
 #include <Bonus.hpp>
+#include <memory>
 
+using namespace std;
 
 class MapElement{
 	protected:
@@ -11,15 +13,15 @@ class MapElement{
 		SDL_Surface* mapElementSurface_;
 		SDL_Rect textureRect_;
 		SDL_Renderer* renderer_;			
-		Bonus* bonus_;
+		shared_ptr<Bonus> bonus_;
 
 	public:
-		MapElement(char*,int,int,SDL_Renderer*,Bonus* b);
+		MapElement(char*,int,int,SDL_Renderer*,shared_ptr<Bonus> b);
 		SDL_Rect* getTextureRect();	
 		SDL_Texture* getMapElementTexture();
 		virtual bool canBeCrossed()=0;
 		void destroySDLElements();
-		Bonus* getBonus();
+		shared_ptr<Bonus> getBonus();
 		void eatBonus();
 
 };

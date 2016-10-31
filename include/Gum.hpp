@@ -8,6 +8,7 @@ class Gum : public Bonus
 public:
 	Gum(SDL_Renderer*,int, int);	
 	int getPoint() override;
+	int getBonusType() override;
 
 
 };

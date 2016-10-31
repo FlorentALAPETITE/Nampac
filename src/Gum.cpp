@@ -11,3 +11,7 @@ Gum::Gum(SDL_Renderer* renderer, int posX, int posY):Bonus(renderer,posX,posY,"s
 int Gum::getPoint(){
 	return 50;
 }
+
+int Gum::getBonusType(){
+	return 0;
+}

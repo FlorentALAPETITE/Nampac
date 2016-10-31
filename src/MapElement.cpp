@@ -2,10 +2,9 @@
 #include <MapElement.hpp>
 #include <iostream>
 
-using namespace std;
 
 
-MapElement::MapElement(char* sl, int posX, int posY,SDL_Renderer* renderer, Bonus* b):renderer_(renderer), bonus_(b){	
+MapElement::MapElement(char* sl, int posX, int posY,SDL_Renderer* renderer, shared_ptr<Bonus> b):renderer_(renderer), bonus_(b){	
 	mapElementSurface_ = SDL_LoadBMP(sl);
 	mapElementTexture_ = SDL_CreateTextureFromSurface(renderer_,mapElementSurface_);
 
@@ -33,7 +32,7 @@ void MapElement::destroySDLElements(){
 }
 
 
-Bonus* MapElement::getBonus(){
+shared_ptr<Bonus> MapElement::getBonus(){
 	return bonus_;
 }
 
