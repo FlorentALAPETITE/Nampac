@@ -104,14 +104,26 @@ void GameEngine::moveCharacters(){
 }
 
 
-void GameEngine::handleBonus(int type){
+void GameEngine::handleBonus(char type){
 
 	switch(type){
 
-		case 1:  //Bonus : slow ghost
-			for(unsigned int i=0;i<ghosts_.size();++i){
-				ghosts_[i]=shared_ptr<Character>(new SlowedCharacter(ghosts_[i]));
-			}
+		case '~':  //Bonus : slow ghost
+			for(unsigned int i=0;i<ghosts_.size();++i)
+				ghosts_[i]=shared_ptr<Character>(new SlowedCharacter(ghosts_[i]));			
+			break;
+
+		case '#':  //Bonus : speed ghost
+			for(unsigned int i=0;i<ghosts_.size();++i)
+				ghosts_[i]=shared_ptr<Character>(new SpeededCharacter(ghosts_[i]));			
+			break;
+
+		case '+':  //Bonus : speed pacman
+			pacman_=shared_ptr<Character>(new SpeededCharacter(pacman_));			
+			break;
+
+		case '-':  //Bonus : slow pacman
+			pacman_=shared_ptr<Character>(new SpeededCharacter(pacman_));			
 			break;
 	}
 

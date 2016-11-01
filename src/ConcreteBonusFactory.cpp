@@ -1,6 +1,9 @@
 #include <ConcreteBonusFactory.hpp>
 #include <Gum.hpp>
 #include <SlowGhostBonus.hpp>
+#include <SpeedGhostBonus.hpp>
+#include <SlowPacmanBonus.hpp>
+#include <SpeedPacmanBonus.hpp>
 
 using namespace std;
 
@@ -11,7 +14,7 @@ shared_ptr<Bonus> ConcreteBonusFactory::createBonus(const char type, const unsig
 
 	switch(type){
 		case '0':
-			bonus = shared_ptr<Gum> (new Gum(renderer, c*sizeSprite+9, l*sizeSprite+9));
+			bonus = shared_ptr<Gum> (new Gum(renderer, c*sizeSprite+8, l*sizeSprite+8));
 			break;
 
 		case '.':
@@ -19,7 +22,20 @@ shared_ptr<Bonus> ConcreteBonusFactory::createBonus(const char type, const unsig
 			break;
 
 		case '~':
-			bonus = shared_ptr<SlowGhostBonus> (new SlowGhostBonus(renderer, c*sizeSprite+9, l*sizeSprite+9));
+			bonus = shared_ptr<SlowGhostBonus> (new SlowGhostBonus(renderer, c*sizeSprite+3, l*sizeSprite+3));
+			break;
+
+		case '#':
+			bonus = shared_ptr<SpeedGhostBonus> (new SpeedGhostBonus(renderer, c*sizeSprite+3, l*sizeSprite+3));
+			break;
+
+		case '+':
+			bonus = shared_ptr<SpeedPacmanBonus> (new SpeedPacmanBonus(renderer, c*sizeSprite+3, l*sizeSprite+3));
+			break;
+
+		case '-':
+			bonus = shared_ptr<SlowPacmanBonus> (new SlowPacmanBonus(renderer, c*sizeSprite+3, l*sizeSprite+3));
+			break;
 
 	}
 

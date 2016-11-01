@@ -3,7 +3,7 @@
 
 using namespace std;
 
-Gum::Gum(SDL_Renderer* renderer, int posX, int posY):Bonus(renderer,posX,posY,"sprites/gum.bmp"){	
+Gum::Gum(SDL_Renderer* renderer, int posX, int posY):Bonus(renderer,posX,posY,10,"sprites/gum.bmp"){	
 }
 
 
@@ -12,6 +12,6 @@ int Gum::getPoint(){
 	return 50;
 }
 
-int Gum::getBonusType(){
-	return 0;
+char Gum::getBonusType(){
+	return '0';
 }

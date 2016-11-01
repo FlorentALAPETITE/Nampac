@@ -51,7 +51,7 @@ class GameEngine{
 
 		void checkBonusEating();
 
-		void handleBonus(int);
+		void handleBonus(char);
 
 	private:
 

@@ -3,8 +3,8 @@
 
 using namespace std;
 
-Bonus::Bonus(SDL_Renderer* renderer, int posX, int posY, const char* sprite ):renderer_(renderer){
-	bonusTextureRect_ = { posX,posY,10,10};
+Bonus::Bonus(SDL_Renderer* renderer, int posX, int posY, int size,const char* sprite ):renderer_(renderer){
+	bonusTextureRect_ = { posX,posY,size,size};
 	bonusSurface_ = SDL_LoadBMP(sprite);
 	bonusTexture_ = SDL_CreateTextureFromSurface(renderer_,bonusSurface_);
 	if(!bonusSurface_ || !bonusTexture_){

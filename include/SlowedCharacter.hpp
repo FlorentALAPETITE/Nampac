@@ -8,7 +8,7 @@ class SlowedCharacter : public CharacterDecorator {
 
 	public:
 		SlowedCharacter(shared_ptr<Character>);
-		int getSpeed() override;
+		int getSpeed() override;		
 	
 };
 
