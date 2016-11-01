@@ -43,3 +43,4 @@ void CharacterDecorator::moveCharacter(GameEngine* g,int speed){
 void CharacterDecorator::calculateNextDirection(){
 	character_->calculateNextDirection();
 }
+

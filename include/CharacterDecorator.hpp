@@ -9,7 +9,7 @@ using namespace std;
 class CharacterDecorator : public Character{
 
 	protected:
-		shared_ptr<Character> character_;
+		shared_ptr<Character> character_;		
 
 	public:
 		CharacterDecorator(shared_ptr<Character>);
@@ -24,6 +24,7 @@ class CharacterDecorator : public Character{
 		void destroySDLElements() override;
 		void moveCharacter(GameEngine*,int) override;
 		void calculateNextDirection() override;
+		
 };
 
 
