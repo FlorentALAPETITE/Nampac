@@ -78,18 +78,20 @@ void Pacman::destroySDLElements(){
 
 void Pacman::moveCharacter(GameEngine* g, int speed){
 
-	int modifiedSpeed = speed;
+	
 	bool modified=false;
+	int move = 0;	
+	int newPosX, newPosY;
+	int modifiedSpeed;
 
+	if(requestedDirection_!=direction_ && requestedDirection_!=9){
 
-	if(requestedDirection_!=direction_){
-
-
-		while(modified==false && modifiedSpeed!=0){
-
-				int newPosX, newPosY;		
+		while(modified==false && move<speed ){
+			modifiedSpeed=speed;
+			while(modified==false && modifiedSpeed!=0){
+				
 				switch (requestedDirection_){
-
+					
 					case 0 : // right
 						newPosX = getPosX()+modifiedSpeed;
 						newPosY = getPosY();
@@ -112,62 +114,119 @@ void Pacman::moveCharacter(GameEngine* g, int speed){
 				}
 
 				if( !g->checkColision(newPosX,newPosY)){
-					changePosition(newPosX, newPosY);
-					modified=true;
-					direction_=requestedDirection_;					
-				}		
+						changePosition(newPosX, newPosY);
+						modified=true;
+						direction_=requestedDirection_;					
+					}
+					
+
+
 				--modifiedSpeed;
 			}
+				
 
-	}
-
-	if (!modified) {
-
-		modifiedSpeed=speed;
-
-		while(modified==false && modifiedSpeed!=0){
-
-			int newPosX, newPosY;		
-			switch (direction_){
+			if(!modified){
+				++move;
+				
+				switch (direction_){
 
 				case 0 : // right
-					newPosX = getPosX()+modifiedSpeed;
+					newPosX = getPosX()+1;
 					newPosY = getPosY();
 					break; 
 
 				case 1 :  // left
-					newPosX = getPosX()-modifiedSpeed;
+					newPosX = getPosX()-1;
 					newPosY = getPosY();
 					break;
 
 				case 2 :  //up
 					newPosX = getPosX();
-					newPosY = getPosY()-modifiedSpeed;
+					newPosY = getPosY()-1;
 					break;
 
 				case 3 : //down
 					newPosX = getPosX();
-					newPosY = getPosY()+modifiedSpeed;
+					newPosY = getPosY()+1;
+					break;
+				}
+
+
+				if(newPosX>=679){
+					changePosition(0, newPosY);						
+				}
+
+				else if (newPosX<0){
+					changePosition(678, newPosY);					
+				}
+
+				else if(newPosY>=754){
+					changePosition(newPosX, 0);					
+				}
+
+				else if(newPosY<=0){
+					changePosition(newPosX, 753);					
+				}
+
+
+
+				else {
+					if( !g->checkColision(newPosX,newPosY))
+						changePosition(newPosX, newPosY);
+				}
+			}
+
+				
+		}
+
+	}
+			
+	if (!modified && move<speed) {
+
+		modifiedSpeed=speed;
+
+		while(modified==false && modifiedSpeed!=0){
+
+			switch (direction_){
+
+				case 0 : // right
+					newPosX = getPosX()+(modifiedSpeed-move);
+					newPosY = getPosY();
+					break; 
+
+				case 1 :  // left
+					newPosX = getPosX()-(modifiedSpeed-move);
+					newPosY = getPosY();
+					break;
+
+				case 2 :  //up
+					newPosX = getPosX();
+					newPosY = getPosY()-(modifiedSpeed-move);
+					break;
+
+				case 3 : //down
+					newPosX = getPosX();
+					newPosY = getPosY()+(modifiedSpeed-move);
 					break;
 			}
 
-			if(newPosX>=680){
+			if(newPosX>=679){
 				changePosition(0, newPosY);	
 				modified=true;
 			}
 
 			else if (newPosX<0){
-				changePosition(680, newPosY);
+				changePosition(678, newPosY);
 				modified=true;
 			}
 
-			else if(newPosY>=755){
+			else if(newPosY>=754){
 				changePosition(newPosX, 0);
 				modified=true;
 			}
 
 			else if(newPosY<=0){
-				changePosition(newPosX, 755);
+				changePosition(newPosX, 753);
 				modified=true;
 			}
 

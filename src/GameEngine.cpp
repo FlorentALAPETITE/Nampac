@@ -123,7 +123,7 @@ void GameEngine::handleBonus(char type){
 			break;
 
 		case '-':  //Bonus : slow pacman
-			pacman_=shared_ptr<Character>(new SpeededCharacter(pacman_));			
+			pacman_=shared_ptr<Character>(new SlowedCharacter(pacman_));			
 			break;
 	}
 
@@ -133,8 +133,8 @@ void GameEngine::handleBonus(char type){
 
 
 void GameEngine::changePacmanDirection(int direction){
-	
-	pacman_->setDirection(direction);
+	if(pacman_->getPosX()>=25 && pacman_->getPosX()<=675 && pacman_->getPosY()>=25 && pacman_->getPosY()<=745 )
+		pacman_->setDirection(direction);
 
 }
 
@@ -310,10 +310,11 @@ void GameEngine::launchNampac(const char* mapLocation){
         renderPlayerScore();
         renderPresent();
 
-        // While window isn't close
-        while(!quit && !gameOver_){   
+        // While window isn't close and game not loose
+        while(!quit){  
 
-            while (SDL_PollEvent(&events)) {
+        	//Handle quit event
+        	while (SDL_PollEvent(&events)) {
 
                 if(events.window.event == SDL_WINDOWEVENT_CLOSE)
                     quit = true;
@@ -334,33 +335,27 @@ void GameEngine::launchNampac(const char* mapLocation){
                         break;
 
                   }           
-              }
-            moveCharacters(); 
-            clearRenderer();
-            renderMap(); 
-            renderCharacters();
-            renderPlayerScore();
-            renderPresent();
-            checkAllCharactersColision();
-                       
-            
-
-
-            if(gameOver_){
-            	renderGameOverMessage();
-            	renderPresent();
-            	SDL_Delay(5000);
             }
 
+        	if(!gameOver_){            
+
+	            moveCharacters(); 
+	            clearRenderer();
+	            renderMap(); 
+	            renderCharacters();
+	            renderPlayerScore();
+	            renderPresent();
+	            checkAllCharactersColision(); 
 
 
+	            if(gameOver_){
+	            	renderGameOverMessage();
+	            	renderPresent();
+	            	
+	            }
+	        }
 
-            //Thread test
-            //std::this_thread::sleep_for (std::chrono::milliseconds(25));   
-
-            //SDL_Delay(25);       
-
-
+            
 
         }   
 

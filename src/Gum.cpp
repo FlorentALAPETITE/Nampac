@@ -3,7 +3,7 @@
 
 using namespace std;
 
-Gum::Gum(SDL_Renderer* renderer, int posX, int posY):Bonus(renderer,posX,posY,10,"sprites/gum.bmp"){	
+Gum::Gum(SDL_Renderer* renderer, int posX, int posY):Bonus(renderer,posX,posY,11,"sprites/gum.bmp"){	
 }
 
 
