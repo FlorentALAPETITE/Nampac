@@ -347,6 +347,7 @@ void GameEngine::launchNampac(const char* mapLocation){
 	            renderPresent();
 	            checkAllCharactersColision(); 
 
+	            SDL_Delay(25);
 
 	            if(gameOver_){
 	            	renderGameOverMessage();

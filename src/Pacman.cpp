@@ -152,20 +152,20 @@ void Pacman::moveCharacter(GameEngine* g, int speed){
 				}
 
 
-				if(newPosX>=679){
+				if(newPosX>=671){
 					changePosition(0, newPosY);						
 				}
 
 				else if (newPosX<0){
-					changePosition(678, newPosY);					
+					changePosition(671, newPosY);					
 				}
 
-				else if(newPosY>=754){
+				else if(newPosY>=748){
 					changePosition(newPosX, 0);					
 				}
 
 				else if(newPosY<=0){
-					changePosition(newPosX, 753);					
+					changePosition(newPosX, 749);					
 				}
 
 
@@ -210,23 +210,23 @@ void Pacman::moveCharacter(GameEngine* g, int speed){
 					break;
 			}
 
-			if(newPosX>=679){
+			if(newPosX>=671){
 				changePosition(0, newPosY);	
 				modified=true;
 			}
 
 			else if (newPosX<0){
-				changePosition(678, newPosY);
+				changePosition(672, newPosY);
 				modified=true;
 			}
 
-			else if(newPosY>=754){
+			else if(newPosY>=748){
 				changePosition(newPosX, 0);
 				modified=true;
 			}
 
 			else if(newPosY<=0){
-				changePosition(newPosX, 753);
+				changePosition(newPosX, 749);
 				modified=true;
 			}
 

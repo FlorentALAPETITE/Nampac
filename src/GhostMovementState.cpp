@@ -37,23 +37,23 @@ void GhostMovementState::moveCharacter(GameEngine* g,int speed){
 					break;
 			}
 
-			if(newPosX>=680){
+			if(newPosX>=671){
 				ghost_->changePosition(0, newPosY);	
 				modified=true;
 			}
 
 			else if (newPosX<0){
-				ghost_->changePosition(680, newPosY);
+				ghost_->changePosition(672, newPosY);
 				modified=true;
 			}
 
-			else if(newPosY>=755){
+			else if(newPosY>=748){
 				ghost_->changePosition(newPosX, 0);
 				modified=true;
 			}
 
 			else if(newPosY<=0){
-				ghost_->changePosition(newPosX, 755);
+				ghost_->changePosition(newPosX, 749);
 				modified=true;
 			}
 

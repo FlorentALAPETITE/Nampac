@@ -5,7 +5,8 @@ SlowedCharacter::SlowedCharacter(shared_ptr<Character> c):CharacterDecorator(c){
 }
 
 int SlowedCharacter::getSpeed(){	
-	return round(0.75*character_->getSpeed());
+	int speed = character_->getSpeed();
+	return round(0.75*speed);
 		
 }
 
