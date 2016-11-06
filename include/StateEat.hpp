@@ -1,9 +1,6 @@
 #ifndef DEF_STATEEAT
 #define DEF_STATEEAT
 
-#ifndef DEF_STATEEAT
-#define DEF_STATEEAT
-
 #include <SDL2/SDL.h>
 #include <Pacman.hpp>
 #include <AGumEatState.hpp>
