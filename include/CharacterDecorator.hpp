@@ -20,8 +20,7 @@ class CharacterDecorator : public Character{
 		SDL_Texture* getCharacterTexture() override;
 		SDL_Rect* getTextureRect() override;
 		int getDirection() override;
-		void setDirection(int) override;
-		void destroySDLElements() override;
+		void setDirection(int) override;		
 		void moveCharacter(GameEngine*,int) override;
 		void calculateNextDirection() override;
 		

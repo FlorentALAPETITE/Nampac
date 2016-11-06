@@ -1,6 +1,8 @@
 #include <Pacman.hpp>
 #include <GameEngine.hpp>
 #include <iostream>
+#include <PreyState.hpp>
+#include <HunterState.hpp>
 
 using namespace std;
 
@@ -21,6 +23,10 @@ Pacman::Pacman(char* sp,int s, int posX, int posY, SDL_Renderer* renderer):Chara
 
 	requestedDirection_=9;
 
+	hunterState_ = shared_ptr<HunterState>(new HunterState(this));
+	preyState_ = shared_ptr<PreyState>(new PreyState(this));
+
+	currentState_ = preyState_;
 	
 }
 
@@ -57,21 +63,31 @@ SDL_Texture* Pacman::getCharacterTexture(){
 }
 
 
-void Pacman::destroySDLElements(){
-	SDL_DestroyTexture(characterTexture_);
-	SDL_FreeSurface(characterSurface_);
+Pacman::~Pacman(){	
 
-	SDL_DestroyTexture(characterTextureOpenBot_);
-	SDL_FreeSurface(characterSurfaceOpenBot_);
+	if(characterTextureOpenBot_!=nullptr)
+		SDL_DestroyTexture(characterTextureOpenBot_);
 
-	SDL_DestroyTexture(characterTextureOpenLeft_);
-	SDL_FreeSurface(characterSurfaceOpenLeft_);
+	if(characterSurfaceOpenBot_!=nullptr)
+		SDL_FreeSurface(characterSurfaceOpenBot_);
 
-	SDL_DestroyTexture(characterTextureOpenRight_);
-	SDL_FreeSurface(characterSurfaceOpenRight_);
+	if(characterTextureOpenLeft_!=nullptr)
+		SDL_DestroyTexture(characterTextureOpenLeft_);
 
-	SDL_DestroyTexture(characterTextureOpenTop_);
-	SDL_FreeSurface(characterSurfaceOpenTop_);
+	if(characterSurfaceOpenLeft_!=nullptr)		
+		SDL_FreeSurface(characterSurfaceOpenLeft_);
+
+	if(characterTextureOpenRight_!=nullptr)
+		SDL_DestroyTexture(characterTextureOpenRight_);
+
+	if(characterSurfaceOpenRight_)
+		SDL_FreeSurface(characterSurfaceOpenRight_);
+
+	if(characterTextureOpenTop_!=nullptr)
+		SDL_DestroyTexture(characterTextureOpenTop_);
+
+	if(characterSurfaceOpenTop_!=nullptr)
+		SDL_FreeSurface(characterSurfaceOpenTop_);
 }
 
 
@@ -253,4 +269,18 @@ void Pacman::calculateNextDirection(){}
 
 void Pacman::setDirection(int direction){
 	requestedDirection_=direction;
+}
+
+
+void Pacman::changeStateHunter(){
+	currentState_=hunterState_;
+	currentState_->addRemainingMovement(200);
+}
+
+void Pacman::changeStatePrey(){
+	currentState_=preyState_;
+}
+
+bool Pacman::canEatGhost(){
+	return currentState_->canEatGhost();
 }

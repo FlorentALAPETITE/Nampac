@@ -3,6 +3,7 @@
 
 #include <SDL2/SDL.h>
 #include <Character.hpp>
+#include <PacmanState.hpp>
 #include <iostream>
 
 
@@ -26,13 +27,21 @@ class Pacman : public Character{
 
 		int requestedDirection_;
 
+		shared_ptr<PacmanState> currentState_;
+		shared_ptr<PacmanState> hunterState_;
+		shared_ptr<PacmanState> preyState_;
+
 	public:	
 		Pacman(char*,int, int, int, SDL_Renderer*);
-		SDL_Texture* getCharacterTexture() override;
-		void destroySDLElements() override;		
+		~Pacman();
+		SDL_Texture* getCharacterTexture() override;			
 		void moveCharacter(GameEngine*, int) override;
 		void calculateNextDirection() override;
 		void setDirection(int) override;
+
+		void changeStateHunter();
+		void changeStatePrey();
+		bool canEatGhost();
 
 
 };

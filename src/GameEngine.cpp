@@ -17,8 +17,7 @@ using namespace std;
 
 GameEngine::GameEngine():gameOver_(false),randNumber_(0),playerScore_(0){
 	    
-           
-       
+                  
     // SDL initialization 
     if(SDL_Init(SDL_INIT_VIDEO) < 0)
     {
@@ -56,8 +55,28 @@ GameEngine::GameEngine():gameOver_(false),randNumber_(0),playerScore_(0){
 
 
 
+GameEngine::~GameEngine(){		
 
-void GameEngine::renderCharacter(Character* c){
+	SDL_DestroyRenderer(renderer_); 	
+
+	if(gameOverTexture_!=nullptr)
+		SDL_DestroyTexture(gameOverTexture_);
+
+	if(gameOverSurface_!=nullptr)
+		SDL_FreeSurface(gameOverSurface_);
+
+	if(playerScoreTexture_!=nullptr)
+		SDL_DestroyTexture(playerScoreTexture_);
+
+	if(playerScoreSurface_!=nullptr)
+		SDL_FreeSurface(playerScoreSurface_);
+
+    SDL_DestroyWindow(window_);
+
+}
+
+
+void GameEngine::renderCharacter(shared_ptr<Character> c){
 		    
  	SDL_RenderCopy(renderer_,c->getCharacterTexture(),NULL,c->getTextureRect()); // Copie du sprite grâce au SDL_Renderer	 
 			
@@ -67,16 +86,16 @@ void GameEngine::renderCharacter(Character* c){
 
 
 void GameEngine::renderCharacters(){
-	renderCharacter(pacman_.get());
+	renderCharacter(pacman_);
 
 	for(unsigned int i=0;i<ghosts_.size();++i){
-		renderCharacter(ghosts_.at(i).get());
+		renderCharacter(ghosts_.at(i));
 	}
 }
 
 
 
-void GameEngine::moveCharacter(Character * c){
+void GameEngine::moveCharacter(shared_ptr<Character> c){
 	c->moveCharacter(this, c->getSpeed());	
 		
 }
@@ -91,14 +110,14 @@ void GameEngine::checkAllCharactersColision(){
 }
 
 void GameEngine::moveCharacters(){
-	moveCharacter(pacman_.get());
+	moveCharacter(pacman_);
 	checkBonusEating();
 
 	for(unsigned int i=0;i<ghosts_.size();++i){
 		srand(randNumber_);
 		randNumber_+=100;
 		ghosts_.at(i)->calculateNextDirection();
-		moveCharacter(ghosts_.at(i).get());
+		moveCharacter(ghosts_.at(i));
 	}
 	
 }
@@ -227,33 +246,6 @@ bool GameEngine::checkColisionSDLRect(SDL_Rect* r1, SDL_Rect* r2){
 
 }
 
-void GameEngine::destroySDL(){
-
-	for (unsigned int l = 0; l < mapElements_.size(); ++l){
-		for (unsigned int c = 0; c < mapElements_[0].size(); ++c){
-			mapElements_.at(l).at(c)->destroySDLElements();
-		}
-	}
-
-
-	SDL_DestroyRenderer(renderer_); 
-	pacman_->destroySDLElements();
-
-	for(unsigned int i=0;i<ghosts_.size();++i){
-		ghosts_.at(i)->destroySDLElements();
-	}
-
-	SDL_DestroyTexture(gameOverTexture_);
-	SDL_FreeSurface(gameOverSurface_);
-
-	SDL_DestroyTexture(playerScoreTexture_);
-	SDL_FreeSurface(playerScoreSurface_);
-
-    SDL_DestroyWindow(window_);
-
-
-
-}
 
 
 
@@ -364,5 +356,4 @@ void GameEngine::launchNampac(const char* mapLocation){
 
         }   
 
-        destroySDL();
-}
+  }
