@@ -144,6 +144,10 @@ void GameEngine::handleBonus(char type){
 		case '-':  //Bonus : slow pacman
 			pacman_=shared_ptr<Character>(new SlowedCharacter(pacman_));			
 			break;
+
+		case '$':  //Bonus : hunter pacman
+			pacman_->ChangeStateHunter();			
+			break;
 	}
 
 }
