@@ -5,6 +5,7 @@
 #include <SDL2/SDL_ttf.h>
 #include <iostream>
 #include <Character.hpp>
+#include <Pacman.hpp>
 #include <vector>
 #include <MapElement.hpp>
 #include <memory>
@@ -59,7 +60,7 @@ class GameEngine{
 
 		SDL_Window* window_;
 		SDL_Renderer* renderer_;		
-		shared_ptr<Character> pacman_;
+		shared_ptr<Pacman> pacman_;
 
 		TTF_Font* fontScoring_;
 		TTF_Font* fontGameOver_;
