@@ -3,11 +3,6 @@
 
 #include <Character.hpp>
 #include <GhostMovementState.hpp>
-#include <GhostMovementChase.hpp>
-#include <GhostMovementAmbush.hpp>
-#include <GhostMovementStupid.hpp>
-#include <GhostMovementUnpredictable.hpp>
-#include <GhostMovementDead.hpp>
 #include <memory>
 
 using namespace std;
@@ -24,11 +19,11 @@ class Ghost : public Character{
 	protected:
 		shared_ptr<GhostMovementState> currentMovementState_;
 
-		shared_ptr<GhostMovementChase> movementChaseState_;		
-		shared_ptr<GhostMovementAmbush> movementAmbushState_;
-		shared_ptr<GhostMovementStupid> movementStupidState_;
-		shared_ptr<GhostMovementUnpredictable> movementUnpredictableState_;
-		shared_ptr<GhostMovementDead> movementDeadState_;		
+		shared_ptr<GhostMovementState> movementChaseState_;		
+		shared_ptr<GhostMovementState> movementAmbushState_;
+		shared_ptr<GhostMovementState> movementStupidState_;
+		shared_ptr<GhostMovementState> movementUnpredictableState_;
+		shared_ptr<GhostMovementState> movementDeadState_;		
 
 };
 

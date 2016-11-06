@@ -1,6 +1,8 @@
 #include <Pacman.hpp>
 #include <GameEngine.hpp>
 #include <iostream>
+#include <PreyState.hpp>
+#include <HunterState.hpp>
 
 using namespace std;
 
@@ -21,6 +23,10 @@ Pacman::Pacman(char* sp,int s, int posX, int posY, SDL_Renderer* renderer):Chara
 
 	requestedDirection_=9;
 
+	hunterState_ = shared_ptr<HunterState>(new HunterState(this));
+	preyState_ = shared_ptr<PreyState>(new PreyState(this));
+
+	currentState_ = preyState_;
 	
 }
 
@@ -263,4 +269,18 @@ void Pacman::calculateNextDirection(){}
 
 void Pacman::setDirection(int direction){
 	requestedDirection_=direction;
+}
+
+
+void Pacman::changeStateHunter(){
+	currentState_=hunterState_;
+	currentState_->addRemainingMovement(200);
+}
+
+void Pacman::changeStatePrey(){
+	currentState_=preyState_;
+}
+
+bool Pacman::canEatGhost(){
+	return currentState_->canEatGhost();
 }

@@ -1,4 +1,9 @@
 #include <Ghost.hpp>
+#include <GhostMovementChase.hpp>
+#include <GhostMovementAmbush.hpp>
+#include <GhostMovementStupid.hpp>
+#include <GhostMovementUnpredictable.hpp>
+#include <GhostMovementDead.hpp>
 #include <iostream>
 
 
