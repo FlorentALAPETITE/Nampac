@@ -4,7 +4,12 @@
 
 
 void GhostMovementAmbush::calculateDirection(){
-	ghost_->setDirection(rand() % 4);
+	if(nextDirectionCalc_==15){
+		ghost_->setDirection(rand() % 4);
+		nextDirectionCalc_=0;
+	}
+	else
+		++nextDirectionCalc_;
 
 }
 

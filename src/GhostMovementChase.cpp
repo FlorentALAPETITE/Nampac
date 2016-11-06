@@ -3,7 +3,12 @@
 #include <Ghost.hpp>
 
 void GhostMovementChase::calculateDirection(){
-	ghost_->setDirection(rand() % 4);
+	if(nextDirectionCalc_==30){
+		ghost_->setDirection(rand() % 4);
+		nextDirectionCalc_=0;
+	}
+	else
+		++nextDirectionCalc_;
 
 }
 

@@ -2,8 +2,7 @@
 #include <Ghost.hpp>
 #include <GameEngine.hpp>
 
-GhostMovementState::GhostMovementState(Ghost* g){
-	ghost_ =g;
+GhostMovementState::GhostMovementState(Ghost* g):ghost_(g),nextDirectionCalc_(0){
 }
 
 

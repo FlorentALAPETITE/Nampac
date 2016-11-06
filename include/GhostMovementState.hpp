@@ -18,6 +18,7 @@ class GhostMovementState {
 
 	protected:
 		Ghost* ghost_;
+		int nextDirectionCalc_;
 
 		
 };
