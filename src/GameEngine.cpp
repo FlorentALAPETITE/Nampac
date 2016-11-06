@@ -9,7 +9,7 @@
 #include <ctype.h>
 #include <SpeededCharacter.hpp>
 #include <SlowedCharacter.hpp>
-#include <Pacman.hpp>
+
 
 
 using namespace std;
@@ -77,8 +77,8 @@ GameEngine::~GameEngine(){
 
 
 void GameEngine::renderCharacter(shared_ptr<Character> c){
-		    
- 	SDL_RenderCopy(renderer_,c->getCharacterTexture(),NULL,c->getTextureRect()); // Copie du sprite grâce au SDL_Renderer	 
+	for(auto texture : c->getCharacterTexture())    
+ 		SDL_RenderCopy(renderer_,texture,NULL,c->getTextureRect()); // Copie du sprite grâce au SDL_Renderer	 
 			
 
 }
@@ -87,7 +87,6 @@ void GameEngine::renderCharacter(shared_ptr<Character> c){
 
 void GameEngine::renderCharacters(){
 	renderCharacter(pacman_);
-
 	for(unsigned int i=0;i<ghosts_.size();++i){
 		renderCharacter(ghosts_.at(i));
 	}
@@ -146,7 +145,7 @@ void GameEngine::handleBonus(char type){
 			break;
 
 		case '$':  //Bonus : hunter pacman
-			pacman_->ChangeStateHunter();			
+			pacman_->changeStateHunter();			
 			break;
 	}
 
@@ -176,7 +175,7 @@ void GameEngine::createMap(vector<vector<char>> const& laby){
 			charMapElement = laby[l][c];
 
 			if(charMapElement == 'p'){
-				pacman_ = shared_ptr<Character>(new Pacman((char*)"sprites/pacmanClose.bmp",5,c*sizeSprite,l*sizeSprite,renderer_)); 							
+				pacman_ = shared_ptr<Pacman>(new Pacman((char*)"sprites/pacmanClose.bmp",5,c*sizeSprite,l*sizeSprite,renderer_)); 							
 				charMapElement = '0';
 			}
 

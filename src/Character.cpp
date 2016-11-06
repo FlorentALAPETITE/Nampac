@@ -39,8 +39,10 @@ int Character::getPosY(){
 }
 
 
-SDL_Texture* Character::getCharacterTexture(){
-	return characterTexture_;
+vector<SDL_Texture*> Character::getCharacterTexture(){
+	vector<SDL_Texture*> res = vector<SDL_Texture*>();
+	res.push_back(characterTexture_);
+	return res;
 }
 
 SDL_Rect* Character::getTextureRect(){
@@ -62,3 +64,5 @@ Character::~Character(){
 		SDL_FreeSurface(characterSurface_);
 }
 
+
+void Character::changeStateHunter(){}

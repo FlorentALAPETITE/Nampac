@@ -25,6 +25,9 @@ class Pacman : public Character{
 		SDL_Texture* characterTextureOpenLeft_;
 		SDL_Surface* characterSurfaceOpenLeft_;
 
+		SDL_Texture* hunterParticleTexture_;
+		SDL_Surface* hunterParticleSurface_;
+
 		int requestedDirection_;
 
 		shared_ptr<PacmanState> currentState_;
@@ -34,12 +37,14 @@ class Pacman : public Character{
 	public:	
 		Pacman(char*,int, int, int, SDL_Renderer*);
 		~Pacman();
-		SDL_Texture* getCharacterTexture() override;			
+		vector<SDL_Texture*> getCharacterTexture() override;
+		
+
 		void moveCharacter(GameEngine*, int) override;
 		void calculateNextDirection() override;
 		void setDirection(int) override;
 
-		void changeStateHunter();
+		void changeStateHunter() override;
 		void changeStatePrey();
 		bool canEatGhost();
 

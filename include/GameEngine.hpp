@@ -60,7 +60,7 @@ class GameEngine{
 
 		SDL_Window* window_;
 		SDL_Renderer* renderer_;		
-		shared_ptr<Pacman> pacman_;
+		shared_ptr<Character> pacman_;
 
 		TTF_Font* fontScoring_;
 		TTF_Font* fontGameOver_;

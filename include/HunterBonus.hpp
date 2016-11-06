@@ -8,7 +8,7 @@ class HunterBonus : public Bonus
 public:
 	HunterBonus(SDL_Renderer*,int, int);	
 	int getPoint() override;
-	char getBonusType();
+	char getBonusType() override;
 
 
 };

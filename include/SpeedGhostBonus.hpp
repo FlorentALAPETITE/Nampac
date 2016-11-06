@@ -8,7 +8,7 @@ class SpeedGhostBonus : public Bonus
 public:
 	SpeedGhostBonus(SDL_Renderer*,int, int);	
 	int getPoint() override;
-	char getBonusType();
+	char getBonusType() override;
 
 
 };
