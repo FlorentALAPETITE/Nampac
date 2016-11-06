@@ -1,7 +1,10 @@
 #include <CharacterDecorator.hpp>
 
 
-CharacterDecorator::CharacterDecorator(shared_ptr<Character> c):character_(c){}
+CharacterDecorator::CharacterDecorator(shared_ptr<Character> c):character_(c){
+	characterTexture_=nullptr;
+	characterSurface_=nullptr;
+}
 
 
 void CharacterDecorator::changePosition(int x,int y){
@@ -32,9 +35,6 @@ void CharacterDecorator::setDirection(int d){
 	character_->setDirection(d);
 }
 
-void CharacterDecorator::destroySDLElements(){
-	character_->destroySDLElements();
-}
 
 void CharacterDecorator::moveCharacter(GameEngine* g,int speed){
 	character_->moveCharacter(g, speed);

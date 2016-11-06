@@ -57,21 +57,31 @@ SDL_Texture* Pacman::getCharacterTexture(){
 }
 
 
-void Pacman::destroySDLElements(){
-	SDL_DestroyTexture(characterTexture_);
-	SDL_FreeSurface(characterSurface_);
+Pacman::~Pacman(){	
 
-	SDL_DestroyTexture(characterTextureOpenBot_);
-	SDL_FreeSurface(characterSurfaceOpenBot_);
+	if(characterTextureOpenBot_!=nullptr)
+		SDL_DestroyTexture(characterTextureOpenBot_);
 
-	SDL_DestroyTexture(characterTextureOpenLeft_);
-	SDL_FreeSurface(characterSurfaceOpenLeft_);
+	if(characterSurfaceOpenBot_!=nullptr)
+		SDL_FreeSurface(characterSurfaceOpenBot_);
 
-	SDL_DestroyTexture(characterTextureOpenRight_);
-	SDL_FreeSurface(characterSurfaceOpenRight_);
+	if(characterTextureOpenLeft_!=nullptr)
+		SDL_DestroyTexture(characterTextureOpenLeft_);
 
-	SDL_DestroyTexture(characterTextureOpenTop_);
-	SDL_FreeSurface(characterSurfaceOpenTop_);
+	if(characterSurfaceOpenLeft_!=nullptr)		
+		SDL_FreeSurface(characterSurfaceOpenLeft_);
+
+	if(characterTextureOpenRight_!=nullptr)
+		SDL_DestroyTexture(characterTextureOpenRight_);
+
+	if(characterSurfaceOpenRight_)
+		SDL_FreeSurface(characterSurfaceOpenRight_);
+
+	if(characterTextureOpenTop_!=nullptr)
+		SDL_DestroyTexture(characterTextureOpenTop_);
+
+	if(characterSurfaceOpenTop_!=nullptr)
+		SDL_FreeSurface(characterSurfaceOpenTop_);
 }
 
 
