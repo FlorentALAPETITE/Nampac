@@ -24,6 +24,19 @@ class CharacterDecorator : public Character{
 		void moveCharacter(GameEngine*,int) override;
 		void calculateNextDirection() override;
 		void changeStateHunter() override;
+		bool canEatGhost() override;
+		void setDeathPosition() override;
+		void setMovementDeadState() override;
+		void setMovementAmbushState() override;
+		void setMovementStupidState() override;
+		void setMovementUnpredictableState() override;
+		void setMovementChaseState() override;
+		void backToClassicState() override;
+		void askChangeMovementDeadState() override;
+		void askChangeMovementAmbushState() override;
+		void askChangeMovementStupidState() override;
+		void askChangeMovementUnpredictableState() override;
+		void askChangeMovementChaseState() override;
 		
 };
 

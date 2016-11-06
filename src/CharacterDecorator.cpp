@@ -47,3 +47,59 @@ void CharacterDecorator::calculateNextDirection(){
 void CharacterDecorator::changeStateHunter(){
 	character_->changeStateHunter();
 }
+
+
+bool CharacterDecorator::canEatGhost(){
+	return character_->canEatGhost();
+}
+
+
+void CharacterDecorator::setDeathPosition(){
+	character_->setDeathPosition();
+}
+
+void CharacterDecorator::setMovementDeadState(){
+	character_->setMovementDeadState();
+}
+
+
+void CharacterDecorator::setMovementChaseState(){
+	character_->setMovementChaseState();
+}
+
+void CharacterDecorator::setMovementAmbushState(){
+	character_->setMovementAmbushState();
+}
+
+void CharacterDecorator::setMovementUnpredictableState(){
+	character_->setMovementUnpredictableState();
+}
+
+void CharacterDecorator::setMovementStupidState(){
+	character_->setMovementStupidState();
+}
+
+void CharacterDecorator::backToClassicState(){
+	character_->backToClassicState();
+}
+
+void CharacterDecorator::askChangeMovementChaseState(){
+	character_->askChangeMovementChaseState();
+}
+
+void CharacterDecorator::askChangeMovementDeadState(){
+	character_->askChangeMovementDeadState();
+}
+
+void CharacterDecorator::askChangeMovementAmbushState(){
+	character_->askChangeMovementAmbushState();
+}
+
+void CharacterDecorator::askChangeMovementUnpredictableState(){
+	character_->askChangeMovementUnpredictableState();
+}
+
+void CharacterDecorator::askChangeMovementStupidState(){
+	character_->askChangeMovementStupidState();
+}
+

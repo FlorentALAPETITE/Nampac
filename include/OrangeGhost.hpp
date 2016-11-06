@@ -28,6 +28,7 @@ class OrangeGhost : public Ghost{
 		 * \param renderer : unique SDL_Renderer used to render the game.
 		 */
 		OrangeGhost(int posX, int posY, SDL_Renderer* renderer);
+		void backToClassicState() override;
 
 	private:
 };
