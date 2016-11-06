@@ -3,6 +3,7 @@
 
 #include <SDL2/SDL.h>
 #include <iostream>
+#include <memory>
 
 using namespace std;
 
@@ -12,7 +13,8 @@ class Character{
 
 	public:
 		Character(char*,int,int,int,SDL_Renderer*);	
-		Character();		
+		Character();	
+		~Character();	
 		virtual int getSpeed();
 		virtual void changePosition(int,int);
 		virtual int getPosX();
@@ -21,15 +23,12 @@ class Character{
 		virtual SDL_Rect* getTextureRect();
 		virtual int getDirection();
 		virtual void setDirection(int);
-		virtual void destroySDLElements();
 		virtual void moveCharacter(GameEngine*,int)=0;
 		virtual void calculateNextDirection()=0;
 
 
-
-
 	protected:
-		char* spriteLocation_;
+		
 		int speed_;
 		SDL_Texture* characterTexture_;
 		SDL_Surface* characterSurface_;

@@ -5,8 +5,8 @@
 using namespace std;
 
 
-Character::Character(char* sl, int s, int posX, int posY,SDL_Renderer* renderer):spriteLocation_(sl),speed_(s),renderer_(renderer),direction_(0){	
-	characterSurface_ = SDL_LoadBMP(spriteLocation_);
+Character::Character(char* sl, int s, int posX, int posY,SDL_Renderer* renderer):speed_(s),renderer_(renderer),direction_(0){	
+	characterSurface_ = SDL_LoadBMP(sl);
 	characterTexture_ = SDL_CreateTextureFromSurface(renderer_,characterSurface_);
 
 	textureRect_ = { posX,posY, 25, 25};
@@ -55,8 +55,10 @@ void Character::setDirection(int d){
 	direction_=d;
 }
 
-void Character::destroySDLElements(){
-	SDL_DestroyTexture(characterTexture_);
-	SDL_FreeSurface(characterSurface_);
+Character::~Character(){
+	if(characterTexture_!=nullptr)
+		SDL_DestroyTexture(characterTexture_);
+	if(characterSurface_!=nullptr)
+		SDL_FreeSurface(characterSurface_);
 }
 

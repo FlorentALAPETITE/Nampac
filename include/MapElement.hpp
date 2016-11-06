@@ -17,10 +17,10 @@ class MapElement{
 
 	public:
 		MapElement(char*,int,int,SDL_Renderer*,shared_ptr<Bonus> b);
+		~MapElement();
 		SDL_Rect* getTextureRect();	
 		SDL_Texture* getMapElementTexture();
-		virtual bool canBeCrossed()=0;
-		void destroySDLElements();
+		virtual bool canBeCrossed()=0;		
 		shared_ptr<Bonus> getBonus();
 		void eatBonus();
 

@@ -28,8 +28,8 @@ class Pacman : public Character{
 
 	public:	
 		Pacman(char*,int, int, int, SDL_Renderer*);
-		SDL_Texture* getCharacterTexture() override;
-		void destroySDLElements() override;		
+		~Pacman();
+		SDL_Texture* getCharacterTexture() override;			
 		void moveCharacter(GameEngine*, int) override;
 		void calculateNextDirection() override;
 		void setDirection(int) override;

@@ -20,10 +20,11 @@ class GameEngine{
 
 	public:
 
-		GameEngine();		
-		void renderCharacter(Character*);
+		GameEngine();
+		~GameEngine();		
+		void renderCharacter(shared_ptr<Character>);
 		void destroyRenderer();
-		void moveCharacter(Character*);
+		void moveCharacter(shared_ptr<Character>);
 		void moveCharacters();
 
 
@@ -39,8 +40,6 @@ class GameEngine{
 		bool checkColisionSDLRect(SDL_Rect* c1, SDL_Rect* c2);
 		int getSizeSprite();	
 
-
-		void destroySDL();
 		void launchNampac(const char*);
 		void renderCharacters();
 

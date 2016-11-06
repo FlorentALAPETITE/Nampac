@@ -28,7 +28,7 @@ class MapReader{
 		 * \param file .laby file containing an integer representation of a map.
 		 * \return Vector of vector of integer : map integer representation used to build a graphical labyrinth.
 		 */
-		static vector<vector<char>> BuildMap(const char* fichier);
+		static vector<vector<char>> BuildMap(const char* file);
 };
 
 
