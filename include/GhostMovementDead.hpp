@@ -11,6 +11,11 @@ class GhostMovementDead : public GhostMovementState {
 		GhostMovementDead(Ghost *);
 		void calculateDirection() override;
 		void moveCharacter(GameEngine*, int speed) override;
+		void setMovementDeadState() override;
+		void setMovementAmbushState() override;
+		void setMovementStupidState() override;
+		void setMovementUnpredictableState() override;
+		void setMovementChaseState() override;
 		
 };
 

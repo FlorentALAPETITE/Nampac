@@ -66,3 +66,36 @@ Character::~Character(){
 
 
 void Character::changeStateHunter(){}
+
+
+bool Character::canEatGhost(){
+	return false;
+}
+
+void Character::setDeathPosition(){}
+
+
+
+void Character::setMovementDeadState(){}
+		
+void Character::setMovementAmbushState(){}
+	
+void Character::setMovementStupidState(){}
+
+void Character::setMovementUnpredictableState(){}
+
+void Character::setMovementChaseState(){}
+
+void Character::backToClassicState(){}
+
+
+void Character::askChangeMovementDeadState(){}
+		
+void Character::askChangeMovementAmbushState(){}
+	
+void Character::askChangeMovementStupidState(){}
+
+void Character::askChangeMovementUnpredictableState(){}
+
+void Character::askChangeMovementChaseState(){}
+

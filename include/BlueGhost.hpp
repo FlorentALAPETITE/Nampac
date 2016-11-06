@@ -28,6 +28,7 @@ class BlueGhost : public Ghost{
 		 * \param renderer : unique SDL_Renderer used to render the game.
 		 */
 		BlueGhost(int posX, int posY, SDL_Renderer* renderer);
+		void backToClassicState() override;
 
 	private:
 };

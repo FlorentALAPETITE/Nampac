@@ -103,7 +103,12 @@ void GameEngine::moveCharacter(shared_ptr<Character> c){
 void GameEngine::checkAllCharactersColision(){	
 	for(unsigned int i=0;i<ghosts_.size();++i){
 		if (checkColisionSDLRect(ghosts_.at(i)->getTextureRect(), pacman_->getTextureRect())){
-			gameOver_ = true;
+			if(!pacman_->canEatGhost())
+				gameOver_ = true;
+			else{				
+				ghosts_.at(i)->setDeathPosition();	
+				ghosts_.at(i)->askChangeMovementDeadState();			
+			}
 		}
 	}
 }

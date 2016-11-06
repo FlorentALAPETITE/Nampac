@@ -2,7 +2,7 @@
 #include <Ghost.hpp>
 #include <GameEngine.hpp>
 
-GhostMovementState::GhostMovementState(Ghost* g):ghost_(g),nextDirectionCalc_(0){
+GhostMovementState::GhostMovementState(Ghost* g):ghost_(g),nextDirectionCalc_(0),stateLifeTime_(150){
 }
 
 
@@ -66,7 +66,39 @@ void GhostMovementState::moveCharacter(GameEngine* g,int speed){
 			--modifiedSpeed;
 		}
 
-	
+	--stateLifeTime_;
 
+	if(stateLifeTime_==0){
+		stateLifeTime_=150;
+		backToClassicState();		
+	}
+}
+
+
+void GhostMovementState::setMovementDeadState(){
+	ghost_->setMovementDeadState();
+}
 		
+void GhostMovementState::setMovementAmbushState(){
+	ghost_->setMovementAmbushState();
+}
+	
+void GhostMovementState::setMovementStupidState(){
+	ghost_->setMovementStupidState();
+}
+
+void GhostMovementState::setMovementUnpredictableState(){
+	ghost_->setMovementUnpredictableState();
+}
+
+void GhostMovementState::setMovementChaseState(){
+	ghost_->setMovementChaseState();
+}
+
+void GhostMovementState::backToClassicState(){
+	ghost_->backToClassicState();
+}
+
+void GhostMovementState::setLifeTime(int lifeTime){
+	stateLifeTime_=lifeTime;
 }
