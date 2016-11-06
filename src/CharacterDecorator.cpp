@@ -19,7 +19,7 @@ int CharacterDecorator::getPosY(){
 	return character_->getPosY();
 }
 
-SDL_Texture* CharacterDecorator::getCharacterTexture(){
+vector<SDL_Texture*> CharacterDecorator::getCharacterTexture(){
 	return character_->getCharacterTexture();
 }
 
@@ -44,3 +44,6 @@ void CharacterDecorator::calculateNextDirection(){
 	character_->calculateNextDirection();
 }
 
+void CharacterDecorator::changeStateHunter(){
+	character_->changeStateHunter();
+}

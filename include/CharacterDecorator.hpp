@@ -17,12 +17,13 @@ class CharacterDecorator : public Character{
 		void changePosition(int,int) override;
 		int getPosX() override;
 		int getPosY() override;
-		SDL_Texture* getCharacterTexture() override;
+		vector<SDL_Texture*> getCharacterTexture() override;
 		SDL_Rect* getTextureRect() override;
 		int getDirection() override;
 		void setDirection(int) override;		
 		void moveCharacter(GameEngine*,int) override;
 		void calculateNextDirection() override;
+		void changeStateHunter() override;
 		
 };
 

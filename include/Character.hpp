@@ -4,6 +4,7 @@
 #include <SDL2/SDL.h>
 #include <iostream>
 #include <memory>
+#include <vector>
 
 using namespace std;
 
@@ -19,12 +20,13 @@ class Character{
 		virtual void changePosition(int,int);
 		virtual int getPosX();
 		virtual int getPosY();
-		virtual SDL_Texture* getCharacterTexture();
+		virtual vector<SDL_Texture*> getCharacterTexture();
 		virtual SDL_Rect* getTextureRect();
 		virtual int getDirection();
 		virtual void setDirection(int);
 		virtual void moveCharacter(GameEngine*,int)=0;
 		virtual void calculateNextDirection()=0;
+		virtual void changeStateHunter();
 
 
 	protected:

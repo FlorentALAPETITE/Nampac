@@ -21,6 +21,9 @@ Pacman::Pacman(char* sp,int s, int posX, int posY, SDL_Renderer* renderer):Chara
 	characterSurfaceOpenRight_ = SDL_LoadBMP("sprites/pacmanOpenRight.bmp");
 	characterTextureOpenRight_ = SDL_CreateTextureFromSurface(renderer_,characterSurfaceOpenRight_);
 
+	hunterParticleSurface_ = SDL_LoadBMP("sprites/hunterParticle.bmp");
+	hunterParticleTexture_ = SDL_CreateTextureFromSurface(renderer_,hunterParticleSurface_);
+
 	requestedDirection_=9;
 
 	hunterState_ = shared_ptr<HunterState>(new HunterState(this));
@@ -30,11 +33,13 @@ Pacman::Pacman(char* sp,int s, int posX, int posY, SDL_Renderer* renderer):Chara
 	
 }
 
-SDL_Texture* Pacman::getCharacterTexture(){
+vector<SDL_Texture*> Pacman::getCharacterTexture(){
+	
+	vector<SDL_Texture*> res = vector<SDL_Texture*>();
 
 	if(open_<=4){
 		open_+=1;
-		return characterTexture_;
+		res.push_back(characterTexture_);
 	}
 
 	else{
@@ -45,21 +50,24 @@ SDL_Texture* Pacman::getCharacterTexture(){
 	
 		switch (direction_){
 			case 0 : // right
-				return characterTextureOpenRight_;
+				res.push_back(characterTextureOpenRight_);
 				break; 
 			case 1 :  // left
-				return characterTextureOpenLeft_;
+				res.push_back(characterTextureOpenLeft_);
 				break;
 			case 2 :  //up
-				return characterTextureOpenTop_;
+				res.push_back(characterTextureOpenTop_);
 				break;
 			case 3 : //down
+				res.push_back(characterTextureOpenBot_);
 				break;
-		}
-		return characterTextureOpenBot_;
-
-
+		}		
 	}
+
+	if(canEatGhost())
+		res.push_back(hunterParticleTexture_);
+	
+	return res;
 }
 
 
@@ -88,6 +96,12 @@ Pacman::~Pacman(){
 
 	if(characterSurfaceOpenTop_!=nullptr)
 		SDL_FreeSurface(characterSurfaceOpenTop_);
+
+	if(hunterParticleTexture_!=nullptr)
+		SDL_DestroyTexture(hunterParticleTexture_);
+
+	if(hunterParticleSurface_!=nullptr)
+		SDL_FreeSurface(hunterParticleSurface_);
 }
 
 
@@ -258,6 +272,7 @@ void Pacman::moveCharacter(GameEngine* g, int speed){
 
 
 	}
+	currentState_->decrementRemainingMovement();
 
 
 }

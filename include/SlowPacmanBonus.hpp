@@ -8,7 +8,7 @@ class SlowPacmanBonus : public Bonus
 public:
 	SlowPacmanBonus(SDL_Renderer*,int, int);	
 	int getPoint() override;
-	char getBonusType();
+	char getBonusType() override;
 
 
 };
