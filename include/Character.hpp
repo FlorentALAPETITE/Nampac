@@ -102,20 +102,20 @@ class Character{
 		 * void setDirection(int);
 		 * \brief definition of the direction setter.
 		 *
-		 * \param direction : direction, int between 0 and 3
+		 * \param int : int direction, between 0 and 3
 		 *
 		 */	
-		virtual void setDirection(int direction);
+		virtual void setDirection(int);
 		
 		/**
 		 *virtual void moveCharacter()=0;
 		 * \brief abstract method used to move character.
 		 *
-		 * \param g : the game engine
-		 * \param speed : character speed
+		 * \param GameEngine* : the game engine
+		 * \param int : speed
 		 *
 		 */	
-		virtual void moveCharacter(GameEngine* g, int speed)=0;
+		virtual void moveCharacter(GameEngine*, int)=0;
 
 		/**
 		 *virtual void calculateNextDirection()=0;
@@ -130,23 +130,6 @@ class Character{
 		 *
 		 */	
 		virtual void changeStateHunter();
-
-		virtual bool canEatGhost();
-
-		virtual void setDeathPosition();
-
-		virtual void setMovementDeadState();
-		virtual void setMovementAmbushState();
-		virtual void setMovementStupidState();
-		virtual void setMovementUnpredictableState();
-		virtual void setMovementChaseState();
-		virtual void backToClassicState();
-
-		virtual void askChangeMovementDeadState();
-		virtual void askChangeMovementAmbushState();
-		virtual void askChangeMovementStupidState();
-		virtual void askChangeMovementUnpredictableState();
-		virtual void askChangeMovementChaseState();
 
 
 	protected:
