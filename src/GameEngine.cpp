@@ -356,6 +356,9 @@ void GameEngine::launchNampac(const char* mapLocation){
 
 	            SDL_Delay(25);
 
+	            if(playerScore_!=0)
+	            	--playerScore_;
+
 	            if(gameOver_){
 	            	renderGameOverMessage();  // render the game over message
 	            	renderPresent();
