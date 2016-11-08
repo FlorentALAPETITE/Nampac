@@ -150,7 +150,7 @@ void Pacman::moveCharacter(GameEngine* g, int speed){
 					}
 					
 
-
+				g->checkBonusEating();
 				--modifiedSpeed;
 			}
 				
@@ -204,6 +204,7 @@ void Pacman::moveCharacter(GameEngine* g, int speed){
 					if( !g->checkColision(newPosX,newPosY))
 						changePosition(newPosX, newPosY);
 				}
+				g->checkBonusEating();
 			}
 
 				
@@ -268,6 +269,7 @@ void Pacman::moveCharacter(GameEngine* g, int speed){
 				}
 			}		
 			--modifiedSpeed;
+			g->checkBonusEating();
 		}
 
 
