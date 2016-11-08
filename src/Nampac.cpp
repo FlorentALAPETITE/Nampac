@@ -9,7 +9,7 @@ int main(int argc, char **argv)
 {   
     try{
         unique_ptr<GameEngine> gameEngine =  unique_ptr<GameEngine>(new GameEngine);
-        gameEngine->launchNampac("map/laby1.laby");
+        gameEngine->launchNampac("map/PacMap.laby");
         SDL_Quit();
     }
         
