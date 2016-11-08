@@ -21,16 +21,16 @@ class Character{
 
 	public:
 		/**
-		 * Character(char* , int , int , int posY,SDL_Renderer*);	
+		 * Character(char* sl, int s, int posX, int posY,SDL_Renderer* renderer);	
 		 * \brief Abstract character creation method.
 		 *
 		 * \param sl : char* name of the sprite to use for illustrate character
 		 * \param s : used to set the speed of character.
 		 * \param posX : line position of the MapElement that require the character.
 		 * \param posY : line position of the MapElement that require the character.
-		 * \param renderer :  unique SDL_Renderer used to render the game..
+		 * \param renderer :  unique SDL_Renderer used to render the game.
 		 */
-		Character(char*, int, int, int, SDL_Renderer*);	
+		Character(char* sl, int s, int posX, int posY,SDL_Renderer* renderer);	
 		
 		/**
 		 * Character();	
@@ -40,7 +40,7 @@ class Character{
 
 		/**
 		 * ~Character();	
-		 * \brief abstract character destroyer method.
+		 * \brief abstract character destructor method.
 		 */
 		~Character();
 
@@ -53,10 +53,10 @@ class Character{
 		virtual int getSpeed();
 
 		/**
-		 * void changePosition(int, int);
+		 * void changePosition(int x, int y);
 		 * \brief methode used to change character's position.
 		 */
-		virtual void changePosition(int,int);
+		virtual void changePosition(int x ,int y);
 
 		/**
 		 * int getPosX();
@@ -102,7 +102,7 @@ class Character{
 		 * void setDirection(int);
 		 * \brief definition of the direction setter.
 		 *
-		 * \param direction : direction, int between 0 and 3
+		 * \param direction : direction, int between 0 and 3 (0: right, 1: left, 2: up, 3: down)
 		 *
 		 */	
 		virtual void setDirection(int direction);
@@ -131,6 +131,12 @@ class Character{
 		 */	
 		virtual void changeStateHunter();
 
+		/**
+		 *virtual bool canEatGhost();
+		 * \brief abstract method used to know if the pacman can eat ghots.
+		 *
+		 * \return bool: true if pacman can eat ghost.
+		 */	
 		virtual bool canEatGhost();
 
 		virtual void setDeathPosition();
