@@ -10,7 +10,7 @@ MapElementFactory::MapElementFactory():MapFactory(){
 }
 
 
-shared_ptr<MapElement> MapElementFactory::createMapElement(const char type, const unsigned int c, const unsigned int l, const int sizeSprite, SDL_Renderer* renderer){
+shared_ptr<MapElement> MapElementFactory::createMapElement(const char type, const unsigned int c, const unsigned int l, const int sizeSprite, SDL_Renderer* renderer,int &gumNumber){
 	shared_ptr<MapElement> mapElement;
 
 	if (type == '1')
@@ -18,7 +18,7 @@ shared_ptr<MapElement> MapElementFactory::createMapElement(const char type, cons
 	
 
 	else{
-		shared_ptr<Bonus> bonus = bonusFactory_->createBonus(type, c,l,sizeSprite,renderer);
+		shared_ptr<Bonus> bonus = bonusFactory_->createBonus(type, c,l,sizeSprite,renderer, gumNumber);
 		mapElement = shared_ptr<Lane> (new Lane(c*sizeSprite,l*sizeSprite,renderer,bonus));
 	}		
 

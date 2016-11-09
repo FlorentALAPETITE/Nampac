@@ -10,12 +10,13 @@ using namespace std;
 
 
 
-shared_ptr<Bonus> ConcreteBonusFactory::createBonus(const char type, const unsigned int c, const unsigned int l, const int sizeSprite, SDL_Renderer* renderer){
+shared_ptr<Bonus> ConcreteBonusFactory::createBonus(const char type, const unsigned int c, const unsigned int l, const int sizeSprite, SDL_Renderer* renderer, int &gumNumber){
 	shared_ptr<Bonus> bonus;
 
 	switch(type){
 		case '0':
 			bonus = shared_ptr<Gum> (new Gum(renderer, c*sizeSprite+8, l*sizeSprite+8));
+			gumNumber++;
 			break;
 
 		case '.':

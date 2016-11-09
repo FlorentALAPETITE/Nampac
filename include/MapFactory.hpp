@@ -12,7 +12,7 @@ class MapFactory {
 
 	public:
 		MapFactory();
-		virtual shared_ptr<MapElement> createMapElement(const char type, const unsigned int c, const unsigned int  l, const int sizeSprite, SDL_Renderer* renderer) = 0;
+		virtual shared_ptr<MapElement> createMapElement(const char type, const unsigned int c, const unsigned int  l, const int sizeSprite, SDL_Renderer* renderer,int& gumNumber) = 0;
 
 	protected:
 		unique_ptr<BonusFactory> bonusFactory_;

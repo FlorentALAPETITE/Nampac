@@ -29,8 +29,9 @@ class BonusFactory {
 		 * \param l : line position of the MapElement that require the bonus.
 		 * \param sizeSprite : general sprite size (default : 25px).
 		 * \param shared_ptr<Bonus> : pointer to the required bonus.
+		 * \param gumNumber: pointer to the number of gum bonuses.
 		 */
-		virtual shared_ptr<Bonus> createBonus(const char type, const unsigned int c, const unsigned int  l, const int sizeSprite, SDL_Renderer* renderer) = 0;
+		virtual shared_ptr<Bonus> createBonus(const char type, const unsigned int c, const unsigned int  l, const int sizeSprite, SDL_Renderer* renderer,int &gumNumber) = 0;
 
 
 };

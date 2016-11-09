@@ -15,7 +15,7 @@
 using namespace std;
 
 
-GameEngine::GameEngine():gameOver_(false),randNumber_(0),playerScore_(0){
+GameEngine::GameEngine():gameOver_(false),randNumber_(0),playerScore_(0),gumNumber_(0){
 	    
                   
     // SDL initialization 
@@ -42,9 +42,10 @@ GameEngine::GameEngine():gameOver_(false),randNumber_(0),playerScore_(0){
     TTF_Init();
 
     fontScoring_ = TTF_OpenFont("./font/Xolonium-Regular.ttf", 30);
-    fontGameOver_ = TTF_OpenFont("./font/Xolonium-Regular.ttf", 250);
+    fontEndGame_ = TTF_OpenFont("./font/Xolonium-Regular.ttf", 250);
     red_ = {255, 0, 0};  
 	white_ = {255, 255, 255};  
+	green_ = {0,255,0};
 
 	playerScoreRect_ = {540,685,80,40};
 
@@ -59,11 +60,11 @@ GameEngine::~GameEngine(){
 
 	SDL_DestroyRenderer(renderer_); 	
 
-	if(gameOverTexture_!=nullptr)
-		SDL_DestroyTexture(gameOverTexture_);
+	if(endGameTexture_!=nullptr)
+		SDL_DestroyTexture(endGameTexture_);
 
-	if(gameOverSurface_!=nullptr)
-		SDL_FreeSurface(gameOverSurface_);
+	if(endGameSurface_!=nullptr)
+		SDL_FreeSurface(endGameSurface_);
 
 	if(playerScoreTexture_!=nullptr)
 		SDL_DestroyTexture(playerScoreTexture_);
@@ -130,6 +131,10 @@ void GameEngine::handleBonus(char type){
 
 	switch(type){
 
+		case '0': //Bonus : gum
+			--gumNumber_;
+			break;
+
 		case '~':  //Bonus : slow ghost
 			for(unsigned int i=0;i<ghosts_.size();++i)
 				ghosts_[i]=shared_ptr<Character>(new SlowedCharacter(ghosts_[i]));			
@@ -164,8 +169,7 @@ void GameEngine::changePacmanDirection(int direction){
 
 
 
-void GameEngine::createMap(vector<vector<char>> const& laby){	
-	
+void GameEngine::createMap(vector<vector<char>> const& laby){		
 
 	mapElements_ = vector<vector<shared_ptr<MapElement>>> ();
 
@@ -189,13 +193,15 @@ void GameEngine::createMap(vector<vector<char>> const& laby){
 			}
 
 			// Request MapElement construction -> mapElementFactory
-			mapElements_[l].push_back(mapElementFactory_->createMapElement(charMapElement,c,l,sizeSprite,renderer_));			
+			mapElements_[l].push_back(mapElementFactory_->createMapElement(charMapElement,c,l,sizeSprite,renderer_,gumNumber_));			
 		}
 	}
-
+	
 	if (pacman_==nullptr)	
 		throw string("Erreur : veuillez disposer un pacman (p) dans la map du jeu.");
 }
+
+
 
 void GameEngine::renderMap(){
 	shared_ptr<Bonus> bonus;
@@ -261,15 +267,15 @@ bool GameEngine::checkColisionSDLRect(SDL_Rect* r1, SDL_Rect* r2){
 
 
 
-void GameEngine::renderGameOverMessage(){
+void GameEngine::renderEndGameMessage(const char* message, SDL_Color color){
 	
-	gameOverSurface_ = TTF_RenderText_Solid(fontGameOver_, "GAME OVER", red_); 
+	endGameSurface_ = TTF_RenderText_Solid(fontEndGame_, message, color); 
 
-	gameOverTexture_ = SDL_CreateTextureFromSurface(renderer_, gameOverSurface_); 
+	endGameTexture_ = SDL_CreateTextureFromSurface(renderer_, endGameSurface_); 
 
-	gameOverRect_ = {150,250,400,200};
+	endGameRect_ = {150,250,400,200};
 
-	SDL_RenderCopy(renderer_, gameOverTexture_, NULL, &gameOverRect_); 
+	SDL_RenderCopy(renderer_, endGameTexture_, NULL, &endGameRect_); 
 }
 
 
@@ -300,6 +306,10 @@ void GameEngine::checkBonusEating(){
 	}
 }
 
+
+void GameEngine::checkVictory(){
+	victory_= (gumNumber_==0);
+}
 
 
 
@@ -344,7 +354,8 @@ void GameEngine::launchNampac(const char* mapLocation){
                   }           
             }
 
-        	if(!gameOver_){            
+
+        	if(!gameOver_ && !victory_){            
         		// Game routine :
 	            moveCharacters(); // move all the characters
 	            clearRenderer();  // clear the screen
@@ -353,6 +364,7 @@ void GameEngine::launchNampac(const char* mapLocation){
 	            renderPlayerScore();  // render the player score actualized
 	            renderPresent();   // show the screen
 	            checkAllCharactersColision(); // check if pacman is in a ghost
+	            checkVictory();
 
 	            SDL_Delay(25);
 
@@ -360,10 +372,18 @@ void GameEngine::launchNampac(const char* mapLocation){
 	            	--playerScore_;
 
 	            if(gameOver_){
-	            	renderGameOverMessage();  // render the game over message
+	            	renderEndGameMessage("GAME OVER", red_);  // render the game over message
 	            	renderPresent();
 	            	
 	            }
+
+	            if (victory_){
+	            	renderEndGameMessage("VICTORY", green_);  // render the victory message
+	            	renderPresent();
+	            }
+
+
+
 	        }
 
             
