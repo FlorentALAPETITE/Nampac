@@ -1,6 +1,6 @@
-#include <GhostMovementChase.hpp>
+#include <GhostMovementState/GhostMovementChase.hpp>
 #include <stdlib.h>  
-#include <Ghost.hpp>
+#include <Character/Ghost.hpp>
 
 void GhostMovementChase::calculateDirection(){
 	if(nextDirectionCalc_==30){

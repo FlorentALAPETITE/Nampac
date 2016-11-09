@@ -1,9 +1,9 @@
-#include <HunterBonus.hpp>
+#include <Bonus/HunterBonus.hpp>
 #include <iostream>
 
 using namespace std;
 
-HunterBonus::HunterBonus(SDL_Renderer* renderer, int posX, int posY):Bonus(renderer,posX,posY, 20,"sprites/bonusHunter.bmp"){	
+HunterBonus::HunterBonus(SDL_Renderer* renderer, int posX, int posY):Bonus(renderer,posX,posY, 20,"sprites/Bonus/bonusHunter.bmp"){	
 }
 
 

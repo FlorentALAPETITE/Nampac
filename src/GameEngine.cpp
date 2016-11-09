@@ -4,11 +4,12 @@
 #include <MapReader.hpp>
 #include <math.h>
 #include <stdlib.h>    
-#include <MapElementFactory.hpp>
-#include <ConcreteGhostFactory.hpp>
+#include <Factory/MapElementFactory.hpp>
+#include <Factory/ConcreteGhostFactory.hpp>
 #include <ctype.h>
-#include <SpeededCharacter.hpp>
-#include <SlowedCharacter.hpp>
+#include <CharacterDecorator/SpeededCharacter.hpp>
+#include <CharacterDecorator/SlowedCharacter.hpp>
+#include <Character/Pacman.hpp>
 
 
 
@@ -183,7 +184,7 @@ void GameEngine::createMap(vector<vector<char>> const& laby){
 			charMapElement = laby[l][c];
 
 			if(charMapElement == 'p'){  // Construct a Pacman
-				pacman_ = shared_ptr<Pacman>(new Pacman((char*)"sprites/pacmanClose.bmp",5,c*sizeSprite,l*sizeSprite,renderer_)); 							
+				pacman_ = shared_ptr<Pacman>(new Pacman((char*)"sprites/Pacman/pacmanClose.bmp",5,c*sizeSprite,l*sizeSprite,renderer_)); 							
 				charMapElement = '0';
 			}
 

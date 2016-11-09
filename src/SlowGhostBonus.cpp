@@ -1,9 +1,9 @@
-#include <SlowGhostBonus.hpp>
+#include <Bonus/SlowGhostBonus.hpp>
 #include <iostream>
 
 using namespace std;
 
-SlowGhostBonus::SlowGhostBonus(SDL_Renderer* renderer, int posX, int posY):Bonus(renderer,posX,posY, 20,"sprites/bonusSlowGhost.bmp"){	
+SlowGhostBonus::SlowGhostBonus(SDL_Renderer* renderer, int posX, int posY):Bonus(renderer,posX,posY, 20,"sprites/Bonus/bonusSlowGhost.bmp"){	
 }
 
 

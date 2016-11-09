@@ -1,6 +1,6 @@
-#include <MapElementFactory.hpp>
-#include <Lane.hpp>
-#include <Wall.hpp>
+#include <Factory/MapElementFactory.hpp>
+#include <MapElement/Lane.hpp>
+#include <MapElement/Wall.hpp>
 
 using namespace std;
 

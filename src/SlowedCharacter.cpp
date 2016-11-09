@@ -1,4 +1,4 @@
-#include <SlowedCharacter.hpp>
+#include <CharacterDecorator/SlowedCharacter.hpp>
 #include <math.h>  
 
 SlowedCharacter::SlowedCharacter(shared_ptr<Character> c):CharacterDecorator(c){	

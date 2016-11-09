@@ -1,27 +1,27 @@
-#include <Pacman.hpp>
+#include <Character/Pacman.hpp>
 #include <GameEngine.hpp>
 #include <iostream>
-#include <PreyState.hpp>
-#include <HunterState.hpp>
+#include <PacmanState/PreyState.hpp>
+#include <PacmanState/HunterState.hpp>
 
 using namespace std;
 
 
 Pacman::Pacman(char* sp,int s, int posX, int posY, SDL_Renderer* renderer):Character(sp,s,posX,posY,renderer), open_(0){
 
-	characterSurfaceOpenTop_ = SDL_LoadBMP("sprites/pacmanOpenTop.bmp");
+	characterSurfaceOpenTop_ = SDL_LoadBMP("sprites/Pacman/pacmanOpenTop.bmp");
 	characterTextureOpenTop_ = SDL_CreateTextureFromSurface(renderer_,characterSurfaceOpenTop_);
 
-	characterSurfaceOpenBot_ = SDL_LoadBMP("sprites/pacmanOpenBot.bmp");
+	characterSurfaceOpenBot_ = SDL_LoadBMP("sprites/Pacman/pacmanOpenBot.bmp");
 	characterTextureOpenBot_ = SDL_CreateTextureFromSurface(renderer_,characterSurfaceOpenBot_);
 
-	characterSurfaceOpenLeft_ = SDL_LoadBMP("sprites/pacmanOpenLeft.bmp");
+	characterSurfaceOpenLeft_ = SDL_LoadBMP("sprites/Pacman/pacmanOpenLeft.bmp");
 	characterTextureOpenLeft_ = SDL_CreateTextureFromSurface(renderer_,characterSurfaceOpenLeft_);
 
-	characterSurfaceOpenRight_ = SDL_LoadBMP("sprites/pacmanOpenRight.bmp");
+	characterSurfaceOpenRight_ = SDL_LoadBMP("sprites/Pacman/pacmanOpenRight.bmp");
 	characterTextureOpenRight_ = SDL_CreateTextureFromSurface(renderer_,characterSurfaceOpenRight_);
 
-	hunterParticleSurface_ = SDL_LoadBMP("sprites/hunterParticle.bmp");
+	hunterParticleSurface_ = SDL_LoadBMP("sprites/Pacman/hunterParticle.bmp");
 	hunterParticleTexture_ = SDL_CreateTextureFromSurface(renderer_,hunterParticleSurface_);
 
 	requestedDirection_=9;

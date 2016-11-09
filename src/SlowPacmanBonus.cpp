@@ -1,9 +1,9 @@
-#include <SlowPacmanBonus.hpp>
+#include <Bonus/SlowPacmanBonus.hpp>
 #include <iostream>
 
 using namespace std;
 
-SlowPacmanBonus::SlowPacmanBonus(SDL_Renderer* renderer, int posX, int posY):Bonus(renderer,posX,posY, 20,"sprites/bonusSlowPacman.bmp"){	
+SlowPacmanBonus::SlowPacmanBonus(SDL_Renderer* renderer, int posX, int posY):Bonus(renderer,posX,posY, 20,"sprites/Bonus/bonusSlowPacman.bmp"){	
 }
 
 

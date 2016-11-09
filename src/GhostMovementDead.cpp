@@ -1,5 +1,5 @@
-#include <GhostMovementDead.hpp>
-#include <Ghost.hpp>
+#include <GhostMovementState/GhostMovementDead.hpp>
+#include <Character/Ghost.hpp>
 #include <stdlib.h>     
 
 

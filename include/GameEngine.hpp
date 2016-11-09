@@ -4,14 +4,13 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 #include <iostream>
-#include <Character.hpp>
-#include <Pacman.hpp>
+#include <Character/Character.hpp>
 #include <vector>
-#include <MapElement.hpp>
+#include <MapElement/MapElement.hpp>
 #include <memory>
-#include <Bonus.hpp>
-#include <GhostFactory.hpp>
-#include <MapFactory.hpp>
+#include <Bonus/Bonus.hpp>
+#include <Factory/GhostFactory.hpp>
+#include <Factory/MapFactory.hpp>
 
 
 const int sizeSprite = 25;

@@ -1,9 +1,9 @@
-#include <Gum.hpp>
+#include <Bonus/Gum.hpp>
 #include <iostream>
 
 using namespace std;
 
-Gum::Gum(SDL_Renderer* renderer, int posX, int posY):Bonus(renderer,posX,posY,8,"sprites/gum.bmp"){	
+Gum::Gum(SDL_Renderer* renderer, int posX, int posY):Bonus(renderer,posX,posY,8,"sprites/Bonus/gum.bmp"){	
 }
 
 
