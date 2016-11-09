@@ -1,4 +1,4 @@
-#include <Bonus.hpp>
+#include <Bonus/Bonus.hpp>
 #include <iostream>
 
 using namespace std;

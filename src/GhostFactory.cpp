@@ -1,8 +1,8 @@
-#include <ConcreteGhostFactory.hpp>
-#include <RedGhost.hpp>
-#include <BlueGhost.hpp>
-#include <OrangeGhost.hpp>
-#include <PinkGhost.hpp>
+#include <Factory/ConcreteGhostFactory.hpp>
+#include <Character/RedGhost.hpp>
+#include <Character/BlueGhost.hpp>
+#include <Character/OrangeGhost.hpp>
+#include <Character/PinkGhost.hpp>
 
 using namespace std;
 

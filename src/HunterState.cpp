@@ -1,5 +1,5 @@
-#include <HunterState.hpp>
-#include <Pacman.hpp>
+#include <PacmanState/HunterState.hpp>
+#include <Character/Pacman.hpp>
 
 
 HunterState::HunterState(Pacman* pacman):PacmanState(pacman), remainingMovement_(200){

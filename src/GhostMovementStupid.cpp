@@ -1,6 +1,6 @@
-#include <GhostMovementStupid.hpp>
+#include <GhostMovementState/GhostMovementStupid.hpp>
 #include <stdlib.h>  
-#include <Ghost.hpp>
+#include <Character/Ghost.hpp>
 
 void GhostMovementStupid::calculateDirection(){
 	ghost_->setDirection(rand() % 4);

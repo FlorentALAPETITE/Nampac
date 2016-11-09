@@ -1,5 +1,5 @@
-#include <GhostMovementState.hpp>
-#include <Ghost.hpp>
+#include <GhostMovementState/GhostMovementState.hpp>
+#include <Character/Ghost.hpp>
 #include <GameEngine.hpp>
 
 GhostMovementState::GhostMovementState(Ghost* g):ghost_(g),nextDirectionCalc_(0),stateLifeTime_(150){

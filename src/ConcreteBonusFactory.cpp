@@ -1,10 +1,10 @@
-#include <ConcreteBonusFactory.hpp>
-#include <Gum.hpp>
-#include <SlowGhostBonus.hpp>
-#include <SpeedGhostBonus.hpp>
-#include <SlowPacmanBonus.hpp>
-#include <SpeedPacmanBonus.hpp>
-#include <HunterBonus.hpp>
+#include <Factory/ConcreteBonusFactory.hpp>
+#include <Bonus/Gum.hpp>
+#include <Bonus/SlowGhostBonus.hpp>
+#include <Bonus/SpeedGhostBonus.hpp>
+#include <Bonus/SlowPacmanBonus.hpp>
+#include <Bonus/SpeedPacmanBonus.hpp>
+#include <Bonus/HunterBonus.hpp>
 
 using namespace std;
 

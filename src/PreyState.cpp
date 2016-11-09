@@ -1,5 +1,5 @@
-#include <PreyState.hpp>
-#include <Pacman.hpp>
+#include <PacmanState/PreyState.hpp>
+#include <Character/Pacman.hpp>
 
 
 PreyState::PreyState(Pacman* pacman):PacmanState(pacman){
