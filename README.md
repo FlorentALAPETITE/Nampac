@@ -19,11 +19,13 @@
 	* ~ : couloir contenant un bonus SlowGhost (ralenti tous les fantômes +100 points)
 	* # : couloir contenant un bonus SpeedGhost (accélère tous les fantômes +500 points)
 	* $ : couloir contenant un bonus HunterBonus (permet à Pacman de manger les fantômes pendant 200 déplacements)
+	* ! : couloir contenant un bonus StupidGhost (rend les fantômes stupides pendant 250 déplacements).
 
 
 ## Règles du jeu :
 * Jeu basé sur un système risk/reward (risque/récompense).
 * Pour gagner : récupérer tous les petits bonus oranges (gum).
+* Toucher un fantôme entraîne la fin de la partie (sauf si le bonus StupidGhost est actif).
 * Le joueur perd 1 point par tour de jeu.
 * Ramasser une gum ajoute 50 points.
 * Ramasser un bonus (SlowGhost, SpeedPacman) ajoute 100 points et facilite un peu plus le jeu.

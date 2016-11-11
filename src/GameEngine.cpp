@@ -157,6 +157,11 @@ void GameEngine::handleBonus(char type){
 		case '$':  //Bonus : hunter pacman
 			pacman_->changeStateHunter();			
 			break;
+
+		case '!':  //Bonus : stupid ghost
+			for(unsigned int i=0;i<ghosts_.size();++i)
+				ghosts_[i]->askChangeMovementStupidState();		
+			break;
 	}
 
 }
