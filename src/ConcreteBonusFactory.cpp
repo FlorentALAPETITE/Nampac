@@ -1,4 +1,4 @@
-#include <Factory/ConcreteBonusFactory.hpp>
+#include <Prototype/ConcreteBonusFactory.hpp>
 #include <Bonus/Gum.hpp>
 #include <Bonus/SlowGhostBonus.hpp>
 #include <Bonus/SpeedGhostBonus.hpp>

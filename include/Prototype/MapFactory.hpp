@@ -4,7 +4,7 @@
 #include <MapElement/MapElement.hpp>
 #include <memory>
 #include <SDL2/SDL.h>
-#include <Factory/BonusFactory.hpp>
+#include <Prototype/BonusFactory.hpp>
 
 using namespace std;
 

@@ -8,12 +8,17 @@
 
 
 Ghost::Ghost(char* sp,int posX, int posY, SDL_Renderer* renderer,int deathPosX, int deathPosY):Character(sp,5,posX,posY,renderer),deathPosX_(deathPosX),deathPosY_(deathPosY){
+}
+
+
+Ghost::Ghost(const Ghost &ghost): Character(ghost),deathPosX_(ghost.deathPosX_),deathPosY_(ghost.deathPosY_){//,currentMovementState_(ghost.currentMovementState_),movementChaseState_(ghost.movementChaseState_),movementAmbushState_(ghost.movementAmbushState_),movementStupidState_(ghost.movementStupidState_),movementUnpredictableState_(ghost.movementUnpredictableState_),movementDeadState_(ghost.movementDeadState_),  deathPosX_(ghost.deathPosX_),deathPosY_(ghost.deathPosY_){
 	movementChaseState_ = shared_ptr<GhostMovementChase>(new GhostMovementChase(this));
 	movementAmbushState_ = shared_ptr<GhostMovementAmbush>(new GhostMovementAmbush(this));
 	movementStupidState_ = shared_ptr<GhostMovementStupid>(new GhostMovementStupid(this));
 	movementUnpredictableState_ = shared_ptr<GhostMovementUnpredictable>(new GhostMovementUnpredictable(this));
 	movementDeadState_ = shared_ptr<GhostMovementDead>(new GhostMovementDead(this));
 }
+
 
 
 void Ghost::calculateNextDirection(){
@@ -72,4 +77,3 @@ void Ghost::setMovementUnpredictableState(){
 void Ghost::setMovementChaseState(){
 	currentMovementState_=movementChaseState_;
 }
-

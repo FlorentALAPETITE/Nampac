@@ -3,6 +3,7 @@
 
 
 #include <Character/Ghost.hpp>
+#include <Prototype/Prototype.hpp>
 
 using namespace std;
 
@@ -16,7 +17,7 @@ using namespace std;
  *
  */
 
-class OrangeGhost : public Ghost{
+class OrangeGhost : public Ghost,public Prototype<OrangeGhost>{
 
 	public:
 		/**
@@ -28,7 +29,9 @@ class OrangeGhost : public Ghost{
 		 * \param renderer : unique SDL_Renderer used to render the game.
 		 */
 		OrangeGhost(int posX, int posY, SDL_Renderer* renderer);
+		OrangeGhost(const OrangeGhost &og);
 		void backToClassicState() override;
+		shared_ptr<OrangeGhost> clone() override;
 
 	private:
 };

@@ -2,6 +2,7 @@
 #define DEF_BLUEGHOST
 
 #include <Character/Ghost.hpp>
+#include <Prototype/Prototype.hpp>
 
 using namespace std;
 
@@ -16,7 +17,7 @@ using namespace std;
  */
 
 
-class BlueGhost : public Ghost{
+class BlueGhost : public Ghost, public Prototype<BlueGhost>{
 
 	public:
 		/**
@@ -28,7 +29,9 @@ class BlueGhost : public Ghost{
 		 * \param renderer : unique SDL_Renderer used to render the game.
 		 */
 		BlueGhost(int posX, int posY, SDL_Renderer* renderer);
-		void backToClassicState() override;
+		BlueGhost(const BlueGhost &bg);
+		void backToClassicState() override;		
+		shared_ptr<BlueGhost> clone() override;
 
 	private:
 };

@@ -1,7 +1,7 @@
 #ifndef DEF_CONCRETEBONUSFACTORY
 #define DEF_CONCRETEBONUSFACTORY
 
-#include <Factory/BonusFactory.hpp>
+#include <Prototype/BonusFactory.hpp>
 #include <memory>
 #include <SDL2/SDL.h>
 

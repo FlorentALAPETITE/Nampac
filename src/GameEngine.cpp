@@ -4,8 +4,8 @@
 #include <MapReader.hpp>
 #include <math.h>
 #include <stdlib.h>    
-#include <Factory/MapElementFactory.hpp>
-#include <Factory/ConcreteGhostFactory.hpp>
+#include <Prototype/MapElementFactory.hpp>
+#include <Prototype/GhostFactory.hpp>
 #include <ctype.h>
 #include <CharacterDecorator/SpeededCharacter.hpp>
 #include <CharacterDecorator/SlowedCharacter.hpp>
@@ -51,7 +51,7 @@ GameEngine::GameEngine():gameOver_(false),randNumber_(0),playerScore_(0),gumNumb
 	playerScoreRect_ = {540,685,80,40};
 
 	mapElementFactory_ = unique_ptr<MapElementFactory>(new MapElementFactory());
-	ghostFactory_ = unique_ptr<ConcreteGhostFactory>(new ConcreteGhostFactory());
+	ghostFactory_ = unique_ptr<GhostFactory>(new GhostFactory(sizeSprite,renderer_));
         
 }
 
@@ -189,7 +189,7 @@ void GameEngine::createMap(vector<vector<char>> const& laby){
 			}
 
 			else if(isalpha(charMapElement)){  // Request ghost construction -> ghostFactory
-				ghosts_.push_back(ghostFactory_->createGhost(charMapElement,c,l,sizeSprite,renderer_));
+				ghosts_.push_back(ghostFactory_->createGhost(charMapElement,c,l));
 				charMapElement = '0';
 			}
 

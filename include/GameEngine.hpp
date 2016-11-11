@@ -9,8 +9,8 @@
 #include <MapElement/MapElement.hpp>
 #include <memory>
 #include <Bonus/Bonus.hpp>
-#include <Factory/GhostFactory.hpp>
-#include <Factory/MapFactory.hpp>
+#include <Prototype/GhostFactory.hpp>
+#include <Prototype/MapFactory.hpp>
 
 
 const int sizeSprite = 25;

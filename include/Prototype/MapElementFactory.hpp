@@ -1,7 +1,7 @@
 #ifndef DEF_MAPELEMENTFACTORY
 #define DEF_MAPELEMENTFACTORY
 
-#include <Factory/MapFactory.hpp>
+#include <Prototype/MapFactory.hpp>
 
 using namespace std;
 

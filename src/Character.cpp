@@ -20,6 +20,11 @@ Character::Character(char* sl, int s, int posX, int posY,SDL_Renderer* renderer)
 Character::Character(){}
 
 
+Character::Character(const Character &character):speed_(character.speed_),characterTexture_(character.characterTexture_),characterSurface_(character.characterSurface_), textureRect_(character.textureRect_),renderer_(character.renderer_),direction_(character.direction_){
+
+}
+
+
 int Character::getSpeed(){
 	return speed_;
 }

@@ -5,6 +5,7 @@
 #include <GhostMovementState/GhostMovementState.hpp>
 #include <memory>
 
+
 using namespace std;
 
 
@@ -13,6 +14,8 @@ class Ghost : public Character{
 
 	public:
 		Ghost(char*, int, int, SDL_Renderer*,int,int);
+		Ghost(const Ghost &ghost);
+
 		void calculateNextDirection() override;
 		void moveCharacter(GameEngine*,int) override;
 		void setDeathPosition() override;
@@ -26,7 +29,7 @@ class Ghost : public Character{
 		void askChangeMovementAmbushState() override;
 		void askChangeMovementStupidState() override;
 		void askChangeMovementUnpredictableState() override;
-		void askChangeMovementChaseState() override;
+		void askChangeMovementChaseState() override;		
 
 	protected:
 		shared_ptr<GhostMovementState> currentMovementState_;
