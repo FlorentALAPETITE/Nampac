@@ -5,6 +5,7 @@
 #include <Bonus/SlowPacmanBonus.hpp>
 #include <Bonus/SpeedPacmanBonus.hpp>
 #include <Bonus/HunterBonus.hpp>
+#include <Bonus/StupidGhostBonus.hpp>
 
 using namespace std;
 
@@ -41,6 +42,10 @@ shared_ptr<Bonus> ConcreteBonusFactory::createBonus(const char type, const unsig
 
 		case '$':
 			bonus = shared_ptr<HunterBonus> (new HunterBonus(renderer, c*sizeSprite+3, l*sizeSprite+3));
+			break;
+
+		case '!':
+			bonus = shared_ptr<StupidGhostBonus> (new StupidGhostBonus(renderer, c*sizeSprite+3, l*sizeSprite+3));
 			break;
 
 	}

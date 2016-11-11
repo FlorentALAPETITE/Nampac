@@ -2,7 +2,7 @@
 #include <Character/Ghost.hpp>
 #include <GameEngine.hpp>
 
-GhostMovementState::GhostMovementState(Ghost* g):ghost_(g),nextDirectionCalc_(0),stateLifeTime_(150){
+GhostMovementState::GhostMovementState(Ghost* g):ghost_(g),nextDirectionCalc_(0),stateLifeTime_(250){
 }
 
 
