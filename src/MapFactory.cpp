@@ -1,5 +1,5 @@
-#include <Factory/MapFactory.hpp>
-#include <Factory/ConcreteBonusFactory.hpp>
+#include <Prototype/MapFactory.hpp>
+#include <Prototype/ConcreteBonusFactory.hpp>
 
 MapFactory::MapFactory(){
 	bonusFactory_ = unique_ptr<ConcreteBonusFactory>(new ConcreteBonusFactory());

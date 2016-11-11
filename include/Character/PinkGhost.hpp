@@ -3,6 +3,7 @@
 
 
 #include <Character/Ghost.hpp>
+#include <Prototype/Prototype.hpp>
 
 using namespace std;
 
@@ -17,7 +18,7 @@ using namespace std;
  */
 
 
-class PinkGhost : public Ghost{
+class PinkGhost : public Ghost, public Prototype<PinkGhost>{
 
 	public:
 		/**
@@ -29,7 +30,9 @@ class PinkGhost : public Ghost{
 		 * \param renderer : unique SDL_Renderer used to render the game.
 		 */
 		PinkGhost(int posX, int posY, SDL_Renderer* renderer);
+		PinkGhost(const PinkGhost &pg);
 		void backToClassicState() override;
+		shared_ptr<PinkGhost> clone() override;
 
 	private:
 };

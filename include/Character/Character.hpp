@@ -32,6 +32,14 @@ class Character{
 		Character(char* sl, int s, int posX, int posY, SDL_Renderer* renderer);	
 		
 		/**
+		 * Character(const Character &character);
+		 * \brief Abstract character copy contructor.
+		 *		
+		 * \param character : existing character pointer.
+		 */
+		Character(const Character &character);
+
+		/**
 		 * Character();	
 		 * \brief Abstract character creation method (empty constructor).
 		 */
