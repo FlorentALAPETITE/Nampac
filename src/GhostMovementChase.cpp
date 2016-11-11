@@ -2,6 +2,8 @@
 #include <stdlib.h>  
 #include <Character/Ghost.hpp>
 
+GhostMovementChase::GhostMovementChase(Ghost* g):GhostMovementState(g){}
+
 void GhostMovementChase::calculateDirection(){
 	if(nextDirectionCalc_==30){
 		ghost_->setDirection(rand() % 4);
@@ -13,4 +15,3 @@ void GhostMovementChase::calculateDirection(){
 }
 
 
-GhostMovementChase::GhostMovementChase(Ghost *g):GhostMovementState(g){}

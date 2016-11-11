@@ -8,7 +8,7 @@ using namespace std;
 class GhostMovementUnpredictable : public GhostMovementState {
 
 	public:
-		GhostMovementUnpredictable(Ghost *);
+		GhostMovementUnpredictable(Ghost* );
 		void calculateDirection() override;
 		
 };

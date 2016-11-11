@@ -6,7 +6,7 @@
 void GhostMovementDead::calculateDirection(){}
 
 
-GhostMovementDead::GhostMovementDead(Ghost *g):GhostMovementState(g){}
+GhostMovementDead::GhostMovementDead(Ghost* g):GhostMovementState(g){}
 
 void GhostMovementDead::moveCharacter(GameEngine*, int speed){
 	--stateLifeTime_;

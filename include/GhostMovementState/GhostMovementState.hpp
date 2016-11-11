@@ -12,7 +12,7 @@ class GameEngine;
 class GhostMovementState {
 
 	public:
-		GhostMovementState(Ghost*);
+		GhostMovementState(Ghost* g);		
 		virtual void calculateDirection() = 0;
 		virtual void moveCharacter(GameEngine*, int);
 		virtual void setMovementDeadState();

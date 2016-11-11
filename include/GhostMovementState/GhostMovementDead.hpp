@@ -8,7 +8,7 @@ using namespace std;
 class GhostMovementDead : public GhostMovementState {
 
 	public:
-		GhostMovementDead(Ghost *);
+		GhostMovementDead(Ghost* );
 		void calculateDirection() override;
 		void moveCharacter(GameEngine*, int speed) override;
 		void setMovementDeadState() override;

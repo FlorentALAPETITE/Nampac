@@ -3,6 +3,8 @@
 #include <time.h>  
 #include <Character/Ghost.hpp>
 
+GhostMovementUnpredictable::GhostMovementUnpredictable(Ghost* g):GhostMovementState(g){}
+
 
 void GhostMovementUnpredictable::calculateDirection(){
 	if(nextDirectionCalc_==8){
@@ -15,4 +17,3 @@ void GhostMovementUnpredictable::calculateDirection(){
 }
 
 
-GhostMovementUnpredictable::GhostMovementUnpredictable(Ghost *g):GhostMovementState(g){}
