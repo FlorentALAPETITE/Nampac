@@ -20,8 +20,15 @@ Character::Character(char* sl, int s, int posX, int posY,SDL_Renderer* renderer)
 Character::Character(){}
 
 
-Character::Character(const Character &character):speed_(character.speed_),characterTexture_(character.characterTexture_),characterSurface_(character.characterSurface_), textureRect_(character.textureRect_),renderer_(character.renderer_),direction_(character.direction_){
+Character::Character(const Character &character):speed_(character.speed_), textureRect_(character.textureRect_),renderer_(character.renderer_),direction_(character.direction_){
 
+}
+
+Character::~Character(){
+	if(characterTexture_!=nullptr)
+		SDL_DestroyTexture(characterTexture_);
+	if(characterSurface_!=nullptr)
+		SDL_FreeSurface(characterSurface_);
 }
 
 
@@ -60,13 +67,6 @@ int Character::getDirection(){
 		
 void Character::setDirection(int d){
 	direction_=d;
-}
-
-Character::~Character(){
-	if(characterTexture_!=nullptr)
-		SDL_DestroyTexture(characterTexture_);
-	if(characterSurface_!=nullptr)
-		SDL_FreeSurface(characterSurface_);
 }
 
 

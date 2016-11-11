@@ -29,7 +29,8 @@ class Ghost : public Character{
 		void askChangeMovementAmbushState() override;
 		void askChangeMovementStupidState() override;
 		void askChangeMovementUnpredictableState() override;
-		void askChangeMovementChaseState() override;		
+		void askChangeMovementChaseState() override;	
+
 
 	protected:
 		shared_ptr<GhostMovementState> currentMovementState_;
@@ -41,7 +42,9 @@ class Ghost : public Character{
 		shared_ptr<GhostMovementState> movementDeadState_;	
 
 		int deathPosX_;
-		int deathPosY_;	
+		int deathPosY_;
+
+		char* spriteLocation_;
 
 };
 

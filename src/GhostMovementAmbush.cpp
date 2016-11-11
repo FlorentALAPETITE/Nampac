@@ -3,6 +3,9 @@
 #include <Character/Ghost.hpp>
 
 
+GhostMovementAmbush::GhostMovementAmbush(Ghost* g):GhostMovementState(g){}
+
+
 void GhostMovementAmbush::calculateDirection(){
 	if(nextDirectionCalc_==15){
 		ghost_->setDirection(rand() % 4);
@@ -13,5 +16,3 @@ void GhostMovementAmbush::calculateDirection(){
 
 }
 
-
-GhostMovementAmbush::GhostMovementAmbush(Ghost *g):GhostMovementState(g){}
