@@ -17,7 +17,7 @@ using namespace std;
  *
  */
 
-class OrangeGhost : public Ghost,public Prototype<OrangeGhost>{
+class OrangeGhost : public Ghost, public Prototype<OrangeGhost>{
 
 	public:
 		/**

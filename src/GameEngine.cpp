@@ -3,9 +3,7 @@
 #include <memory>
 #include <MapReader.hpp>
 #include <math.h>
-#include <stdlib.h>    
-#include <Prototype/MapElementFactory.hpp>
-#include <Prototype/GhostFactory.hpp>
+#include <stdlib.h>   
 #include <ctype.h>
 #include <CharacterDecorator/SpeededCharacter.hpp>
 #include <CharacterDecorator/SlowedCharacter.hpp>
@@ -50,7 +48,7 @@ GameEngine::GameEngine():gameOver_(false),randNumber_(0),playerScore_(0),gumNumb
 
 	playerScoreRect_ = {540,685,80,40};
 
-	mapElementFactory_ = unique_ptr<MapElementFactory>(new MapElementFactory());
+	mapElementFactory_ = unique_ptr<MapElementFactory>(new MapElementFactory(sizeSprite,renderer_));
 	ghostFactory_ = unique_ptr<GhostFactory>(new GhostFactory(sizeSprite,renderer_));
         
 }

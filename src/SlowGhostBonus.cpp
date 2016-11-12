@@ -3,8 +3,11 @@
 
 using namespace std;
 
-SlowGhostBonus::SlowGhostBonus(SDL_Renderer* renderer, int posX, int posY):Bonus(renderer,posX,posY, 20,"sprites/Bonus/bonusSlowGhost.bmp"){	
+SlowGhostBonus::SlowGhostBonus(SDL_Renderer* renderer, int posX, int posY):Bonus(renderer,posX,posY, 20,(char*)"sprites/Bonus/bonusSlowGhost.bmp"){	
 }
+
+SlowGhostBonus::SlowGhostBonus(const SlowGhostBonus &bonus): Bonus(bonus){}
+
 
 
 int SlowGhostBonus::getPoint(){
@@ -13,4 +16,9 @@ int SlowGhostBonus::getPoint(){
 
 char SlowGhostBonus::getBonusType(){
 	return '~';
+}
+
+
+shared_ptr<SlowGhostBonus> SlowGhostBonus::clone(){
+	return make_shared<SlowGhostBonus>(*this);
 }
