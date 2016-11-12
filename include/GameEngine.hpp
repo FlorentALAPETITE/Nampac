@@ -10,7 +10,7 @@
 #include <memory>
 #include <Bonus/Bonus.hpp>
 #include <Prototype/GhostFactory.hpp>
-#include <Prototype/MapFactory.hpp>
+#include <Prototype/MapElementFactory.hpp>
 
 
 const int sizeSprite = 25;
@@ -194,7 +194,7 @@ class GameEngine{
 
 	private:
 
-		unique_ptr<MapFactory> mapElementFactory_;
+		unique_ptr<MapElementFactory> mapElementFactory_;
 		unique_ptr<GhostFactory> ghostFactory_;
 
 		SDL_Window* window_;

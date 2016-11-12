@@ -3,14 +3,28 @@
 
 using namespace std;
 
-Bonus::Bonus(SDL_Renderer* renderer, int posX, int posY, int size,const char* spriteLocation ):renderer_(renderer){
+Bonus::Bonus(SDL_Renderer* renderer, int posX, int posY, int size, char* spriteLocation ):renderer_(renderer), spriteLocation_(spriteLocation){
 	bonusTextureRect_ = { posX,posY,size,size};
-	bonusSurface_ = SDL_LoadBMP(spriteLocation);
+	bonusSurface_ = SDL_LoadBMP(spriteLocation_);
 	bonusTexture_ = SDL_CreateTextureFromSurface(renderer_,bonusSurface_);
 	if(!bonusSurface_ || !bonusTexture_){
 		throw string("Impossible de charger le bonus");
 	}
 }
+
+Bonus::Bonus(const Bonus &bonus): bonusTextureRect_(bonus.bonusTextureRect_),renderer_(bonus.renderer_),spriteLocation_(bonus.spriteLocation_){
+
+	// Can't be pointed from another object, has to be reallocated (SDL particularity)
+	bonusSurface_ = SDL_LoadBMP(spriteLocation_);
+	bonusTexture_ = SDL_CreateTextureFromSurface(renderer_,bonusSurface_);
+}
+
+
+void Bonus::setPosition(int newPosX, int newPosY){
+	bonusTextureRect_.x=newPosX;
+	bonusTextureRect_.y=newPosY;
+}
+
 
 
 SDL_Rect* Bonus::getTextureRect(){ 

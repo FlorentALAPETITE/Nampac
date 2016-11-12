@@ -3,6 +3,7 @@
 
 #include <SDL2/SDL.h>
 
+using namespace std;
 
 /**
  * \file Bonus.cpp
@@ -24,7 +25,13 @@ class Bonus{
 		 * \param size : bonus size (in pixel).
 		 * \param spriteLocation : path for the sprite location.
 		 */
-		Bonus(SDL_Renderer* renderer, int posX, int posY, int size,const char * spriteLocation);
+		Bonus(SDL_Renderer* renderer, int posX, int posY, int size,char * spriteLocation);
+		
+		/**
+		 * Bonus(const Bonus &bonus);
+		 * \param bonus : bonus to copy;
+		*/
+		Bonus(const Bonus &bonus);
 
 		/**
 		 * ~Bonus();
@@ -40,6 +47,14 @@ class Bonus{
 		 * \return SDL_Rect pointer : SDL specific struct that contains size and position of the graphical element.
 		 */
 		SDL_Rect* getTextureRect();
+
+		/**
+		 * void setPosition(int posX, int posY);
+		 * \brief method used to change bonus' position.
+		 * \param posX : X position on the map.
+		 * \param posY : Y position on the map.
+		 */
+		void setPosition(int posX,int posY);
 
 		/**
 		 * SDL_Texture* getTexture();
@@ -71,6 +86,8 @@ class Bonus{
 		SDL_Surface* bonusSurface_;
 		SDL_Rect bonusTextureRect_;
 		SDL_Renderer* renderer_;
+
+		char* spriteLocation_;
 
 };
 

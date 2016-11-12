@@ -5,8 +5,8 @@
 using namespace std;
 
 
-MapElementFactory::MapElementFactory():MapFactory(){
-
+MapElementFactory::MapElementFactory(const int sizeSprite, SDL_Renderer* renderer){
+	bonusFactory_ = unique_ptr<BonusFactory>(new BonusFactory(sizeSprite,renderer));
 }
 
 
@@ -18,7 +18,7 @@ shared_ptr<MapElement> MapElementFactory::createMapElement(const char type, cons
 	
 
 	else{
-		shared_ptr<Bonus> bonus = bonusFactory_->createBonus(type, c,l,sizeSprite,renderer, gumNumber);
+		shared_ptr<Bonus> bonus = bonusFactory_->createBonus(type, c,l, gumNumber);
 		mapElement = shared_ptr<Lane> (new Lane(c*sizeSprite,l*sizeSprite,renderer,bonus));
 	}		
 
