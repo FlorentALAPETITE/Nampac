@@ -1,4 +1,4 @@
-#include <SpeededCharacter.hpp>
+#include <CharacterDecorator/SpeededCharacter.hpp>
 #include <math.h>  
 
 SpeededCharacter::SpeededCharacter(shared_ptr<Character> c):CharacterDecorator(c){	

@@ -1,6 +1,9 @@
-#include <GhostMovementAmbush.hpp>
+#include <GhostMovementState/GhostMovementAmbush.hpp>
 #include <stdlib.h>     
-#include <Ghost.hpp>
+#include <Character/Ghost.hpp>
+
+
+GhostMovementAmbush::GhostMovementAmbush(Ghost* g):GhostMovementState(g){}
 
 
 void GhostMovementAmbush::calculateDirection(){
@@ -13,5 +16,3 @@ void GhostMovementAmbush::calculateDirection(){
 
 }
 
-
-GhostMovementAmbush::GhostMovementAmbush(Ghost *g):GhostMovementState(g){}

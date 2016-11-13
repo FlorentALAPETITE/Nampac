@@ -1,4 +1,4 @@
-#include <CharacterDecorator.hpp>
+#include <CharacterDecorator/CharacterDecorator.hpp>
 
 
 CharacterDecorator::CharacterDecorator(shared_ptr<Character> c):character_(c){

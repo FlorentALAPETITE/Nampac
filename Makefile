@@ -1,4 +1,3 @@
-
 all:LaunchNampac
 
 Nampac-Compile: 
@@ -9,6 +8,5 @@ LaunchNampac: Nampac-Compile
 
 clean:
 	rm Nampac
-
 
 

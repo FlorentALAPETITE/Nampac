@@ -4,14 +4,13 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 #include <iostream>
-#include <Character.hpp>
-#include <Pacman.hpp>
+#include <Character/Character.hpp>
 #include <vector>
-#include <MapElement.hpp>
+#include <MapElement/MapElement.hpp>
 #include <memory>
-#include <Bonus.hpp>
-#include <GhostFactory.hpp>
-#include <MapFactory.hpp>
+#include <Bonus/Bonus.hpp>
+#include <Prototype/GhostFactory.hpp>
+#include <Prototype/MapElementFactory.hpp>
 
 
 const int sizeSprite = 25;
@@ -40,7 +39,7 @@ class GameEngine{
 
 		/**
 		 * void renderCharacter(shared_ptr<Character>);
-		 * \brief used to dispay a character.
+		 * \brief Used to dispay a character.
 		 *
 		 * \param shared_ptr<Character> c: character show.
 		 */
@@ -48,7 +47,7 @@ class GameEngine{
 		
 		/**
 		 * void moveCharacter(shared_ptr<Character>);
-		 * \brief used to move a Character.
+		 * \brief Used to move a Character.
 		 *
 		 * \param shared_ptr<Character> c: character move.
 		 */
@@ -56,13 +55,13 @@ class GameEngine{
 
 		/**
 		 * void moveCharacters();
-		 * \brief used to move all characters.
+		 * \brief Used to move all characters.
 		 */
 		void moveCharacters();
 
 		/**
 		 * void changePacmanDirection(int);
-		 * \brief used to change pacman's direction.
+		 * \brief Used to change pacman's direction.
 		 *
 		 * \param int d: direction, int between 0 and 3 (0: right, 1: left, 2: up, 3: down)
 		 */
@@ -70,7 +69,7 @@ class GameEngine{
 
 		/**
 		 * void createMap(std::vector<std::vector<char>> const& laby);
-		 * \brief used to create map.
+		 * \brief Used to create map.
 		 *
 		 * \param std::vector<std::vector<char>> const& laby: char labyrinth
 		 */
@@ -78,25 +77,25 @@ class GameEngine{
 
 		/**
 		 * void renderMap();
-		 * \brief used to prepare map to show.
+		 * \brief Used to prepare map to show.
 		 */
 		void renderMap();
 
 		/**
 		 * void clearRenderer();
-		 * \brief used to clear the rendrer.
+		 * \brief Used to clear the rendrer.
 		 */
 		void clearRenderer();
 
 		/**
 		 * void renderPresent();
-		 * \brief used to update the screen.
+		 * \brief Used to update the screen.
 		 */
 		void renderPresent();
 
 		/**
 		 * shared_ptr<MapElement> getMapElement(int x, int y);
-		 * \brief used to get map element.
+		 * \brief Used to get map element.
 		 *
 		 * \param int x: x position of map element
 		 * \param int y: y position of map element
@@ -105,7 +104,7 @@ class GameEngine{
 
 		/**
 		 * bool checkColision(int x, int y);
-		 * \brief used to check if a colision.
+		 * \brief Used to check if a colision.
 		 *
 		 * \param int x: x position to check
 		 * \param int y: y position to check
@@ -116,7 +115,7 @@ class GameEngine{
 
 		/**
 		 * bool checkColisionSDLRect(SDL_Rect* c1, SDL_Rect* c2);
-		 * \brief used to check if a colision between characters.
+		 * \brief Used to check if a colision between characters.
 		 *
 		 * \param SDL_Rect* c1: SDL_Rect of the first character
 		 * \param SDL_Rect* c2: SDL_Rect of the second character
@@ -127,7 +126,7 @@ class GameEngine{
 		
 		/**
 		 * int getSizeSprite();
-		 * \brief used to get size of sprite.
+		 * \brief Used to get size of sprite.
 		 *
 		 * \return int: size of sprite
 		 */
@@ -135,7 +134,7 @@ class GameEngine{
 
 		/**
 		 * void launchNampac(const char* nameFile);
-		 * \brief used to start the game and to listen keyboard events.
+		 * \brief Used to start the game and to listen keyboard events.
 		 *
 		 * \param const char* nameFile: file's name of the map
 		 */
@@ -143,50 +142,59 @@ class GameEngine{
 
 		/**
 		 * void renderCharacters();
-		 * \brief used to dispay all characters.
+		 * \brief Used to dispay all characters.
 		 *
 		 */
 		void renderCharacters();
 
 		/**
 		 * renderGameOverMessage
-		 * \brief used to show game over message.
-		 *
+		 * \brief Used to show an end game message.
+		 *	
+		 * \param message : message to render.
+		 * \param color : color of the massage to render.
 		 */
-		void renderGameOverMessage();
+		void renderEndGameMessage(const char* message, SDL_Color color);
 		
 		/**
 		 * void renderPlayerScore();
-		 * \brief used to show the score.
+		 * \brief Used to show the score.
 		 *
 		 */
 		void renderPlayerScore();
 
 		/**
 		 * checkAllCharactersColision();
-		 * \brief used to determinate what to do when pacman is colision with a ghost
+		 * \brief Used to determinate what to do when pacman is colision with a ghost.
 		 *
 		 */
 		void checkAllCharactersColision();
 
 		/**
 		 * void checkBonusEating();
-		 * \brief used to check what is the bonus
+		 * \brief Used to check what is the bonus that Pacman ate.
 		 *
 		 */
 		void checkBonusEating();
 
 		/**
 		 * void handleBonus(char b);
-		 * \brief used to add a bonus to pacman (decorator)
+		 * \brief Handle the reaction of the bonus that Pacman ate.
 		 *
 		 * \param const char: symbole of bonus
 		 */
 		void handleBonus(char b);
 
+		/**
+		 * void checkVictory();
+		 * \brief Used to check if the player won (no gum remaining).
+		 *
+		 */
+		void checkVictory();
+
 	private:
 
-		unique_ptr<MapFactory> mapElementFactory_;
+		unique_ptr<MapElementFactory> mapElementFactory_;
 		unique_ptr<GhostFactory> ghostFactory_;
 
 		SDL_Window* window_;
@@ -194,14 +202,16 @@ class GameEngine{
 		shared_ptr<Character> pacman_;
 
 		TTF_Font* fontScoring_;
-		TTF_Font* fontGameOver_;
+		TTF_Font* fontEndGame_;
 		SDL_Color white_;
 		SDL_Color red_;
+		SDL_Color green_;
 
-		SDL_Texture* gameOverTexture_;
-		SDL_Surface* gameOverSurface_;
-		SDL_Rect gameOverRect_;
+		SDL_Texture* endGameTexture_;
+		SDL_Surface* endGameSurface_;
+		SDL_Rect endGameRect_;
 		bool gameOver_;
+		bool victory_;
 
 		
 		vector<shared_ptr<Character>> ghosts_;						
@@ -215,6 +225,7 @@ class GameEngine{
 		SDL_Surface* playerScoreSurface_;
 		SDL_Rect playerScoreRect_;
 
+		int gumNumber_;
 		
 
 

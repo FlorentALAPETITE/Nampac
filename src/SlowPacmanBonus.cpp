@@ -1,10 +1,12 @@
-#include <SlowPacmanBonus.hpp>
+#include <Bonus/SlowPacmanBonus.hpp>
 #include <iostream>
 
 using namespace std;
 
-SlowPacmanBonus::SlowPacmanBonus(SDL_Renderer* renderer, int posX, int posY):Bonus(renderer,posX,posY, 20,"sprites/bonusSlowPacman.bmp"){	
+SlowPacmanBonus::SlowPacmanBonus(SDL_Renderer* renderer, int posX, int posY):Bonus(renderer,posX,posY, 20,(char*)"sprites/Bonus/bonusSlowPacman.bmp"){	
 }
+
+SlowPacmanBonus::SlowPacmanBonus(const SlowPacmanBonus &bonus): Bonus(bonus){}
 
 
 int SlowPacmanBonus::getPoint(){
@@ -13,4 +15,11 @@ int SlowPacmanBonus::getPoint(){
 
 char SlowPacmanBonus::getBonusType(){
 	return '-';
+}
+
+
+shared_ptr<SlowPacmanBonus> SlowPacmanBonus::clone(int c, int l){
+	shared_ptr<SlowPacmanBonus> bonus = make_shared<SlowPacmanBonus>(*this);
+	bonus->setPosition(c,l);
+	return bonus;
 }

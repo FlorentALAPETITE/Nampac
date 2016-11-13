@@ -1,7 +1,9 @@
-#include <GhostMovementUnpredictable.hpp>
+#include <GhostMovementState/GhostMovementUnpredictable.hpp>
 #include <stdlib.h>    
 #include <time.h>  
-#include <Ghost.hpp>
+#include <Character/Ghost.hpp>
+
+GhostMovementUnpredictable::GhostMovementUnpredictable(Ghost* g):GhostMovementState(g){}
 
 
 void GhostMovementUnpredictable::calculateDirection(){
@@ -15,4 +17,3 @@ void GhostMovementUnpredictable::calculateDirection(){
 }
 
 
-GhostMovementUnpredictable::GhostMovementUnpredictable(Ghost *g):GhostMovementState(g){}

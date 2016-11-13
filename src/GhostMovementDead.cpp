@@ -1,12 +1,12 @@
-#include <GhostMovementDead.hpp>
-#include <Ghost.hpp>
+#include <GhostMovementState/GhostMovementDead.hpp>
+#include <Character/Ghost.hpp>
 #include <stdlib.h>     
 
 
 void GhostMovementDead::calculateDirection(){}
 
 
-GhostMovementDead::GhostMovementDead(Ghost *g):GhostMovementState(g){}
+GhostMovementDead::GhostMovementDead(Ghost* g):GhostMovementState(g){}
 
 void GhostMovementDead::moveCharacter(GameEngine*, int speed){
 	--stateLifeTime_;

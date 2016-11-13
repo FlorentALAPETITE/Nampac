@@ -1,25 +1,34 @@
-#include <Ghost.hpp>
-#include <GhostMovementChase.hpp>
-#include <GhostMovementAmbush.hpp>
-#include <GhostMovementStupid.hpp>
-#include <GhostMovementUnpredictable.hpp>
-#include <GhostMovementDead.hpp>
+#include <Character/Ghost.hpp>
+#include <GhostMovementState/GhostMovementChase.hpp>
+#include <GhostMovementState/GhostMovementAmbush.hpp>
+#include <GhostMovementState/GhostMovementStupid.hpp>
+#include <GhostMovementState/GhostMovementUnpredictable.hpp>
+#include <GhostMovementState/GhostMovementDead.hpp>
 #include <iostream>
 
 
-Ghost::Ghost(char* sp,int posX, int posY, SDL_Renderer* renderer,int deathPosX, int deathPosY):Character(sp,5,posX,posY,renderer),deathPosX_(deathPosX),deathPosY_(deathPosY){
-	movementChaseState_ = shared_ptr<GhostMovementChase>(new GhostMovementChase(this));
+Ghost::Ghost(char* sp,int posX, int posY, SDL_Renderer* renderer,int deathPosX, int deathPosY):Character(sp,5,posX,posY,renderer),deathPosX_(deathPosX),deathPosY_(deathPosY),spriteLocation_(sp){
+	
+}
+
+
+Ghost::Ghost(const Ghost &ghost): Character(ghost),deathPosX_(ghost.deathPosX_),deathPosY_(ghost.deathPosY_),spriteLocation_(ghost.spriteLocation_){
+	
 	movementAmbushState_ = shared_ptr<GhostMovementAmbush>(new GhostMovementAmbush(this));
 	movementStupidState_ = shared_ptr<GhostMovementStupid>(new GhostMovementStupid(this));
 	movementUnpredictableState_ = shared_ptr<GhostMovementUnpredictable>(new GhostMovementUnpredictable(this));
-	movementDeadState_ = shared_ptr<GhostMovementDead>(new GhostMovementDead(this));
+	movementChaseState_ = shared_ptr<GhostMovementChase>(new GhostMovementChase(this));
+	movementDeadState_ = shared_ptr<GhostMovementDead>(new GhostMovementDead(this));	
+
+	// Can't be pointed from another object, has to be reallocated (SDL particularity)
+	characterSurface_ = SDL_LoadBMP(spriteLocation_);
+	characterTexture_ = SDL_CreateTextureFromSurface(renderer_,characterSurface_);
 }
 
 
 void Ghost::calculateNextDirection(){
 	currentMovementState_->calculateDirection();
 }
-
 
 
 
@@ -72,4 +81,3 @@ void Ghost::setMovementUnpredictableState(){
 void Ghost::setMovementChaseState(){
 	currentMovementState_=movementChaseState_;
 }
-

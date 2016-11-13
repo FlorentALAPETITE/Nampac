@@ -1,32 +1,36 @@
-#include <ConcreteGhostFactory.hpp>
-#include <RedGhost.hpp>
-#include <BlueGhost.hpp>
-#include <OrangeGhost.hpp>
-#include <PinkGhost.hpp>
+#include <Prototype/GhostFactory.hpp>
 
 using namespace std;
 
 
-shared_ptr<Character> ConcreteGhostFactory::createGhost(const char type, const unsigned int c, const unsigned int l, const int sizeSprite, SDL_Renderer* renderer){
-	shared_ptr<Character> ghost;
+GhostFactory::GhostFactory(const int sizeSprite, SDL_Renderer* renderer): sizeSprite_(sizeSprite){
+	blueGhostPrototype_ = shared_ptr<BlueGhost>(new BlueGhost(0,0,renderer));
+	orangeGhostPrototype_ = shared_ptr<OrangeGhost>(new OrangeGhost(0,0,renderer));
+	redGhostPrototype_ = shared_ptr<RedGhost>(new RedGhost(0,0,renderer));
+	pinkGhostPrototype_ = shared_ptr<PinkGhost>(new PinkGhost(0,0,renderer));
+}
+
+shared_ptr<Ghost> GhostFactory::createGhost(const char type, const unsigned int c, const unsigned int l){
+	shared_ptr<Ghost> ghost;
 
 	switch(type){
 		case 'R':
-			ghost = shared_ptr<Character>(new RedGhost(c*sizeSprite,l*sizeSprite,renderer));
+			ghost = redGhostPrototype_->clone(c*sizeSprite_,l*sizeSprite_);			
 			break;
 
 		case 'O':
-			ghost = shared_ptr<Character>(new OrangeGhost(c*sizeSprite,l*sizeSprite,renderer));
+			ghost = orangeGhostPrototype_->clone(c*sizeSprite_,l*sizeSprite_);
 			break;
 
 		case 'B':
-			ghost = shared_ptr<Character>(new BlueGhost(c*sizeSprite,l*sizeSprite,renderer));
+			ghost = blueGhostPrototype_->clone(c*sizeSprite_,l*sizeSprite_);
 			break;
 
 		case 'P':
-			ghost = shared_ptr<Character>(new PinkGhost(c*sizeSprite,l*sizeSprite,renderer));
+			ghost = pinkGhostPrototype_->clone(c*sizeSprite_,l*sizeSprite_);
 			break;
-	}
+		
+	}	
 
 	return ghost;
 
