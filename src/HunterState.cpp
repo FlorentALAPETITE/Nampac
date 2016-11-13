@@ -20,7 +20,9 @@ void HunterState::addRemainingMovement(int m){
 	remainingMovement_+=m;
 }
 
-void HunterState::changeStateHunter(){}
+void HunterState::changeStateHunter(){
+	addRemainingMovement(200);
+}
 
 void HunterState::changeStatePrey(){
 	pacman_->changeStatePrey();

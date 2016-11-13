@@ -46,7 +46,9 @@ class Pacman : public Character{
 
 		void changeStateHunter() override;
 		void changeStatePrey();
+		void askChangeStateHunter() override;
 		bool canEatGhost() override;
+
 
 
 };

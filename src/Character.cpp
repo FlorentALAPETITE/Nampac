@@ -69,8 +69,11 @@ void Character::setDirection(int d){
 	direction_=d;
 }
 
-
 void Character::changeStateHunter(){}
+
+void Character::changeStatePrey(){}
+
+void Character::askChangeStateHunter(){}
 
 
 bool Character::canEatGhost(){
