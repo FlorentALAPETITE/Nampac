@@ -136,13 +136,7 @@ class Character{
 		virtual void calculateNextDirection()=0;
 
 
-		/**
-		 *virtual void changeStateHunter();
-		 * \brief method used to change Pacman's state to Hunter (can eat Ghosts). Implemented because of CharacterDecorator, does nothing for a non-Pacman character.
-		 *
-		 */	
-		virtual void changeStateHunter();
-
+	
 		/**
 		 *virtual bool canEatGhost();
 		 * \brief Ask Pacman current state to know if Pacman can eat ghosts or not. Implemented because of CharacterDecorator, return False for a non-Pacman character.
@@ -236,6 +230,22 @@ class Character{
 		 *
 		 */	
 		virtual void askChangeMovementChaseState();
+
+		virtual void askChangeStateHunter();
+
+		/**
+		 *virtual void changeStateHunter();
+		 * \brief method used to change Pacman's state to Hunter (can eat Ghosts). Implemented because of CharacterDecorator, does nothing for a non-Pacman character.
+		 *
+		 */	
+		virtual void changeStateHunter();
+
+		/**
+		 *virtual void changeStatePrey();
+		 * \brief method used to change Pacman's state to Prey (can't eat Ghosts). Implemented because of CharacterDecorator, does nothing for a non-Pacman character.
+		 *
+		 */	
+		virtual void changeStatePrey();
 
 
 	protected:

@@ -291,11 +291,15 @@ void Pacman::setDirection(int direction){
 
 void Pacman::changeStateHunter(){
 	currentState_=hunterState_;
-	currentState_->addRemainingMovement(200);
+	
 }
 
 void Pacman::changeStatePrey(){
 	currentState_=preyState_;
+}
+
+void Pacman::askChangeStateHunter(){
+	currentState_->changeStateHunter();
 }
 
 bool Pacman::canEatGhost(){

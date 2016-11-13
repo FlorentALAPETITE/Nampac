@@ -22,8 +22,7 @@ class CharacterDecorator : public Character{
 		int getDirection() override;
 		void setDirection(int) override;		
 		void moveCharacter(GameEngine*,int) override;
-		void calculateNextDirection() override;
-		void changeStateHunter() override;
+		void calculateNextDirection() override;		
 		bool canEatGhost() override;
 		void setDeathPosition() override;
 		void setMovementDeadState() override;
@@ -37,6 +36,9 @@ class CharacterDecorator : public Character{
 		void askChangeMovementStupidState() override;
 		void askChangeMovementUnpredictableState() override;
 		void askChangeMovementChaseState() override;
+		void changeStateHunter() override;
+		void changeStatePrey() override;
+		void askChangeStateHunter() override;
 		
 };
 

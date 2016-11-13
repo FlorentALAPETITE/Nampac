@@ -16,9 +16,10 @@ void PreyState::decrementRemainingMovement(){}
 void PreyState::addRemainingMovement(int m){}
 
 
-void PreyState::changeStateHunter(){}
-
-void PreyState::changeStatePrey(){	
+void PreyState::changeStateHunter(){
+	pacman_->changeStateHunter();
 }
+
+void PreyState::changeStatePrey(){}
 
 

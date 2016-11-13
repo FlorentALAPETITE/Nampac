@@ -103,3 +103,11 @@ void CharacterDecorator::askChangeMovementStupidState(){
 	character_->askChangeMovementStupidState();
 }
 
+
+void CharacterDecorator::changeStatePrey(){
+	character_->changeStatePrey();
+}
+
+void CharacterDecorator::askChangeStateHunter(){
+	character_->askChangeStateHunter();
+}
