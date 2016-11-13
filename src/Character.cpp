@@ -75,7 +75,6 @@ bool Character::canEatGhost(){
 void Character::setDeathPosition(){}
 
 
-
 void Character::setMovementDeadState(){}
 		
 void Character::setMovementAmbushState(){}

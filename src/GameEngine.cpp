@@ -78,8 +78,7 @@ GameEngine::~GameEngine(){
 
 void GameEngine::renderCharacter(shared_ptr<Character> c){
 	for(auto texture : c->getCharacterTexture())    
- 		SDL_RenderCopy(renderer_,texture,NULL,c->getTextureRect()); // Copie du sprite grâce au SDL_Renderer	 
-			
+ 		SDL_RenderCopy(renderer_,texture,NULL,c->getTextureRect()); //Render the sprite for the character			
 
 }
 
@@ -113,9 +112,9 @@ void GameEngine::checkAllCharactersColision(){
 	}
 }
 
+
 void GameEngine::moveCharacters(){
-	moveCharacter(pacman_);
-	checkBonusEating();
+	moveCharacter(pacman_);		
 
 	for(unsigned int i=0;i<ghosts_.size();++i){
 		srand(randNumber_);
@@ -158,12 +157,12 @@ void GameEngine::handleBonus(char type){
 
 
 
-
 void GameEngine::changePacmanDirection(int direction){
 	if(pacman_->getPosX()>=25 && pacman_->getPosX()<=675 && pacman_->getPosY()>=25 && pacman_->getPosY()<=745 )
 		pacman_->setDirection(direction);
-
 }
+
+
 
 void GameEngine::createMap(vector<vector<char>> const& laby){	
 	
@@ -179,19 +178,23 @@ void GameEngine::createMap(vector<vector<char>> const& laby){
 		{
 			charMapElement = laby[l][c];
 
-			if(charMapElement == 'p'){
+			if(charMapElement == 'p'){  // Construct a Pacman
 				pacman_ = shared_ptr<Pacman>(new Pacman((char*)"sprites/pacmanClose.bmp",5,c*sizeSprite,l*sizeSprite,renderer_)); 							
 				charMapElement = '0';
 			}
 
-			else if(isalpha(charMapElement)){
+			else if(isalpha(charMapElement)){  // Request ghost construction -> ghostFactory
 				ghosts_.push_back(ghostFactory_->createGhost(charMapElement,c,l,sizeSprite,renderer_));
 				charMapElement = '0';
 			}
 
+			// Request MapElement construction -> mapElementFactory
 			mapElements_[l].push_back(mapElementFactory_->createMapElement(charMapElement,c,l,sizeSprite,renderer_));			
 		}
 	}
+
+	if (pacman_==nullptr)	
+		throw string("Erreur : veuillez disposer un pacman (p) dans la map du jeu.");
 }
 
 void GameEngine::renderMap(){
@@ -207,19 +210,24 @@ void GameEngine::renderMap(){
 	}
 }
 
+
 void GameEngine::clearRenderer(){
 	SDL_RenderClear(renderer_);
 }
+
 
 void GameEngine::renderPresent(){
 	SDL_RenderPresent(renderer_);
 }
 
+
 int GameEngine::getSizeSprite(){ return sizeSprite; }
+
 
 shared_ptr<MapElement> GameEngine::getMapElement(int x, int y){		
 	return mapElements_[y][x];
 }
+
 
 bool GameEngine::checkColision(int x, int y){
 	int x1 = x/sizeSprite;
@@ -237,6 +245,7 @@ bool GameEngine::checkColision(int x, int y){
 	return false;
 }
 
+
 bool GameEngine::checkColisionSDLRect(SDL_Rect* r1, SDL_Rect* r2){
 	if(
 		(r2->x >= r1->x + r1->w) || // too right
@@ -249,7 +258,6 @@ bool GameEngine::checkColisionSDLRect(SDL_Rect* r1, SDL_Rect* r2){
 	return true;
 
 }
-
 
 
 
@@ -282,8 +290,8 @@ void GameEngine::renderPlayerScore(){
 
 
 void GameEngine::checkBonusEating(){
-	shared_ptr<Bonus> actualBonus = getMapElement(pacman_->getPosX()/sizeSprite, pacman_->getPosY()/sizeSprite)->getBonus();
-	if(actualBonus != nullptr){
+	shared_ptr<Bonus> actualBonus = getMapElement(pacman_->getPosX()/sizeSprite, pacman_->getPosY()/sizeSprite)->getBonus(); // Try to get the bonus on the case in which the Pacman is.
+	if(actualBonus != nullptr){  // If there's a bonus
 		if(checkColisionSDLRect(pacman_->getTextureRect(), actualBonus->getTextureRect())){
 			playerScore_+=actualBonus->getPoint();
 			handleBonus(actualBonus->getBonusType());
@@ -291,7 +299,6 @@ void GameEngine::checkBonusEating(){
 		}
 	}
 }
-
 
 
 
@@ -310,7 +317,7 @@ void GameEngine::launchNampac(const char* mapLocation){
         renderPlayerScore();
         renderPresent();
 
-        // While window isn't close and game not loose
+        // While window isn't close
         while(!quit){  
 
         	//Handle quit event
@@ -321,16 +328,16 @@ void GameEngine::launchNampac(const char* mapLocation){
 
                 // arrow key events
                 switch( events.key.keysym.sym ){ 
-                    case SDLK_UP: 
+                    case SDLK_UP: // keyboard key up
                         changePacmanDirection(2);
                         break;
-                    case SDLK_DOWN:
+                    case SDLK_DOWN:  // keyboard key down
                         changePacmanDirection(3);
                         break;
-                    case SDLK_RIGHT:
+                    case SDLK_RIGHT:  // keyboard key right 
                         changePacmanDirection(0);
                         break;
-                    case SDLK_LEFT:
+                    case SDLK_LEFT:  // keyboard key left
                         changePacmanDirection(1);
                         break;
 
@@ -338,19 +345,22 @@ void GameEngine::launchNampac(const char* mapLocation){
             }
 
         	if(!gameOver_){            
-
-	            moveCharacters(); 
-	            clearRenderer();
-	            renderMap(); 
-	            renderCharacters();
-	            renderPlayerScore();
-	            renderPresent();
-	            checkAllCharactersColision(); 
+        		// Game routine :
+	            moveCharacters(); // move all the characters
+	            clearRenderer();  // clear the screen
+	            renderMap();  // render the map
+	            renderCharacters();  // render characters
+	            renderPlayerScore();  // render the player score actualized
+	            renderPresent();   // show the screen
+	            checkAllCharactersColision(); // check if pacman is in a ghost
 
 	            SDL_Delay(25);
 
+	            if(playerScore_!=0)
+	            	--playerScore_;
+
 	            if(gameOver_){
-	            	renderGameOverMessage();
+	            	renderGameOverMessage();  // render the game over message
 	            	renderPresent();
 	            	
 	            }
