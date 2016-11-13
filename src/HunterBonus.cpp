@@ -16,6 +16,8 @@ char HunterBonus::getBonusType(){
 	return '$';
 }
 
-shared_ptr<HunterBonus> HunterBonus::clone(){
-	return make_shared<HunterBonus>(*this);
+shared_ptr<HunterBonus> HunterBonus::clone(int c, int l){
+	shared_ptr<HunterBonus> bonus = make_shared<HunterBonus>(*this);
+	bonus->setPosition(c,l);
+	return bonus;
 }

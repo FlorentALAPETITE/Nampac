@@ -19,6 +19,8 @@ char StupidGhostBonus::getBonusType(){
 }
 
 
-shared_ptr<StupidGhostBonus> StupidGhostBonus::clone(){
-	return make_shared<StupidGhostBonus>(*this);
+shared_ptr<StupidGhostBonus> StupidGhostBonus::clone(int c, int l){
+	shared_ptr<StupidGhostBonus> bonus = make_shared<StupidGhostBonus>(*this);
+	bonus->setPosition(c,l);
+	return bonus;
 }

@@ -15,24 +15,22 @@ shared_ptr<Ghost> GhostFactory::createGhost(const char type, const unsigned int 
 
 	switch(type){
 		case 'R':
-			ghost = redGhostPrototype_->clone();			
+			ghost = redGhostPrototype_->clone(c*sizeSprite_,l*sizeSprite_);			
 			break;
 
 		case 'O':
-			ghost = orangeGhostPrototype_->clone();
+			ghost = orangeGhostPrototype_->clone(c*sizeSprite_,l*sizeSprite_);
 			break;
 
 		case 'B':
-			ghost = blueGhostPrototype_->clone();
+			ghost = blueGhostPrototype_->clone(c*sizeSprite_,l*sizeSprite_);
 			break;
 
 		case 'P':
-			ghost = pinkGhostPrototype_->clone();
+			ghost = pinkGhostPrototype_->clone(c*sizeSprite_,l*sizeSprite_);
 			break;
 		
-	}
-	if(ghost!=nullptr)
-		ghost->changePosition(c*sizeSprite_,l*sizeSprite_);
+	}	
 
 	return ghost;
 

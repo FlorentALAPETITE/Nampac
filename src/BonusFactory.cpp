@@ -20,8 +20,7 @@ shared_ptr<Bonus> BonusFactory::createBonus(const char type, const unsigned int 
 
 	switch(type){
 		case '0':
-			bonus = gumBonusPrototype_->clone();
-			bonus->setPosition(c*sizeSprite_+8,l*sizeSprite_+8);
+			bonus = gumBonusPrototype_->clone(c*sizeSprite_+8,l*sizeSprite_+8);			
 			gumNumber++;
 			break;
 
@@ -30,33 +29,28 @@ shared_ptr<Bonus> BonusFactory::createBonus(const char type, const unsigned int 
 			break;
 
 		case '~':
-			bonus = slowGhostBonusPrototype_->clone();
-			bonus->setPosition(c*sizeSprite_+3,l*sizeSprite_+3);
+			bonus = slowGhostBonusPrototype_->clone(c*sizeSprite_+3,l*sizeSprite_+3);
+			
 			break;
 
 		case '#':
-			bonus = speedGhostBonusPrototype_->clone();
-			bonus->setPosition(c*sizeSprite_+3,l*sizeSprite_+3);
+			bonus = speedGhostBonusPrototype_->clone(c*sizeSprite_+3,l*sizeSprite_+3);
 			break;
 
 		case '+':
-			bonus = speedPacmanBonusPrototype_->clone();
-			bonus->setPosition(c*sizeSprite_+3,l*sizeSprite_+3);
+			bonus = speedPacmanBonusPrototype_->clone(c*sizeSprite_+3,l*sizeSprite_+3);
 			break;
 
 		case '-':
-			bonus = slowPacmanBonusPrototype_->clone();
-			bonus->setPosition(c*sizeSprite_+3,l*sizeSprite_+3);
+			bonus = slowPacmanBonusPrototype_->clone(c*sizeSprite_+3,l*sizeSprite_+3);
 			break;
 
 		case '$':
-			bonus = hunterBonusPrototype_->clone();
-			bonus->setPosition(c*sizeSprite_+3,l*sizeSprite_+3);
+			bonus = hunterBonusPrototype_->clone(c*sizeSprite_+3,l*sizeSprite_+3);
 			break;
 
 		case '!':
-			bonus = stupidGhostBonusPrototype_->clone();
-			bonus->setPosition(c*sizeSprite_+3,l*sizeSprite_+3);
+			bonus = stupidGhostBonusPrototype_->clone(c*sizeSprite_+3,l*sizeSprite_+3);
 			break;
 
 	}

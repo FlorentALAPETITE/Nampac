@@ -18,6 +18,8 @@ char SlowPacmanBonus::getBonusType(){
 }
 
 
-shared_ptr<SlowPacmanBonus> SlowPacmanBonus::clone(){
-	return make_shared<SlowPacmanBonus>(*this);
+shared_ptr<SlowPacmanBonus> SlowPacmanBonus::clone(int c, int l){
+	shared_ptr<SlowPacmanBonus> bonus = make_shared<SlowPacmanBonus>(*this);
+	bonus->setPosition(c,l);
+	return bonus;
 }

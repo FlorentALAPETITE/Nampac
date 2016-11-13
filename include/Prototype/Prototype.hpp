@@ -9,7 +9,7 @@ template <class T>
 class Prototype{
 	
 	public:
-		virtual shared_ptr<T> clone()=0;
+		virtual shared_ptr<T> clone(int,int)=0;
 
 };
 

@@ -14,7 +14,7 @@ public:
 	Gum(const Gum &bonus);
 	int getPoint() override;
 	char getBonusType() override;
-	shared_ptr<Gum> clone() override;
+	shared_ptr<Gum> clone(int,int) override;
 
 };
 

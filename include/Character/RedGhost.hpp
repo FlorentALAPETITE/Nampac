@@ -31,7 +31,7 @@ class RedGhost : public Ghost, public Prototype<RedGhost>{
 		RedGhost(int posX, int posY, SDL_Renderer* renderer);
 		RedGhost(const RedGhost &rg);
 		void backToClassicState() override;
-		shared_ptr<RedGhost> clone() override;
+		shared_ptr<RedGhost> clone(int,int) override;
 		
 	private:
 };

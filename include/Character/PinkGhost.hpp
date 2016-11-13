@@ -32,7 +32,7 @@ class PinkGhost : public Ghost, public Prototype<PinkGhost>{
 		PinkGhost(int posX, int posY, SDL_Renderer* renderer);
 		PinkGhost(const PinkGhost &pg);
 		void backToClassicState() override;
-		shared_ptr<PinkGhost> clone() override;
+		shared_ptr<PinkGhost> clone(int,int) override;
 
 	private:
 };
