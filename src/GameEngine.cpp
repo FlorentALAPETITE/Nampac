@@ -197,7 +197,7 @@ void GameEngine::createMap(vector<vector<char>> const& laby){
 			}
 
 			// Request MapElement construction -> mapElementFactory
-			mapElements_[l].push_back(mapElementFactory_->createMapElement(charMapElement,c,l,sizeSprite,renderer_,gumNumber_));			
+			mapElements_[l].push_back(mapElementFactory_->createMapElement(charMapElement,c,l,gumNumber_));			
 		}
 	}
 	
