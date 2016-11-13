@@ -20,7 +20,7 @@ class Character{
 
 	public:
 		/**
-		 * Character(char* sl, int s, int posX, int posY, SDL_Renderer* renderer);	
+
 		 * \brief Abstract character creation method.
 		 *
 		 * \param sl : char* name of the sprite to use for illustrate character
@@ -29,8 +29,9 @@ class Character{
 		 * \param posY : line position of the MapElement that require the character.
 		 * \param renderer :  unique SDL_Renderer used to render the game.
 		 */
-		Character(char* sl, int s, int posX, int posY, SDL_Renderer* renderer);	
-		
+
+		Character(char* sl, int s, int posX, int posY,SDL_Renderer* renderer);	
+
 		/**
 		 * Character(const Character &character);
 		 * \brief Abstract character copy contructor.
@@ -47,7 +48,7 @@ class Character{
 
 		/**
 		 * ~Character();	
-		 * \brief Abstract character destructor method.
+		 * \brief abstract character destructor method.
 		 */
 		~Character();
 
@@ -66,6 +67,7 @@ class Character{
 		 * \param posY : Y position on the map.
 		 */
 		virtual void changePosition(int posX,int posY);
+
 
 		/**
 		 * int getPosX();
@@ -111,7 +113,7 @@ class Character{
 		 * void setDirection(int direction);
 		 * \brief definition of the direction setter.
 		 *
-		 * \param direction : direction, int between 0 and 3
+		 * \param direction : direction, int between 0 and 3 (0: right, 1: left, 2: up, 3: down)
 		 *
 		 */	
 		virtual void setDirection(int direction);
