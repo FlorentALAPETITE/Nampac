@@ -17,6 +17,8 @@ void OrangeGhost::backToClassicState(){
 }
 
 
-shared_ptr<OrangeGhost> OrangeGhost::clone(){
-	return make_shared<OrangeGhost>(*this);
+shared_ptr<OrangeGhost> OrangeGhost::clone(int c, int l){
+	shared_ptr<OrangeGhost> bonus = make_shared<OrangeGhost>(*this);
+	bonus->changePosition(c,l);
+	return bonus;
 }

@@ -12,7 +12,7 @@ public:
 	HunterBonus(const HunterBonus &bonus);
 	int getPoint() override;
 	char getBonusType() override;
-	shared_ptr<HunterBonus> clone() override;
+	shared_ptr<HunterBonus> clone(int,int) override;
 
 };
 

@@ -17,6 +17,9 @@ void RedGhost::backToClassicState(){
 }
 
 
-shared_ptr<RedGhost> RedGhost::clone(){
-	return make_shared<RedGhost>(*this);
+
+shared_ptr<RedGhost> RedGhost::clone(int c, int l){
+	shared_ptr<RedGhost> bonus = make_shared<RedGhost>(*this);
+	bonus->changePosition(c,l);
+	return bonus;
 }

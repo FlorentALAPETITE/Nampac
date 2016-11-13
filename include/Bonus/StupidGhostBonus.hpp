@@ -12,7 +12,7 @@ public:
 	StupidGhostBonus(const StupidGhostBonus &bonus);
 	int getPoint() override;
 	char getBonusType() override;
-	shared_ptr<StupidGhostBonus> clone() override;
+	shared_ptr<StupidGhostBonus> clone(int,int) override;
 
 };
 

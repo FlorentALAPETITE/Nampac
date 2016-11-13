@@ -19,6 +19,8 @@ char SlowGhostBonus::getBonusType(){
 }
 
 
-shared_ptr<SlowGhostBonus> SlowGhostBonus::clone(){
-	return make_shared<SlowGhostBonus>(*this);
+shared_ptr<SlowGhostBonus> SlowGhostBonus::clone(int c, int l){
+	shared_ptr<SlowGhostBonus> bonus = make_shared<SlowGhostBonus>(*this);
+	bonus->setPosition(c,l);
+	return bonus;
 }

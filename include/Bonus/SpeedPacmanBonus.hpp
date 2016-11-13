@@ -12,7 +12,7 @@ public:
 	SpeedPacmanBonus(const SpeedPacmanBonus &bonus);
 	int getPoint() override;
 	char getBonusType() override;
-	shared_ptr<SpeedPacmanBonus> clone() override;
+	shared_ptr<SpeedPacmanBonus> clone(int,int) override;
 
 };
 

@@ -31,7 +31,7 @@ class OrangeGhost : public Ghost, public Prototype<OrangeGhost>{
 		OrangeGhost(int posX, int posY, SDL_Renderer* renderer);
 		OrangeGhost(const OrangeGhost &og);
 		void backToClassicState() override;
-		shared_ptr<OrangeGhost> clone() override;
+		shared_ptr<OrangeGhost> clone(int,int) override;
 
 	private:
 };

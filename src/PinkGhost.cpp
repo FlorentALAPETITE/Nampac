@@ -17,6 +17,8 @@ void PinkGhost::backToClassicState(){
 }
 
 
-shared_ptr<PinkGhost> PinkGhost::clone(){
-	return make_shared<PinkGhost>(*this);
+shared_ptr<PinkGhost> PinkGhost::clone(int c, int l){
+	shared_ptr<PinkGhost> bonus = make_shared<PinkGhost>(*this);
+	bonus->changePosition(c,l);
+	return bonus;
 }

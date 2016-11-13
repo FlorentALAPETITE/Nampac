@@ -18,6 +18,8 @@ char Gum::getBonusType(){
 	return '0';
 }
 
-shared_ptr<Gum> Gum::clone(){
-	return make_shared<Gum>(*this);
+shared_ptr<Gum> Gum::clone(int c, int l){
+	shared_ptr<Gum> bonus = make_shared<Gum>(*this);
+	bonus->setPosition(c,l);
+	return bonus;
 }

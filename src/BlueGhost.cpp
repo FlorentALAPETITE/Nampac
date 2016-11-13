@@ -18,6 +18,8 @@ void BlueGhost::backToClassicState(){
 
 
 
-shared_ptr<BlueGhost> BlueGhost::clone(){
-	return make_shared<BlueGhost>(*this);
+shared_ptr<BlueGhost> BlueGhost::clone(int c, int l){
+	shared_ptr<BlueGhost> bonus = make_shared<BlueGhost>(*this);
+	bonus->changePosition(c,l);
+	return bonus;
 }

@@ -31,7 +31,7 @@ class BlueGhost : public Ghost, public Prototype<BlueGhost>{
 		BlueGhost(int posX, int posY, SDL_Renderer* renderer);
 		BlueGhost(const BlueGhost &bg);
 		void backToClassicState() override;		
-		shared_ptr<BlueGhost> clone() override;
+		shared_ptr<BlueGhost> clone(int,int) override;
 
 	private:
 };
