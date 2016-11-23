@@ -16,7 +16,6 @@
 const int sizeSprite = 25;
 
 /**
- * \file GameEngine.cpp
  * \brief game engine implementation.
  * \author Florent ALAPETITE / Dorian LATOUCHE
  */

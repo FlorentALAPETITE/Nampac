@@ -6,7 +6,6 @@
 using namespace std;
 
 /**
- * \file Bonus.cpp
  * \brief Abstract bonus class implementation for the Nampac game.
  * \author Florent ALAPETITE / Dorian LATOUCHE
  *
@@ -29,6 +28,7 @@ class Bonus{
 		
 		/**
 		 * Bonus(const Bonus &bonus);
+		 * \brief Abstract bonus copy constructor.
 		 * \param bonus : bonus to copy;
 		*/
 		Bonus(const Bonus &bonus);

@@ -8,21 +8,19 @@ using namespace std;
 
 
 /**
- * \file BlueGhost.cpp
  * \brief Blue ghost implementation.
  * \author Florent ALAPETITE / Dorian LATOUCHE
  *
- * Pacman ennemy : Blue Ghost;
+ * Pacman ennemy : Blue Ghost. By default, the blue ghost is an UNPREDICTABLE ghost.
  *
  */
-
 
 class BlueGhost : public Ghost, public Prototype<BlueGhost>{
 
 	public:
 		/**
 		 * BlueGhost(int posX, int posY, SDL_Renderer* renderer);
-		 * \brief Blue Ghost constructor. By default, the blue ghost is an UNPREDICTABLE ghost.
+		 * \brief Blue Ghost constructor.
 		 *
 		 * \param posX : X position in the 700x775 map. 
 		 * \param posY : Y position in the 700x775 map.
