@@ -25,7 +25,7 @@
 ## Règles du jeu :
 * Jeu basé sur un système risk/reward (risque/récompense).
 * Pour gagner : récupérer tous les petits bonus oranges (gum).
-* Toucher un fantôme entraîne la fin de la partie (sauf si le bonus StupidGhost est actif).
+* Toucher un fantôme entraîne la fin de la partie (sauf si le bonus Hunter est actif).
 * Le joueur perd 1 point par tour de jeu.
 * Ramasser une gum ajoute 50 points.
 * Ramasser un bonus (SlowGhost, SpeedPacman) ajoute 100 points et facilite un peu plus le jeu.
