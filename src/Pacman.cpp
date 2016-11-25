@@ -290,8 +290,7 @@ void Pacman::setDirection(int direction){
 
 
 void Pacman::changeStateHunter(){
-	currentState_=hunterState_;
-	
+	currentState_=hunterState_;	
 }
 
 void Pacman::changeStatePrey(){

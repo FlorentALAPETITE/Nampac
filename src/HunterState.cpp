@@ -25,6 +25,7 @@ void HunterState::changeStateHunter(){
 }
 
 void HunterState::changeStatePrey(){
+	addRemainingMovement(200);
 	pacman_->changeStatePrey();
 }
 
