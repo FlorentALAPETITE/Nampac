@@ -53,7 +53,7 @@ class Character{
 		~Character();
 
 		/**
-		 * int getSpeed();
+		 * virtual int getSpeed();
 		 * \brief definition of the speed getter.
 		 *
 		 * \return speed :character's speed.
@@ -61,7 +61,7 @@ class Character{
 		virtual int getSpeed();
 
 		/**
-		 * void changePosition(int posX, int posY);
+		 * virtual void changePosition(int posX, int posY);
 		 * \brief method used to change character's position.
 		 * \param posX : X position on the map.
 		 * \param posY : Y position on the map.
@@ -70,7 +70,7 @@ class Character{
 
 
 		/**
-		 * int getPosX();
+		 * virtual int getPosX();
 		 * \brief definition of the x position getter.
 		 *
 		 * \return int : x position of character.
@@ -78,7 +78,7 @@ class Character{
 		virtual int getPosX();
 		
 		/**
-		 * int getPosY();
+		 * virtual int getPosY();
 		 * \brief definition of the y position getter.
 		 *
 		 * \return int : y position of character.
@@ -86,7 +86,7 @@ class Character{
 		virtual int getPosY();
 		
 		/**
-		 * vector<SDL_Texture*> getCharacterTexture();
+		 * virtual vector<SDL_Texture*> getCharacterTexture();
 		 * \brief definition of the SDL_Texture getter.
 		 *
 		 * \return vector<SDL_Texture*>: all SDL_Texture of character to render.
@@ -94,7 +94,7 @@ class Character{
 		virtual vector<SDL_Texture*> getCharacterTexture();
 		
 		/**
-		 * SDL_Rect* getTextureRect();
+		 * virtual SDL_Rect* getTextureRect();
 		 * \brief definition of the SDL_Rect getter.
 		 *
 		 * \return SDL_Rect*: SDL_Rect* of character to render.
@@ -102,7 +102,7 @@ class Character{
 		virtual SDL_Rect* getTextureRect();
 		
 		/**
-		 * int getDirection();
+		 * virtual int getDirection();
 		 * \brief definition of the direction getter.
 		 *
 		 * \return int: Direction of character.
@@ -110,7 +110,7 @@ class Character{
 		virtual int getDirection();
 		
 		/**
-		 * void setDirection(int direction);
+		 * virtual void setDirection(int direction);
 		 * \brief definition of the direction setter.
 		 *
 		 * \param direction : direction, int between 0 and 3 (0: right, 1: left, 2: up, 3: down)
@@ -119,7 +119,7 @@ class Character{
 		virtual void setDirection(int direction);
 		
 		/**
-		 *virtual void moveCharacter(GameEngine* g, int speed)=0;
+		 * virtual void moveCharacter(GameEngine* g, int speed)=0;
 		 * \brief abstract method used to move character.
 		 *
 		 * \param g : the game engine.
@@ -129,9 +129,11 @@ class Character{
 		virtual void moveCharacter(GameEngine* g, int speed)=0;
 
 		/**
-		 *virtual void calculateNextDirection()=0;
+		 * virtual void calculateNextDirection()=0;
 		 * \brief abstract method used to calculate the next position of character.
 		 *
+		 * \param GameEngine* : the GameEngine.
+		 * \param int : the speed of the character (needed because of the link CharacterDecorator / GhostMovementState).
 		 */	
 		virtual void calculateNextDirection()=0;
 
@@ -231,6 +233,11 @@ class Character{
 		 */	
 		virtual void askChangeMovementChaseState();
 
+		/**
+		 *virtual void askChangeStateHunter();
+		 * \brief Ask to the current pacman state if its state can be changed to a HunterState. Implemented because of CharacterDecorator, does nothing for a non-Pacman character.
+		 *
+		 */	
 		virtual void askChangeStateHunter();
 
 		/**

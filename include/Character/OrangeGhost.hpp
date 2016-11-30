@@ -27,9 +27,27 @@ class OrangeGhost : public Ghost, public Prototype<OrangeGhost>{
 		 * \param renderer : unique SDL_Renderer used to render the game.
 		 */
 		OrangeGhost(int posX, int posY, SDL_Renderer* renderer);
+
+		/**
+		 * 	OrangeGhost(const OrangeGhost &og);
+		 * \brief OrangeGhost copy constructor.
+		 * \param og : orange ghost to copy;
+		*/
 		OrangeGhost(const OrangeGhost &og);
+
+		/**
+		 * 	void backToClassicState() override;
+		 * \brief Change the current ghost state to his classic state : GhostMovementStupid.		
+		 */
 		void backToClassicState() override;
-		shared_ptr<OrangeGhost> clone(int,int) override;
+
+		/**
+		 *  shared_ptr<OrangeGhost> clone(int posX,int poxY) override;
+		 * \brief Prototype method used to instantiate a new Orange Ghost object. Change the created Ghost position to (posX,posY).
+		 *
+		 * \return shared_ptr<OrangeGhost> the new object created with the prototype.
+		 */
+		shared_ptr<OrangeGhost> clone(int posX,int poxY) override;
 
 	private:
 };
