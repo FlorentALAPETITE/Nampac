@@ -32,3 +32,22 @@
 * Ramasser un malus (SpeedGhost, SlowPacman) ajoute 500 points et complexifie un peu plus le jeu.
 * Objectif : trouver la meilleure stratégie de prise de bonus pour maximiser le score.
 
+
+
+Compilation et execution du projet :
+
+  * Compilation et exécution :
+ 	$ make  
+
+  * Exécution seule (après compilation) :
+ 	$ ./Nampac 
+
+
+Génération de la documentation doxygen :
+
+  $ doxygen doxygen-config
+
+
+Ouverture de la documentation HTML générée :
+
+  Click droit sur html/index.html  -> ouvrir dans un navigateur.

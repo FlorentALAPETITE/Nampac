@@ -28,9 +28,27 @@ class PinkGhost : public Ghost, public Prototype<PinkGhost>{
 		 * \param renderer : unique SDL_Renderer used to render the game.
 		 */
 		PinkGhost(int posX, int posY, SDL_Renderer* renderer);
+
+		/**
+		 * 	PinkGhost(const PinkGhost &pg);
+		 * \brief PinkGhost copy constructor.
+		 * \param pg : pink ghost to copy;
+		*/
 		PinkGhost(const PinkGhost &pg);
+
+		/**
+		 * 	void backToClassicState() override;
+		 * \brief Change the current ghost state to his classic state : GhostMovementAmbush.		
+		 */
 		void backToClassicState() override;
-		shared_ptr<PinkGhost> clone(int,int) override;
+
+		/**
+		 *  shared_ptr<PinkGhost> clone(int posX,int poxY) override;
+		 * \brief Prototype method used to instantiate a new Pink Ghost object. Change the created Ghost position to (posX,posY).
+		 *
+		 * \return shared_ptr<PinkGhost> the new object created with the prototype.
+		 */
+		shared_ptr<PinkGhost> clone(int posX,int poxY) override;
 
 	private:
 };

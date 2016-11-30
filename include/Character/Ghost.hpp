@@ -54,17 +54,77 @@ class Ghost : public Character{
 		 * \param speed : the speed of the ghost (needed because of the decoration possibility).
 		 */
 		void moveCharacter(GameEngine* g,int speed) override;
+
+		/**
+		 * void setDeathPosition() override;
+		 * \brief Set the current ghost position to his death position.		
+		 */
 		void setDeathPosition() override;
+
+		/**
+		 * void setMovementDeadState() override;
+		 * \brief GhostMovementState setter : set the current state to a GhostMovementDead.		
+		 */
 		void setMovementDeadState() override;
+
+		/**
+		 * void setMovementAmbushState() override;
+		 * \brief GhostMovementState setter : set the current state to a GhostMovementAmbush.		
+		 */
 		void setMovementAmbushState() override;
+
+		/**
+		 * void setMovementStupidState() override;
+		 * \brief GhostMovementState setter : set the current state to a GhostMovementStupid.		
+		 */
 		void setMovementStupidState() override;
+
+		/**
+		 * 	void setMovementUnpredictableState() override;
+		 * \brief GhostMovementState setter : set the current state to a GhostMovementUnpredictable.		
+		 */
 		void setMovementUnpredictableState() override;
+
+		/**
+		 * 	void setMovementChaseState() override;
+		 * \brief GhostMovementState setter : set the current state to a GhostMovementChase.		
+		 */
 		void setMovementChaseState() override;
+
+		/**
+		 * 	virtual void backToClassicState()=0;
+		 * \brief Change the current ghost state to his classic state (different for each ghost type).		
+		 */
 		virtual void backToClassicState()=0;
+
+		/**
+		 * 	void askChangeMovementDeadState() override;
+		 * \brief Ask to the ghost current state if a transition can be made to a GhostMovementDead.		
+		 */
 		void askChangeMovementDeadState() override;
+
+		/**
+		 * 	void askChangeMovementAmbushState() override;
+		 * \brief Ask to the ghost current state if a transition can be made to a GhostMovementAmbush.		
+		 */
 		void askChangeMovementAmbushState() override;
+
+		/**
+		 * 	void askChangeMovementStupidState() override;
+		 * \brief Ask to the ghost current state if a transition can be made to a GhostMovementStupid.		
+		 */
 		void askChangeMovementStupidState() override;
+
+		/**
+		 * 	void askChangeMovementUnpredictableState() override;
+		 * \brief Ask to the ghost current state if a transition can be made to a GhostMovementUnpredictable.		
+		 */
 		void askChangeMovementUnpredictableState() override;
+
+		/**
+		 * 	void askChangeMovementChaseState() override;	
+		 * \brief Ask to the ghost current state if a transition can be made to a GhostMovementChase.		
+		 */
 		void askChangeMovementChaseState() override;	
 
 
