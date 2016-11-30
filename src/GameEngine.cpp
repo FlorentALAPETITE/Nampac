@@ -117,9 +117,11 @@ void GameEngine::moveCharacters(){
 	moveCharacter(pacman_);		
 
 	for(unsigned int i=0;i<ghosts_.size();++i){
-		srand(randNumber_);
-		randNumber_+=100;
-		ghosts_.at(i)->calculateNextDirection();
+		if(ghosts_.at(i)->getPosX()>=25 && ghosts_.at(i)->getPosX()<=675 && ghosts_.at(i)->getPosY()>=25 && ghosts_.at(i)->getPosY()<=745 ){
+			srand(randNumber_);
+			randNumber_+=100;
+			ghosts_.at(i)->calculateNextDirection();
+		}		
 		moveCharacter(ghosts_.at(i));
 	}
 	
