@@ -19,17 +19,17 @@ class GameEngine;
 class Character{
 
 	public:
-		/**
 
+		/**
+		 * Character(char* sl, int s, int posX, int posY,SDL_Renderer* renderer);	
 		 * \brief Abstract character creation method.
 		 *
-		 * \param sl : char* name of the sprite to use for illustrate character
+		 * \param sl : path ot the character sprite.
 		 * \param s : used to set the speed of character.
-		 * \param posX : line position of the MapElement that require the character.
-		 * \param posY : line position of the MapElement that require the character.
+		 * \param posX : X position of the character on the map.
+		 * \param posY : Y position of the character on the map.
 		 * \param renderer :  unique SDL_Renderer used to render the game.
 		 */
-
 		Character(char* sl, int s, int posX, int posY,SDL_Renderer* renderer);	
 
 		/**
@@ -48,13 +48,13 @@ class Character{
 
 		/**
 		 * ~Character();	
-		 * \brief abstract character destructor method.
+		 * \brief Abstract character destructor method.
 		 */
 		~Character();
 
 		/**
 		 * virtual int getSpeed();
-		 * \brief definition of the speed getter.
+		 * \brief Definition of the speed getter.
 		 *
 		 * \return speed :character's speed.
 		 */	
@@ -62,7 +62,7 @@ class Character{
 
 		/**
 		 * virtual void changePosition(int posX, int posY);
-		 * \brief method used to change character's position.
+		 * \brief Method used to change character's position.
 		 * \param posX : X position on the map.
 		 * \param posY : Y position on the map.
 		 */
@@ -71,7 +71,7 @@ class Character{
 
 		/**
 		 * virtual int getPosX();
-		 * \brief definition of the x position getter.
+		 * \brief Definition of the x position getter.
 		 *
 		 * \return int : x position of character.
 		 */	
@@ -79,7 +79,7 @@ class Character{
 		
 		/**
 		 * virtual int getPosY();
-		 * \brief definition of the y position getter.
+		 * \brief Definition of the y position getter.
 		 *
 		 * \return int : y position of character.
 		 */	
@@ -87,7 +87,7 @@ class Character{
 		
 		/**
 		 * virtual vector<SDL_Texture*> getCharacterTexture();
-		 * \brief definition of the SDL_Texture getter.
+		 * \brief Definition of the SDL_Texture getter.
 		 *
 		 * \return vector<SDL_Texture*>: all SDL_Texture of character to render.
 		 */	
@@ -95,15 +95,15 @@ class Character{
 		
 		/**
 		 * virtual SDL_Rect* getTextureRect();
-		 * \brief definition of the SDL_Rect getter.
+		 * \brief Definition of the SDL_Rect getter.
 		 *
-		 * \return SDL_Rect*: SDL_Rect* of character to render.
+		 * \return SDL_Rect*: SDL_Rect* of the character to render.
 		 */	
 		virtual SDL_Rect* getTextureRect();
 		
 		/**
 		 * virtual int getDirection();
-		 * \brief definition of the direction getter.
+		 * \brief Definition of the direction getter.
 		 *
 		 * \return int: Direction of character.
 		 */	
@@ -111,7 +111,7 @@ class Character{
 		
 		/**
 		 * virtual void setDirection(int direction);
-		 * \brief definition of the direction setter.
+		 * \brief Definition of the direction setter.
 		 *
 		 * \param direction : direction, int between 0 and 3 (0: right, 1: left, 2: up, 3: down)
 		 *
@@ -120,7 +120,7 @@ class Character{
 		
 		/**
 		 * virtual void moveCharacter(GameEngine* g, int speed)=0;
-		 * \brief abstract method used to move character.
+		 * \brief Abstract method used to move character.
 		 *
 		 * \param g : the game engine.
 		 * \param speed : character speed.
@@ -130,7 +130,7 @@ class Character{
 
 		/**
 		 * virtual void calculateNextDirection()=0;
-		 * \brief abstract method used to calculate the next position of character.
+		 * \brief Abstract method used to calculate the next position of character.
 		 *
 		 * \param GameEngine* : the GameEngine.
 		 * \param int : the speed of the character (needed because of the link CharacterDecorator / GhostMovementState).

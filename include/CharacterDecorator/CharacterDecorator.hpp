@@ -21,7 +21,7 @@ class CharacterDecorator : public Character{
 
 		/**
 		 * CharacterDecorator(shared_ptr<Character> c);
-		 * \brief Abstract CharacterDecorator contructor.
+		 * \brief Abstract CharacterDecorator constructor.
 		 *		
 		 * \param c : the decorated character.
 		 */
