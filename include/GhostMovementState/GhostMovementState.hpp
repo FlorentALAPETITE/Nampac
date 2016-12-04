@@ -10,10 +10,10 @@ class Ghost;
 class GameEngine;
 
 /**
- * \brief State pattern implementation for the ghost.
+ * \brief State pattern implementation for the ghost movement.
  * \author Florent ALAPETITE / Dorian LATOUCHE
  *
- * It is a abstract class to represent state pattern.
+ * Abstract class that represents a state pattern for the ghosts' A.I.
  *
  */
 class GhostMovementState {
@@ -30,14 +30,14 @@ class GhostMovementState {
 
 		/**
 		 * void calculateDirection() = 0;
-		 * \brief abstract methode calculateDirection of GhostMovementState.
+		 * \brief Abstract method calculateDirection of GhostMovementState.
 		 *		
 		 */		
 		virtual void calculateDirection() = 0;
 
 		/**
 		 * void moveCharacter(GameEngine* g, int speed);
-		 * \brief methode used to move a character
+		 * \brief Method used to move a character
 		 *		
 		 * \param g : GameEngine used to move character.
 		 * \param speed : the speed used to move character.
@@ -46,49 +46,49 @@ class GhostMovementState {
 
 		/**
 		 * void setMovementDeadState();
-		 * \brief methode used to change state into dead state.
+		 * \brief Method used to change state into dead state.
 		 *		
 		 */	
 		virtual void setMovementDeadState();
 
 		/**
 		 * void setMovementAmbushState();
-		 * \brief methode used to change state into ambush state.
+		 * \brief Method used to change state into ambush state.
 		 *		
 		 */	
 		virtual void setMovementAmbushState();
 
 		/**
 		 * void setMovementStupidState();
-		 * \brief methode used to change state into stupid state.
+		 * \brief Method used to change state into stupid state.
 		 *		
 		 */	
 		virtual void setMovementStupidState();
 		
 		/**
 		 * void setMovementUnpredictableState();
-		 * \brief methode used to change state into unpredictable state.
+		 * \brief Method used to change state into unpredictable state.
 		 *		
 		 */	
 		virtual void setMovementUnpredictableState();
 		
 		/**
 		 * void setMovementChaseState();
-		 * \brief methode used to change state into chase state.
+		 * \brief Method used to change state into chase state.
 		 *		
 		 */	
 		virtual void setMovementChaseState();
 
 		/**
 		 * void backToClassicState();
-		 * \brief methode used to change state into classic state.
+		 * \brief Method used to change the ghost state to the classic state of the ghost.
 		 *		
 		 */	
 		void backToClassicState();
 
 		/**
 		 * void void setLifeTime(int l);
-		 * \brief methode used to set life time to l .
+		 * \brief Method used to set life time to l .
 		 *		
 		 */	
 		void setLifeTime(int l);

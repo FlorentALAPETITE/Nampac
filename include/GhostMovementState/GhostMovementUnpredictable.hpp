@@ -9,7 +9,7 @@ using namespace std;
  * \brief State pattern implementation for the ghost movement.
  * \author Florent ALAPETITE / Dorian LATOUCHE
  *
- * It is stupid state used for ghosts.
+ * Unpredictable state used for ghosts.
  *
  */
 class GhostMovementUnpredictable : public GhostMovementState {
@@ -25,7 +25,7 @@ class GhostMovementUnpredictable : public GhostMovementState {
 
 		/**
 		 * void calculateDirection() override;
-		 * \brief override calculateDirection of GhostMovementState. This methode change direction in a way "unpredictable".
+		 * \brief Override calculateDirection of GhostMovementState. This methode change direction in a way "unpredictable".
 		 *		
 		 */
 		void calculateDirection() override;

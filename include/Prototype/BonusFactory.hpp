@@ -15,7 +15,7 @@
 using namespace std;
 
 
-/**
+	/**
 	 * 
 	 * \brief Bonus factory class implementation for the Nampac map creation (using a Prototype Pattern).
 	 * \author Florent ALAPETITE / Dorian LATOUCHE
@@ -31,7 +31,7 @@ class BonusFactory {
 
 		/**		
 		 * BonusFactory(const int sizeSprite, SDL_Renderer* renderer);
-		 * \brief Bonus factory constructor.
+		 * \brief BonusFactory constructor.
 		 *
 		 * \param sizeSprite : general sprite size (default : 25px).		
 		 * \param renderer : unique SDL_Renderer used to render the game.
@@ -41,7 +41,7 @@ class BonusFactory {
 
 		/**
 		 * shared_ptr<Bonus> createBonus(const char type, const unsigned int c, const unsigned int  l, const int sizeSprite, SDL_Renderer* renderer);
-		 * \brief Bonus creation method.
+		 * \brief Bonus creation method using the Prototype pattern. The required Bonus is created using the clone method of the corresponding prototype attribute.
 		 *
 		 * \param type : bonus type of the required bonus.
 		 * \param c : column position of the MapElement that require the bonus.

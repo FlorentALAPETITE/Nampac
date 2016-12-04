@@ -9,7 +9,7 @@ using namespace std;
  * \brief State pattern implementation for the ghost movement.
  * \author Florent ALAPETITE / Dorian LATOUCHE
  *
- * It is ambush state used for ghosts.
+ * Dead state used for the ghosts.
  *
  */
 
@@ -26,14 +26,14 @@ class GhostMovementDead : public GhostMovementState {
 
 		/**
 		 * void calculateDirection() override;
-		 * \brief override calculateDirection of GhostMovementState. This methode change direction in a way "dead".
+		 * \brief Override calculateDirection of GhostMovementState. This method change direction in a "dead" way (no new direction calculated).
 		 *		
 		 */
 		void calculateDirection() override;
 
 		/**
 		 * void moveCharacter(GameEngine* g, int speed) override;
-		 * \brief methode used to move a character.
+		 * \brief Method used to move a character (no movement in the dead state).
 		 *		
 		 * \param g : GameEngine used to move character.
 		 * \param speed : the speed used to move character.

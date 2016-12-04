@@ -9,7 +9,7 @@ using namespace std;
  * \brief State pattern implementation for the ghost movement.
  * \author Florent ALAPETITE / Dorian LATOUCHE
  *
- * It is ambush state used for ghosts.
+ * Ambush state used for the ghosts.
  *
  */
 
@@ -27,7 +27,7 @@ class GhostMovementAmbush : public GhostMovementState {
 
 		/**
 		 * void calculateDirection() override;
-		 * \brief override calculateDirection of GhostMovementState. This methode change direction in a way "ambush".
+		 * \brief Override calculateDirection of GhostMovementState. This method change direction in an "ambush" way.
 		 *		
 		 */
 		void calculateDirection() override;

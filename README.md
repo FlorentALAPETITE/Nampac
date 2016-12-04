@@ -45,9 +45,13 @@ Compilation et execution du projet :
 
 Génération de la documentation doxygen :
 
-  $ doxygen doxygen-config
+  * $ doxygen doxygen-config
 
 
 Ouverture de la documentation HTML générée :
 
-  Click droit sur html/index.html  -> ouvrir dans un navigateur.
+  * Click droit sur html/index.html  -> ouvrir dans un navigateur.
+
+
+Lien du projet sur GitHub :
+  * https://github.com/FlorentALAPETITE/Nampac

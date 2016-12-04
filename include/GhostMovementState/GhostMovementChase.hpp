@@ -9,7 +9,7 @@ using namespace std;
  * \brief State pattern implementation for the ghost movement.
  * \author Florent ALAPETITE / Dorian LATOUCHE
  *
- * It is chase state used for ghosts.
+ * Chase state used for the ghosts.
  *
  */
 
@@ -26,7 +26,7 @@ class GhostMovementChase : public GhostMovementState {
 
 		/**
 		 * void calculateDirection() override;
-		 * \brief override calculateDirection of GhostMovementState. This methode change direction in a way "chase".
+		 * \brief Override calculateDirection of GhostMovementState. This method change direction in a "chase" way.
 		 *		
 		 */
 		void calculateDirection() override;
