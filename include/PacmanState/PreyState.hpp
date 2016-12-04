@@ -7,10 +7,10 @@
 using namespace std;
 
 /**
- * \brief PreyState pattern implementation for the pacmanState.
+ * \brief PreyState concrete pattern implementation for the PacmanState.
  * \author Florent ALAPETITE / Dorian LATOUCHE
  *
- * It is prey state used for pacman.
+ * Prey state used for the Pacman.
  *
  */
 class PreyState: public PacmanState {
@@ -27,21 +27,21 @@ class PreyState: public PacmanState {
 		
 		/**
 		 * bool canEatGhost() override;
-		 * \brief methode used to know if the pacman can eat ghosts (return false).
+		 * \brief Method used to know if the pacman can eat ghosts (return false).
 		 *		
 		 */	
 		bool canEatGhost() override;
 		
 		/**
 		 * void decrementRemainingMovement() override;
-		 * \brief methode used to decrement remaining movement.
+		 * \brief Method used to decrement remaining movement.
 		 *		
 		 */	
 		void decrementRemainingMovement() override;
 		
 		/**
 		 * void addRemainingMovement(int m) override;
-		 * \brief methode used to add remaining movement.
+		 * \brief Method used to add remaining movement.
 		 *		
 		 * \param m : the remaining movement to be added.
 		 */	
@@ -49,14 +49,14 @@ class PreyState: public PacmanState {
 		
 		/**
 		 * void changeStateHunter() override;
-		 * \brief methode used to change pacman state into hunter state.
+		 * \brief Method used to change the PacmanState to a HunterState. 
 		 *		
 		 */	
 		void changeStateHunter() override;
 		
 		/**
 		 * void changeStatePrey() override;
-		 * \brief methode used to change pacman state into prey state.
+		 * \brief Method used to change the PacmanState to a PreyState. In this state, does nothing (already prey).
 		 *		
 		 */	
 		void changeStatePrey() override;

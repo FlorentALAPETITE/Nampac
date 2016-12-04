@@ -9,10 +9,10 @@ using namespace std;
 class Pacman;
 
 /**
- * \brief State pattern implementation for the pacman.
+ * \brief State pattern implementation for the Pacman.
  * \author Florent ALAPETITE / Dorian LATOUCHE
  *
- * It is a abstract class to represent state pattern.
+ * Abstract class that implements the state pattern. Change dynamically the behaviour of the Pacman.
  *
  */
 class PacmanState {
@@ -28,21 +28,21 @@ class PacmanState {
 
 		/**
 		 * virtual bool canEatGhost() = 0;
-		 * \brief abstract methode canEatGhost of PacmanState.
+		 * \brief Abstract method canEatGhost : return a bool representing the Pacman ability to eat Ghosts.
 		 *		
 		 */	
 		virtual bool canEatGhost() = 0;
 
 		/**
 		 * virtual void decrementRemainingMovement()=0;
-		 * \brief abstract methode decrementRemainingMovement of PacmanState.
+		 * \brief Abstract method decrementRemainingMovement of PacmanState.
 		 *		
 		 */	
 		virtual void decrementRemainingMovement()=0;
 
 		/**
 		 * virtual void addRemainingMovement(int m)=0;
-		 * \brief abstract methode addRemainingMovement of PacmanState.
+		 * \brief Abstract method addRemainingMovement of PacmanState.
 		 *		
 		 * \param m : the remaining movement to be added.
 		 */	
@@ -50,14 +50,14 @@ class PacmanState {
 
 		/**
 		 * virtual void changeStatePrey()=0;
-		 * \brief abstract methode changeStatePrey of PacmanState.
+		 * \brief Abstract method changeStatePrey of PacmanState. Make (or not) the transition from the current state to the PreyState.
 		 *		
 		 */	
 		virtual void changeStatePrey()=0;
 
 		/**
 		 * virtual void changeStateHunter()=0;
-		 * \brief abstract methode changeStateHunter of PacmanState.
+		 * \brief Abstract method changeStateHunter of PacmanState. Make (or not) the transition from the current state to the HunterState.
 		 *		
 		 */	
 		virtual void changeStateHunter()=0;
