@@ -8,8 +8,7 @@
 using namespace std;
 
 
-/**
- * \file MapReader.cpp
+/** 
  * \brief Labyrinth file reader.
  * \author Florent ALAPETITE / Dorian LATOUCHE
  *
