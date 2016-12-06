@@ -50,7 +50,7 @@ Génération de la documentation doxygen :
 
 Ouverture de la documentation HTML générée :
 
-  * Click droit sur html/index.html  -> ouvrir dans un navigateur.
+  * Ouvrir Documentation.html
 
 
 Lien du projet sur GitHub :
